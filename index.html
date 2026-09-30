@@ -8,515 +8,367 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
-
 body{
     margin:0;
-    font-family:Arial,sans-serif;
+    padding:20px;
     background:#111;
-    color:#fff;
+    color:white;
+    font-family:Arial,sans-serif;
 }
 
-header{
-    padding:22px 15px;
+h1{
     text-align:center;
-    background:linear-gradient(135deg,#181818,#252525);
-    border-bottom:1px solid #333;
-}
-
-header h1{
-    margin:0;
-    font-size:25px;
-}
-
-header p{
-    margin:8px 0 0;
-    color:#aaa;
 }
 
 .container{
-    max-width:1000px;
+    max-width:700px;
     margin:auto;
-    padding:15px;
 }
 
-.categories{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-    margin-bottom:20px;
+.card{
+    background:#1e1e1e;
+    padding:20px;
+    border-radius:15px;
+    margin-top:20px;
+}
+
+input,select,textarea{
+    width:100%;
+    box-sizing:border-box;
+    padding:12px;
+    margin:8px 0 15px;
+    background:#111;
+    color:white;
+    border:1px solid #555;
+    border-radius:8px;
+}
+
+textarea{
+    min-height:100px;
 }
 
 button{
+    width:100%;
+    padding:15px;
     border:0;
     border-radius:10px;
-    padding:13px;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.cat{
-    background:#252525;
-    color:white;
-}
-
-.cat:hover{
-    background:#333;
-}
-
-.form{
-    background:#1b1b1b;
-    padding:18px;
-    border-radius:15px;
-    margin-bottom:20px;
-    border:1px solid #333;
-}
-
-.form h2{
-    margin-top:0;
-}
-
-input,
-select,
-textarea{
-    width:100%;
-    padding:12px;
-    margin:7px 0 12px;
-    border-radius:8px;
-    border:1px solid #444;
-    background:#111;
-    color:white;
-    font-size:15px;
-}
-
-textarea{
-    min-height:90px;
-    resize:vertical;
-}
-
-.save{
-    width:100%;
     background:#00c853;
     color:white;
+    font-size:16px;
+    font-weight:bold;
 }
 
-.status{
+#message{
+    margin-top:15px;
+    padding:12px;
     text-align:center;
-    padding:10px;
-    color:#aaa;
+    border-radius:8px;
 }
 
-.exercise{
-    background:#1b1b1b;
-    border:1px solid #333;
-    border-radius:15px;
+.exercice{
+    background:#222;
     padding:15px;
-    margin-bottom:15px;
-}
-
-.exercise h3{
-    margin-top:0;
-    font-size:20px;
-}
-
-.exercise p{
-    color:#ccc;
-    line-height:1.5;
-}
-
-.exercise img,
-.exercise video{
-    width:100%;
-    max-height:400px;
-    object-fit:contain;
+    margin-top:12px;
     border-radius:10px;
-    margin-top:10px;
-    background:#000;
-}
-
-.delete{
-    background:#d50000;
-    color:white;
-    margin-top:10px;
-    width:100%;
-}
-
-@media(min-width:700px){
-
-    .categories{
-        grid-template-columns:repeat(3,1fr);
-    }
-
 }
 </style>
 </head>
 
 <body>
 
-<header>
-
-    <h1>🏋️ Mon Carnet Musculation</h1>
-
-    <p>
-        Mes exercices, vidéos, photos et notes
-    </p>
-
-</header>
-
 <div class="container">
 
-    <div class="categories">
+<h1>🏋️ Mon Carnet Musculation</h1>
 
-        <button class="cat"
-                onclick="filtrer('Pectoraux')">
-            💪 Pectoraux
-        </button>
+<div class="card">
 
-        <button class="cat"
-                onclick="filtrer('Dos')">
-            🔙 Dos
-        </button>
+<h2>➕ Ajouter un exercice</h2>
 
-        <button class="cat"
-                onclick="filtrer('Épaules')">
-            🏋️ Épaules
-        </button>
+<label>Catégorie</label>
 
-        <button class="cat"
-                onclick="filtrer('Biceps')">
-            💪 Biceps
-        </button>
+<select id="categorie">
+<option>Pectoraux</option>
+<option>Dos</option>
+<option>Épaules</option>
+<option>Biceps</option>
+<option>Triceps</option>
+<option>Jambes</option>
+<option>Abdos</option>
+<option>Photos</option>
+<option>Notes</option>
+</select>
 
-        <button class="cat"
-                onclick="filtrer('Triceps')">
-            💪 Triceps
-        </button>
+<label>Nom</label>
 
-        <button class="cat"
-                onclick="filtrer('Jambes')">
-            🦵 Jambes
-        </button>
+<input id="nom" type="text" placeholder="Exemple : Développé couché">
 
-        <button class="cat"
-                onclick="filtrer('Abdos')">
-            🔥 Abdos
-        </button>
+<label>Description</label>
 
-        <button class="cat"
-                onclick="filtrer('Photos')">
-            📷 Photos
-        </button>
+<textarea id="description" placeholder="Description"></textarea>
 
-        <button class="cat"
-                onclick="filtrer('Notes')">
-            📝 Notes
-        </button>
+<label>Séries</label>
 
-        <button class="cat"
-                onclick="chargerExercices()">
-            🏠 Tout afficher
-        </button>
+<input id="series" type="number" placeholder="4">
 
-    </div>
+<label>Répétitions</label>
 
+<input id="repetitions" type="number" placeholder="10">
 
-    <div class="form">
+<button id="bouton">
+💾 ENREGISTRER
+</button>
 
-        <h2>➕ Ajouter un exercice</h2>
-
-
-        <label>Catégorie</label>
-
-        <select id="categorie">
-
-            <option>Pectoraux</option>
-            <option>Dos</option>
-            <option>Épaules</option>
-            <option>Biceps</option>
-            <option>Triceps</option>
-            <option>Jambes</option>
-            <option>Abdos</option>
-            <option>Photos</option>
-            <option>Notes</option>
-
-        </select>
-
-
-        <label>Nom de l'exercice</label>
-
-        <input
-            id="nom"
-            placeholder="Exemple : Développé couché"
-        >
-
-
-        <label>Description</label>
-
-        <textarea
-            id="description"
-            placeholder="Technique, conseils, matériel..."
-        ></textarea>
-
-
-        <label>Séries</label>
-
-        <input
-            id="series"
-            type="number"
-            placeholder="4"
-        >
-
-
-        <label>Répétitions</label>
-
-        <input
-            id="repetitions"
-            type="number"
-            placeholder="10"
-        >
-
-
-        <label>Vidéo de démonstration</label>
-
-        <input
-            id="video"
-            type="file"
-            accept="video/*"
-        >
-
-
-        <label>Photo</label>
-
-        <input
-            id="photo"
-            type="file"
-            accept="image/*"
-        >
-
-
-        <button
-            class="save"
-            onclick="ajouterExercice()"
-        >
-            💾 Enregistrer l'exercice
-        </button>
-
-
-        <div
-            id="status"
-            class="status"
-        ></div>
-
-    </div>
-
-
-    <h2>📚 Mes exercices</h2>
-
-
-    <div id="liste"></div>
+<div id="message"></div>
 
 </div>
 
+<div class="card">
+
+<h2>📚 Mes exercices</h2>
+
+<div id="liste">
+Chargement...
+</div>
+
+</div>
+
+</div>
 
 <script>
 
 const SUPABASE_URL =
-    "https://cjtgjwepiotuhtfqwanw.supabase.co";
+"https://cjtgjwepiotuhtfqwanw.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_DXMY1V9ir7R_vwuFysSWwA_Pe-r5NNP";
+
+const client =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 
-const SUPABASE_ANON_KEY =
-    "sb_publishable_DXMY1V9ir7R_vwuFysSWwA_Pe-r5NNP";
+const bouton =
+document.getElementById("bouton");
+
+const message =
+document.getElementById("message");
 
 
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-    );
+bouton.addEventListener(
+    "click",
+    async function(){
 
+        message.innerHTML =
+        "⏳ Le bouton fonctionne...";
 
-async function ajouterFichier(fichier){
+        try{
 
-    if(!fichier){
-
-        return null;
-
-    }
-
-
-    const nomUnique =
-        Date.now() +
-        "_" +
-        Math.random()
-            .toString(36)
-            .substring(2) +
-        "_" +
-        fichier.name
-            .replace(
-                /[^a-zA-Z0-9._-]/g,
-                "_"
-            );
-
-
-    const { error } =
-        await supabaseClient
-        .storage
-        .from("medias")
-        .upload(
-            nomUnique,
-            fichier
-        );
-
-
-    if(error){
-
-        throw error;
-
-    }
-
-
-    const { data } =
-        supabaseClient
-        .storage
-        .from("medias")
-        .getPublicUrl(
-            nomUnique
-        );
-
-
-    return data.publicUrl;
-
-}
-
-
-async function ajouterExercice(){
-
-    const status =
-        document.getElementById(
-            "status"
-        );
-
-
-    status.textContent =
-        "⏳ Enregistrement en cours...";
-
-
-    try{
-
-        const categorie =
+            const categorie =
             document.getElementById(
                 "categorie"
             ).value;
 
-
-        const nom =
+            const nom =
             document.getElementById(
                 "nom"
             ).value.trim();
 
-
-        const description =
+            const description =
             document.getElementById(
                 "description"
             ).value.trim();
 
-
-        const series =
+            const series =
             document.getElementById(
                 "series"
             ).value;
 
-
-        const repetitions =
+            const repetitions =
             document.getElementById(
                 "repetitions"
             ).value;
 
 
-        const video =
-            document.getElementById(
-                "video"
-            ).files[0];
+            if(!nom){
+
+                message.innerHTML =
+                "⚠️ Entre d'abord un nom.";
+
+                return;
+            }
 
 
-        const photo =
-            document.getElementById(
-                "photo"
-            ).files[0];
+            message.innerHTML =
+            "⏳ Connexion à Supabase...";
 
 
-        if(!nom){
-
-            alert(
-                "Entre le nom de l'exercice."
-            );
-
-            status.textContent = "";
-
-            return;
-
-        }
-
-
-        let videoUrl = null;
-
-        let photoUrl = null;
-
-
-        if(video){
-
-            status.textContent =
-                "🎥 Envoi de la vidéo...";
-
-
-            videoUrl =
-                await ajouterFichier(
-                    video
-                );
-
-        }
-
-
-        if(photo){
-
-            status.textContent =
-                "📷 Envoi de la photo...";
-
-
-            photoUrl =
-                await ajouterFichier(
-                    photo
-                );
-
-        }
-
-
-        status.textContent =
-            "💾 Enregistrement...";
-
-
-        const { error } =
-            await supabaseClient
+            const resultat =
+            await client
             .from("exercices")
-            .insert([{
+            .insert({
 
-                nom:nom,
+                nom: nom,
 
-                categorie:categorie,
+                categorie: categorie,
 
                 description:
-                    description || null,
+                description || null,
 
                 series:
-                    series
-                    ? parseInt(series)
-                    : null,
+                series
+                ? Number(series)
+                : null,
 
                 repetitions:
-                    repetitions
-                    ? parseInt(repetitions)
-                    : null,
+                repetitions
+                ? Number(repetitions)
+                : null
 
-                video_url:
-                    videoUrl,
+            })
+            .select();
+
+
+            if(resultat.error){
+
+                message.innerHTML =
+                "❌ ERREUR SUPABASE : " +
+                resultat.error.message;
+
+                return;
+            }
+
+
+            message.innerHTML =
+            "✅ EXERCICE ENREGISTRÉ !";
+
+
+            document.getElementById(
+                "nom"
+            ).value = "";
+
+            document.getElementById(
+                "description"
+            ).value = "";
+
+            document.getElementById(
+                "series"
+            ).value = "";
+
+            document.getElementById(
+                "repetitions"
+            ).value = "";
+
+
+            chargerExercices();
+
+        }
+        catch(erreur){
+
+            message.innerHTML =
+            "❌ ERREUR : " +
+            erreur.message;
+
+        }
+
+    }
+);
+
+
+async function chargerExercices(){
+
+    const liste =
+    document.getElementById(
+        "liste"
+    );
+
+
+    const resultat =
+    await client
+    .from("exercices")
+    .select("*")
+    .order(
+        "id",
+        {
+            ascending:false
+        }
+    );
+
+
+    if(resultat.error){
+
+        liste.innerHTML =
+        "❌ " +
+        resultat.error.message;
+
+        return;
+    }
+
+
+    if(!resultat.data.length){
+
+        liste.innerHTML =
+        "Aucun exercice enregistré.";
+
+        return;
+    }
+
+
+    liste.innerHTML = "";
+
+
+    resultat.data.forEach(
+        function(exercice){
+
+            const div =
+            document.createElement(
+                "div"
+            );
+
+            div.className =
+            "exercice";
+
+
+            div.innerHTML =
+            "<h3>" +
+            exercice.nom +
+            "</h3>" +
+
+            "<p>📂 " +
+            (
+                exercice.categorie || ""
+            ) +
+            "</p>" +
+
+            "<p>" +
+            (
+                exercice.description || ""
+            ) +
+            "</p>" +
+
+            "<p>🔢 " +
+            (
+                exercice.series || "-"
+            ) +
+            " séries × " +
+            (
+                exercice.repetitions || "-"
+            ) +
+            " répétitions</p>";
+
+
+            liste.appendChild(div);
+
+        }
+    );
+
+}
+
+
+chargerExercices();
+
+</script>
+
+</body>
+</html>
