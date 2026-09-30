@@ -14,7 +14,6 @@
     --black: #080808;
     --dark: #111111;
     --card: #171717;
-    --card-light: #202020;
     --border: #2c2c2c;
     --text: #ffffff;
     --muted: #a1a1a1;
@@ -53,9 +52,7 @@ button {
     margin: auto;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 header {
     position: relative;
@@ -100,7 +97,6 @@ header h1 {
     margin: 0;
     font-size: 29px;
     font-weight: 900;
-    letter-spacing: -0.5px;
 }
 
 header h1 span {
@@ -113,10 +109,6 @@ header p {
     color: var(--muted);
     font-size: 14px;
 }
-
-/* =========================
-   STATUS
-========================= */
 
 .status-bar {
     display: flex;
@@ -141,9 +133,7 @@ header p {
     box-shadow: 0 0 10px rgba(255, 122, 0, 0.7);
 }
 
-/* =========================
-   STATS
-========================= */
+/* STATS */
 
 .stats {
     display: grid;
@@ -160,7 +150,6 @@ header p {
     border-radius: 17px;
     padding: 18px 10px;
     text-align: center;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.22);
 }
 
 .stat::after {
@@ -171,7 +160,6 @@ header p {
     bottom: 0;
     height: 3px;
     background: var(--orange);
-    opacity: 0.8;
 }
 
 .stat strong {
@@ -187,12 +175,9 @@ header p {
     color: var(--muted);
     font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
-/* =========================
-   TITRES
-========================= */
+/* TITRES */
 
 .section-title {
     display: flex;
@@ -209,16 +194,10 @@ header p {
 .section-title .line {
     flex: 1;
     height: 1px;
-    background: linear-gradient(
-        90deg,
-        #3b260f,
-        transparent
-    );
+    background: linear-gradient(90deg, #3b260f, transparent);
 }
 
-/* =========================
-   CATEGORIES
-========================= */
+/* CATEGORIES */
 
 .categories {
     display: grid;
@@ -246,19 +225,13 @@ header p {
 }
 
 .category.active {
-    background: linear-gradient(
-        135deg,
-        var(--orange),
-        var(--orange-dark)
-    );
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
     border-color: var(--orange);
     color: white;
     box-shadow: 0 8px 20px rgba(255,122,0,0.18);
 }
 
-/* =========================
-   TOOLBAR
-========================= */
+/* TOOLBAR */
 
 .toolbar {
     margin-top: 20px;
@@ -275,22 +248,15 @@ header p {
     color: white;
     cursor: pointer;
     font-weight: 800;
-    transition: 0.2s;
 }
 
 .toolbar button:hover,
 .toolbar button.active {
-    background: linear-gradient(
-        135deg,
-        var(--orange),
-        var(--orange-dark)
-    );
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
     border-color: var(--orange);
 }
 
-/* =========================
-   SEARCH
-========================= */
+/* SEARCH */
 
 .search-wrapper {
     position: relative;
@@ -316,7 +282,6 @@ header p {
     background: #121212;
     color: white;
     font-size: 16px;
-    transition: 0.2s;
 }
 
 .search:focus {
@@ -324,13 +289,7 @@ header p {
     box-shadow: 0 0 0 3px rgba(255,122,0,0.08);
 }
 
-.search::placeholder {
-    color: #777;
-}
-
-/* =========================
-   CONNEXION
-========================= */
+/* MESSAGES */
 
 .loading,
 .message,
@@ -358,23 +317,18 @@ header p {
     background: #351515;
     border: 1px solid #8f2929;
     color: #fecaca;
-    line-height: 1.5;
 }
 
-/* =========================
-   EXERCISE CARD
-========================= */
+/* CARD */
 
 .card {
     position: relative;
     overflow: hidden;
-    background:
-        linear-gradient(145deg, #1a1a1a, #111111);
+    background: linear-gradient(145deg, #1a1a1a, #111111);
     border: 1px solid #292929;
     border-radius: 19px;
     padding: 19px;
     margin-bottom: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.22);
 }
 
 .card::before {
@@ -410,9 +364,7 @@ header p {
     font-weight: bold;
 }
 
-/* =========================
-   PERFORMANCE
-========================= */
+/* PERFORMANCE */
 
 .performance {
     display: grid;
@@ -460,9 +412,7 @@ header p {
     color: var(--red);
 }
 
-/* =========================
-   MEDIA
-========================= */
+/* MEDIA */
 
 .video {
     width: 100%;
@@ -483,9 +433,7 @@ header p {
     border: 1px solid #292929;
 }
 
-/* =========================
-   ACTIONS
-========================= */
+/* ACTIONS */
 
 .actions {
     display: grid;
@@ -501,19 +449,10 @@ header p {
     color: white;
     cursor: pointer;
     font-weight: 800;
-    transition: 0.2s;
-}
-
-.actions button:hover {
-    transform: translateY(-1px);
 }
 
 .edit {
-    background: linear-gradient(
-        135deg,
-        #ff8a00,
-        #db5d00
-    );
+    background: linear-gradient(135deg, #ff8a00, #db5d00);
 }
 
 .delete {
@@ -525,18 +464,14 @@ header p {
     background: #b91c1c;
 }
 
-/* =========================
-   FORMULAIRE
-========================= */
+/* FORMULAIRE */
 
 .form-box {
-    background:
-        linear-gradient(145deg, #191919, #111111);
+    background: linear-gradient(145deg, #191919, #111111);
     border: 1px solid #2c2c2c;
     border-radius: 19px;
     padding: 20px;
     margin-top: 28px;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.25);
 }
 
 .form-header {
@@ -553,11 +488,7 @@ header p {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(
-        135deg,
-        var(--orange),
-        var(--orange-dark)
-    );
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
     font-size: 22px;
 }
 
@@ -586,7 +517,6 @@ textarea {
     background: #0d0d0d;
     color: white;
     font-size: 16px;
-    transition: 0.2s;
 }
 
 input:focus,
@@ -622,22 +552,11 @@ input[type="file"]::file-selector-button {
     padding: 16px;
     border: 0;
     border-radius: 13px;
-    background: linear-gradient(
-        135deg,
-        var(--orange),
-        var(--orange-dark)
-    );
+    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
     color: white;
     font-size: 17px;
     font-weight: 900;
     cursor: pointer;
-    box-shadow: 0 8px 25px rgba(255,122,0,0.2);
-    transition: 0.2s;
-}
-
-.save:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(255,122,0,0.28);
 }
 
 .cancel {
@@ -652,9 +571,7 @@ input[type="file"]::file-selector-button {
     display: none;
 }
 
-/* =========================
-   GALERIE
-========================= */
+/* GALERIE */
 
 .gallery {
     display: grid;
@@ -669,7 +586,6 @@ input[type="file"]::file-selector-button {
     border-radius: 13px;
     cursor: pointer;
     border: 1px solid #292929;
-    transition: 0.2s;
 }
 
 .gallery img:hover {
@@ -677,9 +593,7 @@ input[type="file"]::file-selector-button {
     border-color: var(--orange);
 }
 
-/* =========================
-   EMPTY
-========================= */
+/* EMPTY */
 
 .empty {
     background: #141414;
@@ -690,9 +604,7 @@ input[type="file"]::file-selector-button {
     text-align: center;
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 footer {
     text-align: center;
@@ -705,9 +617,7 @@ footer {
     color: var(--orange);
 }
 
-/* =========================
-   DESKTOP
-========================= */
+/* DESKTOP */
 
 @media (min-width: 700px) {
 
@@ -756,259 +666,231 @@ footer {
 }
 </style></head><body><header><div class="logo">💪</div>
 
-<h1>Mon Carnet <span>Musculation</span></h1>
+<h1>
+    Mon Carnet <span>Musculation</span>
+</h1>
 
-<p>Mes exercices • mes performances • mes progrès</p>
+<p>
+    Mes exercices • mes performances • mes progrès
+</p>
 
 <div class="status-bar">
     <span class="status-dot"></span>
     <span>Mon carnet personnel</span>
 </div>
 
-</header><div class="container"><div class="stats">
-
-    <div class="stat">
-        <strong id="statExercices">0</strong>
-        <span>Exercices</span>
-    </div>
-
-    <div class="stat">
-        <strong id="statPhotos">0</strong>
-        <span>Photos</span>
-    </div>
-
-    <div class="stat">
-        <strong id="statVideos">0</strong>
-        <span>Vidéos</span>
-    </div>
-
+</header><div class="container"><div class="stats"><div class="stat">
+    <strong id="statExercices">0</strong>
+    <span>Exercices</span>
 </div>
 
+<div class="stat">
+    <strong id="statPhotos">0</strong>
+    <span>Photos</span>
+</div>
 
-<div class="section-title">
+<div class="stat">
+    <strong id="statVideos">0</strong>
+    <span>Vidéos</span>
+</div>
+
+</div><div class="section-title">
     <h2>🏋️ Mes catégories</h2>
     <div class="line"></div>
-</div>
+</div><div class="categories"><button class="category"
+    onclick="filtrerCategorie('Pectoraux', this)">
+    🏋️ Pectoraux
+</button>
 
+<button class="category"
+    onclick="filtrerCategorie('Dos', this)">
+    🔥 Dos
+</button>
 
-<div class="categories">
+<button class="category"
+    onclick="filtrerCategorie('Épaules', this)">
+    💪 Épaules
+</button>
 
-    <button class="category" onclick="filtrerCategorie('Pectoraux', this)">
-        🏋️ Pectoraux
-    </button>
+<button class="category"
+    onclick="filtrerCategorie('Biceps', this)">
+    💪 Biceps
+</button>
 
-    <button class="category" onclick="filtrerCategorie('Dos', this)">
-        🔥 Dos
-    </button>
+<button class="category"
+    onclick="filtrerCategorie('Triceps', this)">
+    💪 Triceps
+</button>
 
-    <button class="category" onclick="filtrerCategorie('Épaules', this)">
-        💪 Épaules
-    </button>
+<button class="category"
+    onclick="filtrerCategorie('Jambes', this)">
+    🦵 Jambes
+</button>
 
-    <button class="category" onclick="filtrerCategorie('Biceps', this)">
-        💪 Biceps
-    </button>
+<button class="category"
+    onclick="filtrerCategorie('Abdos', this)">
+    🔥 Abdos
+</button>
 
-    <button class="category" onclick="filtrerCategorie('Triceps', this)">
-        💪 Triceps
-    </button>
+<button class="category"
+    onclick="filtrerPhotos(this)">
+    📷 Photos
+</button>
 
-    <button class="category" onclick="filtrerCategorie('Jambes', this)">
-        🦵 Jambes
-    </button>
+</div><div class="toolbar"><button
+    id="btnTous"
+    class="active"
+    onclick="afficherTous(this)">
+    📋 TOUS LES EXERCICES
+</button>
 
-    <button class="category" onclick="filtrerCategorie('Abdos', this)">
-        🔥 Abdos
-    </button>
+</div><div class="search-wrapper"><span class="search-icon">🔎</span>
 
-    <button class="category" onclick="filtrerPhotos(this)">
-        📷 Photos
-    </button>
+<input
+    id="recherche"
+    class="search"
+    type="text"
+    placeholder="Rechercher un exercice..."
+    oninput="afficherExercices()"
+>
 
-</div>
-
-
-<div class="toolbar">
-
-    <button
-        id="btnTous"
-        class="active"
-        onclick="afficherTous(this)">
-        📋 TOUS LES EXERCICES
-    </button>
-
-</div>
-
-
-<div class="search-wrapper">
-
-    <span class="search-icon">🔎</span>
-
-    <input
-        id="recherche"
-        class="search"
-        type="text"
-        placeholder="Rechercher un exercice..."
-        oninput="afficherExercices"
-    >
-
-</div>
-
-
-<div id="connexion" class="loading">
+</div><div id="connexion" class="loading">
     🔄 Connexion à Supabase...
-</div>
+</div><div id="listeExercices"></div><div class="form-box" id="sectionFormulaire"><div class="form-header">
 
+    <div class="form-icon">➕</div>
 
-<div id="listeExercices"></div>
-
-
-<div class="form-box" id="sectionFormulaire">
-
-    <div class="form-header">
-
-        <div class="form-icon">➕</div>
-
-        <h2 id="titreFormulaire">
-            Ajouter un exercice
-        </h2>
-
-    </div>
-
-
-    <input type="hidden" id="exerciceId">
-
-
-    <label>🏋️ Nom de l'exercice</label>
-
-    <input
-        id="nom"
-        type="text"
-        placeholder="Exemple : Développé couché"
-    >
-
-
-    <label>📂 Catégorie</label>
-
-    <select id="categorie">
-
-        <option value="Pectoraux">Pectoraux</option>
-        <option value="Dos">Dos</option>
-        <option value="Épaules">Épaules</option>
-        <option value="Biceps">Biceps</option>
-        <option value="Triceps">Triceps</option>
-        <option value="Jambes">Jambes</option>
-        <option value="Abdos">Abdos</option>
-
-    </select>
-
-
-    <label>🔢 Nombre de séries</label>
-
-    <input
-        id="series"
-        type="number"
-        value="4"
-        min="1"
-    >
-
-
-    <label>🔁 Nombre de répétitions</label>
-
-    <input
-        id="repetitions"
-        type="number"
-        value="10"
-        min="1"
-    >
-
-
-    <label>⚖️ Poids utilisé (kg)</label>
-
-    <input
-        id="poids"
-        type="number"
-        value=""
-        min="0"
-        step="0.5"
-        placeholder="Exemple : 60"
-    >
-
-
-    <label>🎯 Charge</label>
-
-    <select id="charge">
-
-        <option value="">-- Choisir --</option>
-        <option value="Trop léger">🟡 Trop léger</option>
-        <option value="Correct">🟢 Correct</option>
-        <option value="Trop lourd">🔴 Trop lourd</option>
-
-    </select>
-
-
-    <label>📝 Description / notes</label>
-
-    <textarea
-        id="description"
-        placeholder="Technique, conseils, sensations..."
-    ></textarea>
-
-
-    <label>🎥 Vidéo de démonstration</label>
-
-    <input
-        id="video"
-        type="file"
-        accept="video/*"
-    >
-
-
-    <label>📷 Photo</label>
-
-    <input
-        id="photo"
-        type="file"
-        accept="image/*"
-    >
-
-
-    <button
-        class="save"
-        onclick="sauvegarderExercice()">
-        💾 ENREGISTRER L'EXERCICE
-    </button>
-
-
-    <button
-        id="btnAnnuler"
-        class="cancel"
-        onclick="annulerModification()">
-        ❌ ANNULER LA MODIFICATION
-    </button>
-
-
-    <div id="message" class="message"></div>
+    <h2 id="titreFormulaire">
+        Ajouter un exercice
+    </h2>
 
 </div>
 
 
-<div class="section-title">
+<input
+    type="hidden"
+    id="exerciceId"
+>
+
+
+<label>🏋️ Nom de l'exercice</label>
+
+<input
+    id="nom"
+    type="text"
+    placeholder="Exemple : Développé couché"
+>
+
+
+<label>📂 Catégorie</label>
+
+<select id="categorie">
+
+    <option value="Pectoraux">Pectoraux</option>
+    <option value="Dos">Dos</option>
+    <option value="Épaules">Épaules</option>
+    <option value="Biceps">Biceps</option>
+    <option value="Triceps">Triceps</option>
+    <option value="Jambes">Jambes</option>
+    <option value="Abdos">Abdos</option>
+
+</select>
+
+
+<label>🔢 Nombre de séries</label>
+
+<input
+    id="series"
+    type="number"
+    value="4"
+    min="1"
+>
+
+
+<label>🔁 Nombre de répétitions</label>
+
+<input
+    id="repetitions"
+    type="number"
+    value="10"
+    min="1"
+>
+
+
+<label>⚖️ Poids utilisé (kg)</label>
+
+<input
+    id="poids"
+    type="number"
+    value=""
+    min="0"
+    step="0.5"
+    placeholder="Exemple : 60"
+>
+
+
+<label>🎯 Charge</label>
+
+<select id="charge">
+
+    <option value="">-- Choisir --</option>
+    <option value="Trop léger">🟡 Trop léger</option>
+    <option value="Correct">🟢 Correct</option>
+    <option value="Trop lourd">🔴 Trop lourd</option>
+
+</select>
+
+
+<label>📝 Description / notes</label>
+
+<textarea
+    id="description"
+    placeholder="Technique, conseils, sensations..."
+></textarea>
+
+
+<label>🎥 Vidéo de démonstration</label>
+
+<input
+    id="video"
+    type="file"
+    accept="video/*"
+>
+
+
+<label>📷 Photo</label>
+
+<input
+    id="photo"
+    type="file"
+    accept="image/*"
+>
+
+
+<button
+    class="save"
+    onclick="sauvegarderExercice()">
+    💾 ENREGISTRER L'EXERCICE
+</button>
+
+
+<button
+    id="btnAnnuler"
+    class="cancel"
+    onclick="annulerModification()">
+    ❌ ANNULER LA MODIFICATION
+</button>
+
+
+<div id="message" class="message"></div>
+
+</div><div class="section-title">
     <h2>🖼️ Galerie photos</h2>
     <div class="line"></div>
-</div>
-
-<div id="galerie" class="gallery"></div>
-
-
-<div class="section-title">
+</div><div id="galerie" class="gallery"></div><div class="section-title">
     <h2>📝 Notes</h2>
     <div class="line"></div>
-</div>
-
-<div id="notes"></div>
-
-</div><footer>
+</div><div id="notes"></div></div><footer>
     <span class="footer-orange">●</span>
     Mon Carnet Musculation
     <span class="footer-orange">●</span>
@@ -1291,7 +1173,7 @@ function classeCharge(charge) {
 
 
 /* ============================================================
-   CHARGER LES EXERCICES
+   CHARGER EXERCICES
    ============================================================ */
 
 async function chargerExercices() {
@@ -1311,13 +1193,10 @@ async function chargerExercices() {
 
     try {
 
-        const url =
-            TABLE_URL +
-            "?select=*&order=id.desc";
-
         const response =
             await fetchAvecTimeout(
-                url,
+                TABLE_URL +
+                "?select=*&order=id.desc",
                 {
                     method: "GET",
                     headers: headersSupabase(),
@@ -1350,20 +1229,8 @@ async function chargerExercices() {
 
         }
 
-        let donnees;
-
-        try {
-
-            donnees =
-                JSON.parse(texte);
-
-        } catch (erreurJSON) {
-
-            throw new Error(
-                "La réponse de Supabase n'est pas valide."
-            );
-
-        }
+        const donnees =
+            JSON.parse(texte);
 
         if (!Array.isArray(donnees)) {
 
@@ -1402,27 +1269,11 @@ async function chargerExercices() {
         connexion.className =
             "error-box";
 
-        if (
-            erreur.name === "AbortError"
-        ) {
-
-            connexion.innerHTML =
-                "<strong>❌ Délai de connexion dépassé.</strong><br><br>" +
-                "Supabase n'a pas répondu après 15 secondes.<br><br>" +
-                "Tes exercices ne sont PAS supprimés.";
-
-        } else {
-
-            connexion.innerHTML =
-                "<strong>❌ Impossible de contacter Supabase.</strong><br><br>" +
-                "<strong>Erreur :</strong><br>" +
-                echapperHTML(
-                    erreur.message
-                ) +
-                "<br><br>" +
-                "Tes données ne sont PAS supprimées.";
-
-        }
+        connexion.innerHTML =
+            "<strong>❌ Impossible de contacter Supabase.</strong><br><br>" +
+            echapperHTML(erreur.message) +
+            "<br><br>" +
+            "Tes données ne sont PAS supprimées.";
 
         zone.innerHTML = "";
 
@@ -1460,6 +1311,58 @@ function mettreAJourStats() {
 
 
 /* ============================================================
+   OBTENIR LA LISTE SELON LE FILTRE
+   ============================================================ */
+
+function obtenirListeFiltree() {
+
+    let liste =
+        [...exercices];
+
+
+    if (modePhotos) {
+
+        liste =
+            liste.filter(
+                e => e.photo_url
+            );
+
+        return liste;
+
+    }
+
+
+    if (
+        filtreActuel !== "TOUS"
+    ) {
+
+        liste =
+            liste.filter(
+                function(e) {
+
+                    return String(
+                        e.categorie || ""
+                    )
+                    .trim()
+                    .toLowerCase() ===
+                    String(
+                        filtreActuel
+                    )
+                    .trim()
+                    .toLowerCase();
+
+                }
+            );
+
+    }
+
+
+    return liste;
+
+}
+
+
+/* ============================================================
    AFFICHER EXERCICES
    ============================================================ */
 
@@ -1478,61 +1381,43 @@ function afficherExercices() {
         .toLowerCase()
         .trim();
 
+
     let liste =
-        [...exercices];
+        obtenirListeFiltree();
 
-    if (modePhotos) {
-
-        liste =
-            liste.filter(
-                e => e.photo_url
-            );
-
-    } else if (
-        filtreActuel !== "TOUS"
-    ) {
-
-        liste =
-            liste.filter(
-                e =>
-                    String(
-                        e.categorie || ""
-                    )
-                    .toLowerCase() ===
-                    filtreActuel.toLowerCase()
-            );
-
-    }
 
     if (recherche) {
 
         liste =
-            liste.filter(function(e) {
+            liste.filter(
+                function(e) {
 
-                const nom =
-                    String(
-                        e.nom || ""
-                    ).toLowerCase();
+                    const nom =
+                        String(
+                            e.nom || ""
+                        ).toLowerCase();
 
-                const description =
-                    String(
-                        e.description || ""
-                    ).toLowerCase();
+                    const description =
+                        String(
+                            e.description || ""
+                        ).toLowerCase();
 
-                const categorie =
-                    String(
-                        e.categorie || ""
-                    ).toLowerCase();
+                    const categorie =
+                        String(
+                            e.categorie || ""
+                        ).toLowerCase();
 
-                return (
-                    nom.includes(recherche) ||
-                    description.includes(recherche) ||
-                    categorie.includes(recherche)
-                );
+                    return (
+                        nom.includes(recherche) ||
+                        description.includes(recherche) ||
+                        categorie.includes(recherche)
+                    );
 
-            });
+                }
+            );
 
     }
+
 
     if (liste.length === 0) {
 
@@ -1543,112 +1428,203 @@ function afficherExercices() {
 
     }
 
+
     zone.innerHTML =
-        liste.map(function(e) {
+        liste.map(
+            function(e) {
 
-            const nom =
-                echapperHTML(e.nom);
+                const nom =
+                    echapperHTML(e.nom);
 
-            const categorie =
-                echapperHTML(e.categorie);
+                const categorie =
+                    echapperHTML(e.categorie);
 
-            const donnees =
-                extraireDonneesMusculation(
-                    e.description
-                );
+                const donnees =
+                    extraireDonneesMusculation(
+                        e.description
+                    );
 
-            const description =
-                echapperHTML(
-                    donnees.description
-                );
+                const description =
+                    echapperHTML(
+                        donnees.description
+                    );
 
-            let chargeAffichage =
-                "Non renseignée";
 
-            if (
-                donnees.charge === "Trop léger"
-            ) {
-                chargeAffichage =
-                    "🟡 Trop léger";
-            }
+                let chargeAffichage =
+                    "Non renseignée";
 
-            if (
-                donnees.charge === "Correct"
-            ) {
-                chargeAffichage =
-                    "🟢 Correct";
-            }
 
-            if (
-                donnees.charge === "Trop lourd"
-            ) {
-                chargeAffichage =
-                    "🔴 Trop lourd";
-            }
+                if (
+                    donnees.charge ===
+                    "Trop léger"
+                ) {
 
-            const classe =
-                classeCharge(
+                    chargeAffichage =
+                        "🟡 Trop léger";
+
+                }
+
+
+                if (
+                    donnees.charge ===
+                    "Correct"
+                ) {
+
+                    chargeAffichage =
+                        "🟢 Correct";
+
+                }
+
+
+                if (
+                    donnees.charge ===
+                    "Trop lourd"
+                ) {
+
+                    chargeAffichage =
+                        "🔴 Trop lourd";
+
+                }
+
+
+                const classe =
+                    classeCharge(
+                        donnees.charge
+                    );
+
+
+                let html = `
+
+                    <div class="card">
+
+                        <h3>
+                            ${nom}
+                        </h3>
+
+                        <div class="exercise-category">
+                            🏷️ ${categorie}
+                        </div>
+
+                        <div class="info">
+                            💪 ${e.series || 0}
+                            séries ×
+                            ${e.repetitions || 0}
+                            répétitions
+                        </div>
+
+                `;
+
+
+                if (
+                    donnees.poids ||
                     donnees.charge
-                );
+                ) {
 
-            let html = `
+                    html += `
 
-                <div class="card">
+                        <div class="performance">
 
-                    <h3>
-                        ${nom}
-                    </h3>
+                            <div class="performance-box">
 
-                    <div class="exercise-category">
-                        🏷️ ${categorie}
-                    </div>
+                                <span class="performance-label">
+                                    ⚖️ Poids utilisé
+                                </span>
 
-                    <div class="info">
-                        💪 ${e.series || 0}
-                        séries ×
-                        ${e.repetitions || 0}
-                        répétitions
-                    </div>
-
-            `;
-
-
-            if (
-                donnees.poids ||
-                donnees.charge
-            ) {
-
-                html += `
-
-                    <div class="performance">
-
-                        <div class="performance-box">
-
-                            <span class="performance-label">
-                                ⚖️ Poids
-                            </span>
-
-                            <span class="performance-value weight-value">
-                                ${
-                                    donnees.poids
-                                    ? echapperHTML(
+                                <span class="performance-value weight-value">
+                                    ${
                                         donnees.poids
-                                    ) + " kg"
-                                    : "Non renseigné"
-                                }
-                            </span>
+                                            ? echapperHTML(
+                                                donnees.poids
+                                            ) + " kg"
+                                            : "Non renseigné"
+                                    }
+                                </span>
+
+                            </div>
+
+
+                            <div class="performance-box">
+
+                                <span class="performance-label">
+                                    🎯 Charge
+                                </span>
+
+                                <span class="performance-value ${classe}">
+                                    ${chargeAffichage}
+                                </span>
+
+                            </div>
 
                         </div>
 
-                        <div class="performance-box">
+                    `;
 
-                            <span class="performance-label">
-                                🎯 Charge
-                            </span>
+                }
 
-                            <span class="performance-value ${classe}">
-                                ${chargeAffichage}
-                            </span>
+
+                if (description) {
+
+                    html += `
+
+                        <p class="info">
+                            📝 ${description}
+                        </p>
+
+                    `;
+
+                }
+
+
+                if (e.video_url) {
+
+                    html += `
+
+                        <video
+                            class="video"
+                            controls
+                            preload="metadata"
+                            src="${echapperHTML(
+                                e.video_url
+                            )}">
+                        </video>
+
+                    `;
+
+                }
+
+
+                if (e.photo_url) {
+
+                    html += `
+
+                        <img
+                            class="photo"
+                            src="${echapperHTML(
+                                e.photo_url
+                            )}"
+                            alt="${nom}"
+                            loading="lazy">
+
+                    `;
+
+                }
+
+
+                html += `
+
+                        <div class="actions">
+
+                            <button
+                                class="edit"
+                                onclick="modifierExercice(${Number(e.id)})">
+                                ✏️ Modifier
+                            </button>
+
+                            <button
+                                class="delete"
+                                onclick="supprimerExercice(${Number(e.id)})">
+                                🗑️ Supprimer
+                            </button>
 
                         </div>
 
@@ -1656,84 +1632,17 @@ function afficherExercices() {
 
                 `;
 
-            }
 
-
-            if (description) {
-
-                html += `
-
-                    <p class="info">
-                        📝 ${description}
-                    </p>
-
-                `;
+                return html;
 
             }
-
-
-            if (e.video_url) {
-
-                html += `
-
-                    <video
-                        class="video"
-                        controls
-                        preload="metadata"
-                        src="${echapperHTML(e.video_url)}">
-                    </video>
-
-                `;
-
-            }
-
-
-            if (e.photo_url) {
-
-                html += `
-
-                    <img
-                        class="photo"
-                        src="${echapperHTML(e.photo_url)}"
-                        alt="${nom}"
-                        loading="lazy">
-
-                `;
-
-            }
-
-
-            html += `
-
-                    <div class="actions">
-
-                        <button
-                            class="edit"
-                            onclick="modifierExercice(${Number(e.id)})">
-                            ✏️ Modifier
-                        </button>
-
-                        <button
-                            class="delete"
-                            onclick="supprimerExercice(${Number(e.id)})">
-                            🗑️ Supprimer
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-            return html;
-
-        }).join("");
+        ).join("");
 
 }
 
 
 /* ============================================================
-   FILTRE CATEGORIE
+   FILTRER UNE CATÉGORIE
    ============================================================ */
 
 function filtrerCategorie(
@@ -1746,55 +1655,109 @@ function filtrerCategorie(
     filtreActuel =
         categorie;
 
+
+    /*
+       Active le bouton choisi
+    */
+
     document.querySelectorAll(
         ".category"
     )
     .forEach(
-        b => b.classList.remove("active")
+        function(b) {
+            b.classList.remove("active");
+        }
     );
+
 
     document.querySelectorAll(
         ".toolbar button"
     )
     .forEach(
-        b => b.classList.remove("active")
+        function(b) {
+            b.classList.remove("active");
+        }
     );
+
 
     bouton.classList.add("active");
 
+
+    /*
+       PRÉREMPLIT LE FORMULAIRE
+       POUR TOUTES LES CATÉGORIES
+    */
+
+    const categorieFormulaire =
+        document.getElementById(
+            "categorie"
+        );
+
+
+    if (categorieFormulaire) {
+
+        categorieFormulaire.value =
+            categorie;
+
+    }
+
+
+    /*
+       Affiche uniquement cette catégorie
+       partout dans le site
+    */
+
     afficherExercices();
+
+    afficherGalerie();
+
+    afficherNotes();
 
 }
 
 
 /* ============================================================
-   PHOTOS
+   FILTRE PHOTOS
    ============================================================ */
 
-function filtrerPhotos(bouton) {
+function filtrerPhotos(
+    bouton
+) {
 
     modePhotos = true;
 
     filtreActuel =
         "PHOTOS";
 
+
     document.querySelectorAll(
         ".category"
     )
     .forEach(
-        b => b.classList.remove("active")
+        function(b) {
+            b.classList.remove("active");
+        }
     );
+
 
     document.querySelectorAll(
         ".toolbar button"
     )
     .forEach(
-        b => b.classList.remove("active")
+        function(b) {
+            b.classList.remove("active");
+        }
     );
+
 
     bouton.classList.add("active");
 
+
     afficherExercices();
+
+    afficherGalerie();
+
+    afficherNotes();
 
 }
 
@@ -1803,36 +1766,50 @@ function filtrerPhotos(bouton) {
    TOUS
    ============================================================ */
 
-function afficherTous(bouton) {
+function afficherTous(
+    bouton
+) {
 
     modePhotos = false;
 
     filtreActuel =
         "TOUS";
 
+
     document.querySelectorAll(
         ".category"
     )
     .forEach(
-        b => b.classList.remove("active")
+        function(b) {
+            b.classList.remove("active");
+        }
     );
+
 
     document.querySelectorAll(
         ".toolbar button"
     )
     .forEach(
-        b => b.classList.remove("active")
+        function(b) {
+            b.classList.remove("active");
+        }
     );
+
 
     bouton.classList.add("active");
 
+
     afficherExercices();
+
+    afficherGalerie();
+
+    afficherNotes();
 
 }
 
 
 /* ============================================================
-   UPLOAD STORAGE
+   UPLOAD
    ============================================================ */
 
 async function envoyerFichier(
@@ -1844,12 +1821,14 @@ async function envoyerFichier(
         return null;
     }
 
+
     const extension =
         fichier.name.includes(".")
             ? fichier.name.substring(
                 fichier.name.lastIndexOf(".")
             )
             : "";
+
 
     const nomFichier =
         prefixe +
@@ -1861,12 +1840,14 @@ async function envoyerFichier(
             .substring(2, 9) +
         extension;
 
+
     const url =
         STORAGE_URL +
         "/" +
         encodeURIComponent(
             nomFichier
         );
+
 
     const response =
         await fetchAvecTimeout(
@@ -1887,12 +1868,15 @@ async function envoyerFichier(
                 },
 
                 body: fichier
+
             },
             60000
         );
 
+
     const texte =
         await response.text();
+
 
     if (!response.ok) {
 
@@ -1902,6 +1886,7 @@ async function envoyerFichier(
         );
 
     }
+
 
     return (
         SUPABASE_URL +
@@ -1923,15 +1908,18 @@ async function sauvegarderExercice() {
             "exerciceId"
         ).value;
 
+
     const nom =
         document.getElementById(
             "nom"
         ).value.trim();
 
+
     const categorie =
         document.getElementById(
             "categorie"
         ).value;
+
 
     const series =
         parseInt(
@@ -1940,6 +1928,7 @@ async function sauvegarderExercice() {
             ).value
         ) || 0;
 
+
     const repetitions =
         parseInt(
             document.getElementById(
@@ -1947,20 +1936,24 @@ async function sauvegarderExercice() {
             ).value
         ) || 0;
 
+
     const poids =
         document.getElementById(
             "poids"
         ).value.trim();
+
 
     const charge =
         document.getElementById(
             "charge"
         ).value;
 
+
     const descriptionTexte =
         document.getElementById(
             "description"
         ).value.trim();
+
 
     const description =
         construireDescription(
@@ -1969,15 +1962,18 @@ async function sauvegarderExercice() {
             charge
         );
 
+
     const videoFile =
         document.getElementById(
             "video"
         ).files[0];
 
+
     const photoFile =
         document.getElementById(
             "photo"
         ).files[0];
+
 
     if (!nom) {
 
@@ -1989,11 +1985,13 @@ async function sauvegarderExercice() {
 
     }
 
+
     try {
 
         message(
             "⏳ Enregistrement en cours..."
         );
+
 
         let videoUrl = null;
 
@@ -2039,6 +2037,7 @@ async function sauvegarderExercice() {
                         String(id)
                 );
 
+
             const donnees = {
 
                 nom: nom,
@@ -2062,7 +2061,8 @@ async function sauvegarderExercice() {
             } else if (ancien) {
 
                 donnees.video_url =
-                    ancien.video_url || null;
+                    ancien.video_url ||
+                    null;
 
             }
 
@@ -2075,7 +2075,8 @@ async function sauvegarderExercice() {
             } else if (ancien) {
 
                 donnees.photo_url =
-                    ancien.photo_url || null;
+                    ancien.photo_url ||
+                    null;
 
             }
 
@@ -2090,6 +2091,7 @@ async function sauvegarderExercice() {
 
                         headers: {
                             ...headersSupabase(),
+
                             "Prefer":
                                 "return=representation"
                         },
@@ -2150,6 +2152,7 @@ async function sauvegarderExercice() {
 
                         headers: {
                             ...headersSupabase(),
+
                             "Prefer":
                                 "return=representation"
                         },
@@ -2201,6 +2204,7 @@ async function sauvegarderExercice() {
             erreur
         );
 
+
         message(
             "❌ Erreur : " +
             echapperHTML(
@@ -2225,6 +2229,7 @@ function modifierExercice(id) {
                 Number(e.id) ===
                 Number(id)
         );
+
 
     if (!exercice) {
 
@@ -2327,6 +2332,7 @@ function annulerModification() {
 
     viderFormulaire();
 
+
     document.getElementById(
         "titreFormulaire"
     ).textContent =
@@ -2344,6 +2350,24 @@ function annulerModification() {
     ).style.display =
         "none";
 
+
+    /*
+       On conserve la catégorie actuellement sélectionnée.
+       Donc si tu es dans DOS, le formulaire reste sur DOS.
+    */
+
+    if (
+        filtreActuel !== "TOUS" &&
+        !modePhotos
+    ) {
+
+        document.getElementById(
+            "categorie"
+        ).value =
+            filtreActuel;
+
+    }
+
 }
 
 
@@ -2357,37 +2381,63 @@ function viderFormulaire() {
         "exerciceId"
     ).value = "";
 
+
     document.getElementById(
         "nom"
     ).value = "";
+
 
     document.getElementById(
         "description"
     ).value = "";
 
+
     document.getElementById(
         "poids"
     ).value = "";
+
 
     document.getElementById(
         "charge"
     ).value = "";
 
+
     document.getElementById(
         "video"
     ).value = "";
+
 
     document.getElementById(
         "photo"
     ).value = "";
 
+
     document.getElementById(
         "series"
     ).value = 4;
 
+
     document.getElementById(
         "repetitions"
     ).value = 10;
+
+
+    /*
+       Si une catégorie est sélectionnée,
+       on la conserve dans le formulaire.
+    */
+
+    if (
+        filtreActuel !== "TOUS" &&
+        !modePhotos
+    ) {
+
+        document.getElementById(
+            "categorie"
+        ).value =
+            filtreActuel;
+
+    }
 
 }
 
@@ -2404,6 +2454,7 @@ async function supprimerExercice(id) {
                 Number(e.id) ===
                 Number(id)
         );
+
 
     if (!exercice) {
         return;
@@ -2471,6 +2522,7 @@ async function supprimerExercice(id) {
             erreur
         );
 
+
         message(
             "❌ Erreur de suppression : " +
             echapperHTML(
@@ -2484,7 +2536,7 @@ async function supprimerExercice(id) {
 
 
 /* ============================================================
-   GALERIE
+   GALERIE — FILTRÉE PAR CATÉGORIE
    ============================================================ */
 
 function afficherGalerie() {
@@ -2495,16 +2547,34 @@ function afficherGalerie() {
         );
 
 
+    let liste =
+        obtenirListeFiltree();
+
+
     const photos =
-        exercices.filter(
+        liste.filter(
             e => e.photo_url
         );
 
 
     if (photos.length === 0) {
 
-        galerie.innerHTML =
-            '<div class="empty">📷 Aucune photo pour le moment</div>';
+        if (
+            filtreActuel !== "TOUS" &&
+            !modePhotos
+        ) {
+
+            galerie.innerHTML =
+                '<div class="empty">📷 Aucune photo pour ' +
+                echapperHTML(filtreActuel) +
+                '.</div>';
+
+        } else {
+
+            galerie.innerHTML =
+                '<div class="empty">📷 Aucune photo pour le moment</div>';
+
+        }
 
         return;
 
@@ -2512,31 +2582,34 @@ function afficherGalerie() {
 
 
     galerie.innerHTML =
-        photos.map(function(e) {
+        photos.map(
+            function(e) {
 
-            const url =
-                echapperHTML(
-                    e.photo_url
-                );
+                const url =
+                    echapperHTML(
+                        e.photo_url
+                    );
 
 
-            return `
+                return `
 
-                <img
-                    src="${url}"
-                    alt="${echapperHTML(e.nom)}"
-                    loading="lazy"
-                    onclick="window.open('${url}', '_blank')">
+                    <img
+                        src="${url}"
+                        alt="${echapperHTML(e.nom)}"
+                        title="${echapperHTML(e.nom)}"
+                        loading="lazy"
+                        onclick="window.open('${url}', '_blank')">
 
-            `;
+                `;
 
-        }).join("");
+            }
+        ).join("");
 
 }
 
 
 /* ============================================================
-   NOTES
+   NOTES — FILTRÉES PAR CATÉGORIE
    ============================================================ */
 
 function afficherNotes() {
@@ -2547,36 +2620,58 @@ function afficherNotes() {
         );
 
 
-    const notes =
-        exercices
-            .map(function(e) {
+    let liste =
+        obtenirListeFiltree();
 
-                const donnees =
-                    extraireDonneesMusculation(
-                        e.description
+
+    const notes =
+        liste
+            .map(
+                function(e) {
+
+                    const donnees =
+                        extraireDonneesMusculation(
+                            e.description
+                        );
+
+
+                    return {
+                        exercice: e,
+                        note: donnees.description
+                    };
+
+                }
+            )
+            .filter(
+                function(x) {
+
+                    return (
+                        x.note &&
+                        x.note.trim() !== ""
                     );
 
-
-                return {
-                    exercice: e,
-                    note: donnees.description
-                };
-
-            })
-            .filter(function(x) {
-
-                return (
-                    x.note &&
-                    x.note.trim() !== ""
-                );
-
-            });
+                }
+            );
 
 
     if (notes.length === 0) {
 
-        zone.innerHTML =
-            '<div class="empty">📝 Aucune note pour le moment</div>';
+        if (
+            filtreActuel !== "TOUS" &&
+            !modePhotos
+        ) {
+
+            zone.innerHTML =
+                '<div class="empty">📝 Aucune note pour ' +
+                echapperHTML(filtreActuel) +
+                '.</div>';
+
+        } else {
+
+            zone.innerHTML =
+                '<div class="empty">📝 Aucune note pour le moment</div>';
+
+        }
 
         return;
 
@@ -2584,25 +2679,37 @@ function afficherNotes() {
 
 
     zone.innerHTML =
-        notes.map(function(x) {
+        notes.map(
+            function(x) {
 
-            return `
+                return `
 
-                <div class="card">
+                    <div class="card">
 
-                    <h3>
-                        ${echapperHTML(x.exercice.nom)}
-                    </h3>
+                        <h3>
+                            ${echapperHTML(
+                                x.exercice.nom
+                            )}
+                        </h3>
 
-                    <div class="info">
-                        📝 ${echapperHTML(x.note)}
+                        <div class="exercise-category">
+                            🏷️ ${echapperHTML(
+                                x.exercice.categorie
+                            )}
+                        </div>
+
+                        <div class="info">
+                            📝 ${echapperHTML(
+                                x.note
+                            )}
+                        </div>
+
                     </div>
 
-                </div>
+                `;
 
-            `;
-
-        }).join("");
+            }
+        ).join("");
 
 }
 
@@ -2617,11 +2724,13 @@ function demarrerApplication() {
         "Mon Carnet Musculation : démarrage"
     );
 
+
     afficherTous(
         document.getElementById(
             "btnTous"
         )
     );
+
 
     chargerExercices();
 
@@ -2644,4 +2753,4 @@ if (
 }
 
 </script></body>
-        </html>
+    </html>
