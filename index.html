@@ -3,92 +3,151 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Mon Carnet Musculation</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#111;
+    color:#fff;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #101114;
-    color: white;
+header{
+    padding:22px 15px;
+    text-align:center;
+    background:linear-gradient(135deg,#181818,#252525);
+    border-bottom:1px solid #333;
 }
 
-header {
-    text-align: center;
-    padding: 28px 15px;
-    background: #181a1f;
-    border-bottom: 1px solid #30333a;
+header h1{
+    margin:0;
+    font-size:25px;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 28px;
+header p{
+    margin:8px 0 0;
+    color:#aaa;
 }
 
-header p {
-    color: #aaa;
-    margin: 10px 0 0;
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:15px;
 }
 
-.container {
-    max-width: 1000px;
-    margin: auto;
-    padding: 20px 15px;
+.categories{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-bottom:20px;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+button{
+    border:0;
+    border-radius:10px;
+    padding:13px;
+    font-size:15px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.card {
-    background: #1b1e24;
-    border: 1px solid #30343c;
-    border-radius: 16px;
-    padding: 24px 10px;
-    text-align: center;
-    cursor: pointer;
+.cat{
+    background:#252525;
+    color:white;
 }
 
-.card:active {
-    transform: scale(0.97);
+.cat:hover{
+    background:#333;
 }
 
-.icon {
-    display: block;
-    font-size: 36px;
-    margin-bottom: 10px;
+.form{
+    background:#1b1b1b;
+    padding:18px;
+    border-radius:15px;
+    margin-bottom:20px;
+    border:1px solid #333;
 }
 
-.card strong {
-    font-size: 16px;
+.form h2{
+    margin-top:0;
 }
 
-.info {
-    margin-top: 25px;
-    padding: 20px;
-    background: #1b1e24;
-    border-radius: 16px;
-    color: #ccc;
-    line-height: 1.5;
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    margin:7px 0 12px;
+    border-radius:8px;
+    border:1px solid #444;
+    background:#111;
+    color:white;
+    font-size:15px;
 }
 
-footer {
-    text-align: center;
-    color: #777;
-    padding: 30px 15px;
+textarea{
+    min-height:90px;
+    resize:vertical;
 }
 
-@media (min-width: 700px) {
-    .grid {
-        grid-template-columns: repeat(3, 1fr);
+.save{
+    width:100%;
+    background:#00c853;
+    color:white;
+}
+
+.status{
+    text-align:center;
+    padding:10px;
+    color:#aaa;
+}
+
+.exercise{
+    background:#1b1b1b;
+    border:1px solid #333;
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:15px;
+}
+
+.exercise h3{
+    margin-top:0;
+    font-size:20px;
+}
+
+.exercise p{
+    color:#ccc;
+    line-height:1.5;
+}
+
+.exercise img,
+.exercise video{
+    width:100%;
+    max-height:400px;
+    object-fit:contain;
+    border-radius:10px;
+    margin-top:10px;
+    background:#000;
+}
+
+.delete{
+    background:#d50000;
+    color:white;
+    margin-top:10px;
+    width:100%;
+}
+
+@media(min-width:700px){
+
+    .categories{
+        grid-template-columns:repeat(3,1fr);
     }
+
 }
 </style>
 </head>
@@ -96,92 +155,368 @@ footer {
 <body>
 
 <header>
+
     <h1>🏋️ Mon Carnet Musculation</h1>
-    <p>Mes exercices, vidéos, photos et notes</p>
+
+    <p>
+        Mes exercices, vidéos, photos et notes
+    </p>
+
 </header>
 
 <div class="container">
 
-    <div class="grid">
+    <div class="categories">
 
-        <div class="card" onclick="ouvrir('Pectoraux')">
-            <span class="icon">💪</span>
-            <strong>Pectoraux</strong>
-        </div>
+        <button class="cat"
+                onclick="filtrer('Pectoraux')">
+            💪 Pectoraux
+        </button>
 
-        <div class="card" onclick="ouvrir('Dos')">
-            <span class="icon">🦾</span>
-            <strong>Dos</strong>
-        </div>
+        <button class="cat"
+                onclick="filtrer('Dos')">
+            🔙 Dos
+        </button>
 
-        <div class="card" onclick="ouvrir('Épaules')">
-            <span class="icon">🏋️</span>
-            <strong>Épaules</strong>
-        </div>
+        <button class="cat"
+                onclick="filtrer('Épaules')">
+            🏋️ Épaules
+        </button>
 
-        <div class="card" onclick="ouvrir('Biceps')">
-            <span class="icon">💪</span>
-            <strong>Biceps</strong>
-        </div>
+        <button class="cat"
+                onclick="filtrer('Biceps')">
+            💪 Biceps
+        </button>
 
-        <div class="card" onclick="ouvrir('Triceps')">
-            <span class="icon">💪</span>
-            <strong>Triceps</strong>
-        </div>
+        <button class="cat"
+                onclick="filtrer('Triceps')">
+            💪 Triceps
+        </button>
 
-        <div class="card" onclick="ouvrir('Jambes')">
-            <span class="icon">🦵</span>
-            <strong>Jambes</strong>
-        </div>
+        <button class="cat"
+                onclick="filtrer('Jambes')">
+            🦵 Jambes
+        </button>
 
-        <div class="card" onclick="ouvrir('Abdos')">
-            <span class="icon">🔥</span>
-            <strong>Abdos</strong>
-        </div>
+        <button class="cat"
+                onclick="filtrer('Abdos')">
+            🔥 Abdos
+        </button>
 
-        <div class="card" onclick="ouvrir('Photos')">
-            <span class="icon">📸</span>
-            <strong>Photos</strong>
-        </div>
+        <button class="cat"
+                onclick="filtrer('Photos')">
+            📷 Photos
+        </button>
 
-        <div class="card" onclick="ouvrir('Notes')">
-            <span class="icon">📝</span>
-            <strong>Notes</strong>
-        </div>
+        <button class="cat"
+                onclick="filtrer('Notes')">
+            📝 Notes
+        </button>
+
+        <button class="cat"
+                onclick="chargerExercices()">
+            🏠 Tout afficher
+        </button>
 
     </div>
 
-    <div class="info">
-        <h2>📋 Mon carnet</h2>
 
-        <p>
-            Bienvenue dans ton carnet personnel de musculation.
-        </p>
+    <div class="form">
 
-        <p>
-            Tu pourras y ajouter tes exercices, tes vidéos
-            de démonstration, tes photos et tes notes.
-        </p>
+        <h2>➕ Ajouter un exercice</h2>
+
+
+        <label>Catégorie</label>
+
+        <select id="categorie">
+
+            <option>Pectoraux</option>
+            <option>Dos</option>
+            <option>Épaules</option>
+            <option>Biceps</option>
+            <option>Triceps</option>
+            <option>Jambes</option>
+            <option>Abdos</option>
+            <option>Photos</option>
+            <option>Notes</option>
+
+        </select>
+
+
+        <label>Nom de l'exercice</label>
+
+        <input
+            id="nom"
+            placeholder="Exemple : Développé couché"
+        >
+
+
+        <label>Description</label>
+
+        <textarea
+            id="description"
+            placeholder="Technique, conseils, matériel..."
+        ></textarea>
+
+
+        <label>Séries</label>
+
+        <input
+            id="series"
+            type="number"
+            placeholder="4"
+        >
+
+
+        <label>Répétitions</label>
+
+        <input
+            id="repetitions"
+            type="number"
+            placeholder="10"
+        >
+
+
+        <label>Vidéo de démonstration</label>
+
+        <input
+            id="video"
+            type="file"
+            accept="video/*"
+        >
+
+
+        <label>Photo</label>
+
+        <input
+            id="photo"
+            type="file"
+            accept="image/*"
+        >
+
+
+        <button
+            class="save"
+            onclick="ajouterExercice()"
+        >
+            💾 Enregistrer l'exercice
+        </button>
+
+
+        <div
+            id="status"
+            class="status"
+        ></div>
+
     </div>
+
+
+    <h2>📚 Mes exercices</h2>
+
+
+    <div id="liste"></div>
 
 </div>
 
-<footer>
-    Mon Carnet Musculation
-</footer>
 
 <script>
 
-function ouvrir(section) {
+const SUPABASE_URL =
+    "https://cjtgjwepiotuhtfqwanw.supabase.co";
 
-    alert(
-        "Section : " + section +
-        "\n\nLes exercices et vidéos seront ajoutés ici."
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_DXMY1V9ir7R_vwuFysSWwA_Pe-r5NNP";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
     );
+
+
+async function ajouterFichier(fichier){
+
+    if(!fichier){
+
+        return null;
+
+    }
+
+
+    const nomUnique =
+        Date.now() +
+        "_" +
+        Math.random()
+            .toString(36)
+            .substring(2) +
+        "_" +
+        fichier.name
+            .replace(
+                /[^a-zA-Z0-9._-]/g,
+                "_"
+            );
+
+
+    const { error } =
+        await supabaseClient
+        .storage
+        .from("medias")
+        .upload(
+            nomUnique,
+            fichier
+        );
+
+
+    if(error){
+
+        throw error;
+
+    }
+
+
+    const { data } =
+        supabaseClient
+        .storage
+        .from("medias")
+        .getPublicUrl(
+            nomUnique
+        );
+
+
+    return data.publicUrl;
 
 }
 
-</script>
 
-</body>
-  </html>
+async function ajouterExercice(){
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    status.textContent =
+        "⏳ Enregistrement en cours...";
+
+
+    try{
+
+        const categorie =
+            document.getElementById(
+                "categorie"
+            ).value;
+
+
+        const nom =
+            document.getElementById(
+                "nom"
+            ).value.trim();
+
+
+        const description =
+            document.getElementById(
+                "description"
+            ).value.trim();
+
+
+        const series =
+            document.getElementById(
+                "series"
+            ).value;
+
+
+        const repetitions =
+            document.getElementById(
+                "repetitions"
+            ).value;
+
+
+        const video =
+            document.getElementById(
+                "video"
+            ).files[0];
+
+
+        const photo =
+            document.getElementById(
+                "photo"
+            ).files[0];
+
+
+        if(!nom){
+
+            alert(
+                "Entre le nom de l'exercice."
+            );
+
+            status.textContent = "";
+
+            return;
+
+        }
+
+
+        let videoUrl = null;
+
+        let photoUrl = null;
+
+
+        if(video){
+
+            status.textContent =
+                "🎥 Envoi de la vidéo...";
+
+
+            videoUrl =
+                await ajouterFichier(
+                    video
+                );
+
+        }
+
+
+        if(photo){
+
+            status.textContent =
+                "📷 Envoi de la photo...";
+
+
+            photoUrl =
+                await ajouterFichier(
+                    photo
+                );
+
+        }
+
+
+        status.textContent =
+            "💾 Enregistrement...";
+
+
+        const { error } =
+            await supabaseClient
+            .from("exercices")
+            .insert([{
+
+                nom:nom,
+
+                categorie:categorie,
+
+                description:
+                    description || null,
+
+                series:
+                    series
+                    ? parseInt(series)
+                    : null,
+
+                repetitions:
+                    repetitions
+                    ? parseInt(repetitions)
+                    : null,
+
+                video_url:
+                    videoUrl,
