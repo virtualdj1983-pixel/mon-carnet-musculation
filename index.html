@@ -341,10 +341,6 @@ footer {
     .gallery {
         grid-template-columns: repeat(4, 1fr);
     }
-
-    .performance {
-        grid-template-columns: repeat(2, 1fr);
-    }
 }
 </style></head><body><header>
     <h1>💪 Mon Carnet Musculation</h1>
@@ -410,18 +406,15 @@ oninput="afficherExercices()"
 «»
 
 <div id="connexion" class="loading">
-    🔄 Connexion à la base de données...
-</div><div id="listeExercices"></div><div class="form-box" id="sectionFormulaire"><h2 id="titreFormulaire">➕ Ajouter un exercice</h2>
-
-<input type="hidden" id="exerciceId">
-
-<label>Nom de l'exercice</label>
+    🔄 Connexion à Supabase...
+</div><div id="listeExercices"></div><div class="form-box" id="sectionFormulaire"><h2 id="titreFormulaire">➕ Ajouter un exercice</h2><input type="hidden" id="exerciceId"><label>Nom de l'exercice</label>
 
 <input
-    id="nom"
-    type="text"
-    placeholder="Exemple : Développé couché"
->
+id="nom"
+type="text"
+placeholder="Exemple : Développé couché"
+
+«»
 
 <label>Catégorie</label>
 
@@ -433,36 +426,37 @@ oninput="afficherExercices()"
     <option value="Triceps">Triceps</option>
     <option value="Jambes">Jambes</option>
     <option value="Abdos">Abdos</option>
-</select>
-
-<label>Nombre de séries</label>
+</select><label>Nombre de séries</label>
 
 <input
-    id="series"
-    type="number"
-    value="4"
-    min="1"
->
+id="series"
+type="number"
+value="4"
+min="1"
+
+«»
 
 <label>Nombre de répétitions</label>
 
 <input
-    id="repetitions"
-    type="number"
-    value="10"
-    min="1"
->
+id="repetitions"
+type="number"
+value="10"
+min="1"
+
+«»
 
 <label>⚖️ Poids utilisé (kg)</label>
 
 <input
-    id="poids"
-    type="number"
-    value=""
-    min="0"
-    step="0.5"
-    placeholder="Exemple : 60"
->
+id="poids"
+type="number"
+value=""
+min="0"
+step="0.5"
+placeholder="Exemple : 60"
+
+«»
 
 <label>🎯 Charge</label>
 
@@ -471,46 +465,41 @@ oninput="afficherExercices()"
     <option value="Trop léger">🟡 Trop léger</option>
     <option value="Correct">🟢 Correct</option>
     <option value="Trop lourd">🔴 Trop lourd</option>
-</select>
-
-<label>📝 Description / notes</label>
+</select><label>📝 Description / notes</label>
 
 <textarea
     id="description"
     placeholder="Technique, conseils, sensations..."
-></textarea>
-
-<label>🎥 Vidéo de démonstration</label>
+></textarea><label>🎥 Vidéo de démonstration</label>
 
 <input
-    id="video"
-    type="file"
-    accept="video/*"
->
+id="video"
+type="file"
+accept="video/*"
+
+«»
 
 <label>📷 Photo</label>
 
 <input
-    id="photo"
-    type="file"
-    accept="image/*"
->
+id="photo"
+type="file"
+accept="image/*"
+
+«»
 
 <button class="save" onclick="sauvegarderExercice()">
     💾 ENREGISTRER
-</button>
+</button><button
+id="btnAnnuler"
+class="cancel"
+onclick="annulerModification()"
 
-<button
-    id="btnAnnuler"
-    class="cancel"
-    onclick="annulerModification()"
->
-    ❌ ANNULER LA MODIFICATION
-</button>
+«»
 
-<div id="message" class="message"></div>
+❌ ANNULER LA MODIFICATION
 
-</div><h2>🖼️ Galerie photos</h2><div id="galerie" class="gallery"></div><h2>📝 Notes</h2><div id="notes"></div></div><footer>
+</button><div id="message" class="message"></div></div><h2>🖼️ Galerie photos</h2><div id="galerie" class="gallery"></div><h2>📝 Notes</h2><div id="notes"></div></div><footer>
     Mon Carnet Musculation
 </footer><script>
 
@@ -557,7 +546,7 @@ function headersSupabase() {
 
 
 /* ============================================================
-   REQUETE AVEC TIMEOUT
+   FETCH AVEC TIMEOUT
    ============================================================ */
 
 async function fetchAvecTimeout(
@@ -630,18 +619,13 @@ function echapperHTML(texte) {
 
 
 /* ============================================================
-   GESTION POIDS / CHARGE
+   EXTRAIRE POIDS / CHARGE
 
-   Les colonnes Supabase existantes ne sont pas modifiées.
+   IMPORTANT :
+   Les doubles crochets doivent rester exactement comme ceci :
 
-   Les nouvelles informations sont enregistrées dans le champ
-   description sous forme de lignes techniques protégées.
-
-   Exemple :
    [[POIDS:60]]
    [[CHARGE:Correct]]
-
-   Ainsi, les anciens exercices restent compatibles.
    ============================================================ */
 
 function extraireDonneesMusculation(description) {
@@ -650,10 +634,14 @@ function extraireDonneesMusculation(description) {
         String(description || "");
 
     const poidsMatch =
-        texte.match(/\[POIDS:([0-9]+(?:[.,][0-9]+)?)\]/i);
+        texte.match(
+            /\[POIDS:([0-9]+(?:[.,][0-9]+)?)\]/i
+        );
 
     const chargeMatch =
-        texte.match(/\[CHARGE:(Trop léger|Correct|Trop lourd)\]/i);
+        texte.match(
+            /\[CHARGE:(Trop léger|Correct|Trop lourd)\]/i
+        );
 
     let poids = "";
 
@@ -692,7 +680,7 @@ function extraireDonneesMusculation(description) {
 
 
 /* ============================================================
-   CONSTRUIRE LA DESCRIPTION SUPABASE
+   CONSTRUIRE DESCRIPTION
    ============================================================ */
 
 function construireDescription(
@@ -702,12 +690,8 @@ function construireDescription(
 ) {
 
     let texte =
-        String(description || "").trim();
-
-    /*
-     * Supprime d'abord d'éventuelles anciennes données
-     * techniques afin d'éviter les doublons.
-     */
+        String(description || "")
+            .trim();
 
     texte =
         texte
@@ -773,7 +757,7 @@ function construireDescription(
 
 
 /* ============================================================
-   CLASSE CSS DE LA CHARGE
+   CLASSE CHARGE
    ============================================================ */
 
 function classeCharge(charge) {
@@ -821,7 +805,7 @@ async function chargerExercices() {
             "?select=*&order=id.desc";
 
         console.log(
-            "Connexion Supabase :",
+            "URL Supabase :",
             url
         );
 
@@ -840,8 +824,12 @@ async function chargerExercices() {
             await response.text();
 
         console.log(
+            "Supabase HTTP :",
+            response.status
+        );
+
+        console.log(
             "Réponse Supabase :",
-            response.status,
             texte
         );
 
@@ -851,12 +839,15 @@ async function chargerExercices() {
                 "error-box";
 
             connexion.innerHTML =
-                "<strong>❌ Supabase a refusé la requête.</strong><br><br>" +
-                "Code HTTP : " +
+                "<strong>❌ ERREUR SUPABASE</strong><br><br>" +
+                "Code HTTP : <strong>" +
                 response.status +
+                "</strong><br><br>" +
+                "<strong>Réponse du serveur :</strong><br>" +
+                echapperHTML(texte) +
                 "<br><br>" +
-                "<strong>Réponse :</strong><br>" +
-                echapperHTML(texte);
+                "Tes exercices ne sont pas supprimés. " +
+                "La page n'arrive simplement pas à les lire.";
 
             zone.innerHTML = "";
 
@@ -874,7 +865,7 @@ async function chargerExercices() {
         } catch (erreurJSON) {
 
             throw new Error(
-                "Supabase a répondu avec des données qui ne sont pas du JSON valide."
+                "La réponse de Supabase n'est pas du JSON valide."
             );
 
         }
@@ -882,7 +873,7 @@ async function chargerExercices() {
         if (!Array.isArray(donnees)) {
 
             throw new Error(
-                "La réponse Supabase n'est pas une liste d'exercices."
+                "Supabase n'a pas renvoyé une liste d'exercices."
             );
 
         }
@@ -907,14 +898,14 @@ async function chargerExercices() {
         afficherNotes();
 
         console.log(
-            "Exercices récupérés :",
+            "EXERCICES CHARGÉS :",
             exercices
         );
 
     } catch (erreur) {
 
         console.error(
-            "Erreur chargement :",
+            "ERREUR CHARGEMENT SUPABASE :",
             erreur
         );
 
@@ -924,17 +915,20 @@ async function chargerExercices() {
         if (erreur.name === "AbortError") {
 
             connexion.innerHTML =
-                "<strong>❌ La connexion à Supabase a dépassé 15 secondes.</strong><br><br>" +
-                "La page ne restera plus bloquée indéfiniment.<br>" +
-                "Vérifie la connexion Internet et recharge la page.";
+                "<strong>❌ Délai de connexion dépassé.</strong><br><br>" +
+                "Supabase n'a pas répondu après 15 secondes.<br><br>" +
+                "Vérifie Internet puis recharge la page.";
 
         } else {
 
             connexion.innerHTML =
-                "<strong>❌ Impossible de charger les exercices.</strong><br><br>" +
+                "<strong>❌ Impossible de contacter Supabase.</strong><br><br>" +
+                "<strong>Erreur :</strong><br>" +
                 echapperHTML(
                     erreur.message
-                );
+                ) +
+                "<br><br>" +
+                "Tes données ne sont pas supprimées.";
 
         }
 
@@ -1098,6 +1092,35 @@ function afficherExercices() {
                         donnees.charge
                     );
 
+                let chargeAffichage =
+                    "Non renseignée";
+
+                if (
+                    donnees.charge ===
+                    "Trop léger"
+                ) {
+
+                    chargeAffichage =
+                        "🟡 Trop léger";
+
+                } else if (
+                    donnees.charge ===
+                    "Correct"
+                ) {
+
+                    chargeAffichage =
+                        "🟢 Correct";
+
+                } else if (
+                    donnees.charge ===
+                    "Trop lourd"
+                ) {
+
+                    chargeAffichage =
+                        "🔴 Trop lourd";
+
+                }
+
                 html += `
                     <div class="performance">
 
@@ -1110,7 +1133,9 @@ function afficherExercices() {
                             <span class="performance-value">
                                 ${
                                     donnees.poids
-                                    ? echapperHTML(donnees.poids) + " kg"
+                                    ? echapperHTML(
+                                        donnees.poids
+                                    ) + " kg"
                                     : "Non renseigné"
                                 }
                             </span>
@@ -1124,17 +1149,7 @@ function afficherExercices() {
                             </span>
 
                             <span class="performance-value ${classe}">
-                                ${
-                                    donnees.charge
-                                    ? (
-                                        donnees.charge === "Trop léger"
-                                            ? "🟡 Trop léger"
-                                            : donnees.charge === "Correct"
-                                                ? "🟢 Correct"
-                                                : "🔴 Trop lourd"
-                                    )
-                                    : "Non renseignée"
-                                }
+                                ${chargeAffichage}
                             </span>
 
                         </div>
@@ -1442,11 +1457,6 @@ async function sauvegarderExercice() {
         document.getElementById(
             "description"
         ).value.trim();
-
-    /*
-     * Les nouvelles informations sont ajoutées
-     * à la description existante.
-     */
 
     const description =
         construireDescription(
@@ -1762,7 +1772,7 @@ function modifierExercice(id) {
 
 
 /* ============================================================
-   ANNULER MODIFICATION
+   ANNULER
    ============================================================ */
 
 function annulerModification() {
@@ -1957,9 +1967,6 @@ function afficherGalerie() {
 
 /* ============================================================
    NOTES
-
-   On retire les informations techniques poids/charge
-   avant d'afficher les notes.
    ============================================================ */
 
 function afficherNotes() {
@@ -2041,4 +2048,4 @@ document.addEventListener(
 );
 
 </script></body>
-    </html>
+        </html>
