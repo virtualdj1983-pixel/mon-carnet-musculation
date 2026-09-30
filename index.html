@@ -1,7 +1,13 @@
-<!DOCTYPE html><html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mon Carnet Musculation</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon Carnet Musculation</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
 * {
     box-sizing: border-box;
 }
@@ -306,211 +312,284 @@ button {
         padding: 14px 5px;
     }
 }
-</style></head><body><header>
+</style>
+</head>
+
+<body>
+
+<header>
     <h1>💪 Mon Carnet Musculation</h1>
     <p>Mes exercices, mes vidéos, mes photos et mes notes</p>
-</header><div class="container"><div class="stats">
-    <div class="stat">
-        <strong id="statExercices">0</strong>
-        <span>Exercices</span>
+</header>
+
+<div class="container">
+
+    <div class="stats">
+
+        <div class="stat">
+            <strong id="statExercices">0</strong>
+            <span>Exercices</span>
+        </div>
+
+        <div class="stat">
+            <strong id="statPhotos">0</strong>
+            <span>Photos</span>
+        </div>
+
+        <div class="stat">
+            <strong id="statVideos">0</strong>
+            <span>Vidéos</span>
+        </div>
+
     </div>
 
-    <div class="stat">
-        <strong id="statPhotos">0</strong>
-        <span>Photos</span>
+
+    <div class="section">
+
+        <h2>🏋️ Mes catégories</h2>
+
+        <div class="categories">
+
+            <button class="category"
+                onclick="selectionnerCategorie('Pectoraux', this)">
+                🏋️ Pectoraux
+            </button>
+
+            <button class="category"
+                onclick="selectionnerCategorie('Dos', this)">
+                🔥 Dos
+            </button>
+
+            <button class="category"
+                onclick="selectionnerCategorie('Épaules', this)">
+                💪 Épaules
+            </button>
+
+            <button class="category"
+                onclick="selectionnerCategorie('Biceps', this)">
+                💪 Biceps
+            </button>
+
+            <button class="category"
+                onclick="selectionnerCategorie('Triceps', this)">
+                💪 Triceps
+            </button>
+
+            <button class="category"
+                onclick="selectionnerCategorie('Jambes', this)">
+                🦵 Jambes
+            </button>
+
+            <button class="category"
+                onclick="selectionnerCategorie('Abdos', this)">
+                🔥 Abdos
+            </button>
+
+            <button class="category"
+                onclick="selectionnerCategorie('Photos', this)">
+                📷 Photos
+            </button>
+
+        </div>
+
+        <button
+            id="boutonTous"
+            class="category all-button active"
+            onclick="afficherTous(this)">
+            📋 TOUS LES EXERCICES
+        </button>
+
     </div>
 
-    <div class="stat">
-        <strong id="statVideos">0</strong>
-        <span>Vidéos</span>
+
+    <div class="section">
+
+        <div class="selected-title">
+
+            <h2 id="titreListe">
+                📋 Tous mes exercices
+            </h2>
+
+            <span id="filtreActuel">
+                Tous
+            </span>
+
+        </div>
+
+        <input
+            id="recherche"
+            class="search"
+            type="search"
+            placeholder="🔎 Rechercher un exercice..."
+            oninput="rechercher()">
+
+        <div id="listeExercices">
+            <div class="empty">
+                Chargement...
+            </div>
+        </div>
+
     </div>
+
+
+    <div class="section" id="sectionFormulaire">
+
+        <h2 id="titreFormulaire">
+            ➕ Ajouter un exercice
+        </h2>
+
+        <label>
+            Nom de l'exercice
+        </label>
+
+        <input
+            id="nom"
+            type="text"
+            placeholder="Exemple : Développé couché">
+
+
+        <label>
+            Catégorie
+        </label>
+
+        <select id="categorie">
+
+            <option value="Pectoraux">Pectoraux</option>
+            <option value="Dos">Dos</option>
+            <option value="Épaules">Épaules</option>
+            <option value="Biceps">Biceps</option>
+            <option value="Triceps">Triceps</option>
+            <option value="Jambes">Jambes</option>
+            <option value="Abdos">Abdos</option>
+            <option value="Photos">Photos</option>
+            <option value="Notes">Notes</option>
+
+        </select>
+
+
+        <label>
+            Nombre de séries
+        </label>
+
+        <input
+            id="series"
+            type="number"
+            min="0"
+            placeholder="4">
+
+
+        <label>
+            Nombre de répétitions
+        </label>
+
+        <input
+            id="repetitions"
+            type="number"
+            min="0"
+            placeholder="10">
+
+
+        <label>
+            Description / notes
+        </label>
+
+        <textarea
+            id="description"
+            placeholder="Technique, poids, conseils, sensations..."></textarea>
+
+
+        <label>
+            🎥 Vidéo de démonstration
+        </label>
+
+        <input
+            id="video"
+            type="file"
+            accept="video/*">
+
+
+        <label>
+            📷 Photo
+        </label>
+
+        <input
+            id="photo"
+            type="file"
+            accept="image/*">
+
+
+        <button
+            id="boutonPrincipal"
+            class="save"
+            onclick="ajouterExercice()">
+            💾 ENREGISTRER
+        </button>
+
+
+        <button
+            id="boutonAnnuler"
+            class="cancel"
+            onclick="annulerModification()">
+            ❌ ANNULER LA MODIFICATION
+        </button>
+
+
+        <div id="message" class="message"></div>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2>
+            🖼️ Galerie photos
+        </h2>
+
+        <div id="galerie" class="gallery">
+
+            <div class="empty">
+                Aucune photo
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2>
+            📝 Notes
+        </h2>
+
+        <div id="listeNotes">
+
+            <div class="empty">
+                Aucune note
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
-<div class="section">
-    <h2>🏋️ Mes catégories</h2>
 
-    <div class="categories">
+<script>
 
-        <button class="category" onclick="selectionnerCategorie('Pectoraux', this)">
-            🏋️ Pectoraux
-        </button>
-
-        <button class="category" onclick="selectionnerCategorie('Dos', this)">
-            🔥 Dos
-        </button>
-
-        <button class="category" onclick="selectionnerCategorie('Épaules', this)">
-            💪 Épaules
-        </button>
-
-        <button class="category" onclick="selectionnerCategorie('Biceps', this)">
-            💪 Biceps
-        </button>
-
-        <button class="category" onclick="selectionnerCategorie('Triceps', this)">
-            💪 Triceps
-        </button>
-
-        <button class="category" onclick="selectionnerCategorie('Jambes', this)">
-            🦵 Jambes
-        </button>
-
-        <button class="category" onclick="selectionnerCategorie('Abdos', this)">
-            🔥 Abdos
-        </button>
-
-        <button class="category" onclick="selectionnerCategorie('Photos', this)">
-            📷 Photos
-        </button>
-
-    </div>
-
-    <button
-        id="boutonTous"
-        class="category all-button active"
-        onclick="afficherTous(this)"
-    >
-        📋 TOUS LES EXERCICES
-    </button>
-</div>
-
-<div class="section">
-
-    <div class="selected-title">
-        <h2 id="titreListe">📋 Tous mes exercices</h2>
-        <span id="filtreActuel">Tous</span>
-    </div>
-
-    <input
-        id="recherche"
-        class="search"
-        type="search"
-        placeholder="🔎 Rechercher un exercice..."
-        oninput="rechercher()"
-    >
-
-    <div id="listeExercices">
-        <div class="empty">Chargement...</div>
-    </div>
-
-</div>
-
-<div class="section">
-
-    <h2 id="titreFormulaire">➕ Ajouter un exercice</h2>
-
-    <label>Nom de l'exercice</label>
-
-    <input
-        id="nom"
-        type="text"
-        placeholder="Exemple : Développé couché"
-    >
-
-    <label>Catégorie</label>
-
-    <select id="categorie">
-
-        <option value="Pectoraux">Pectoraux</option>
-        <option value="Dos">Dos</option>
-        <option value="Épaules">Épaules</option>
-        <option value="Biceps">Biceps</option>
-        <option value="Triceps">Triceps</option>
-        <option value="Jambes">Jambes</option>
-        <option value="Abdos">Abdos</option>
-        <option value="Photos">Photos</option>
-        <option value="Notes">Notes</option>
-
-    </select>
-
-    <label>Nombre de séries</label>
-
-    <input
-        id="series"
-        type="number"
-        min="0"
-        placeholder="4"
-    >
-
-    <label>Nombre de répétitions</label>
-
-    <input
-        id="repetitions"
-        type="number"
-        min="0"
-        placeholder="10"
-    >
-
-    <label>Description / notes</label>
-
-    <textarea
-        id="description"
-        placeholder="Technique, poids, conseils, sensations..."
-    ></textarea>
-
-    <label>🎥 Vidéo de démonstration</label>
-
-    <input
-        id="video"
-        type="file"
-        accept="video/*"
-    >
-
-    <label>📷 Photo</label>
-
-    <input
-        id="photo"
-        type="file"
-        accept="image/*"
-    >
-
-    <button
-        id="boutonPrincipal"
-        class="save"
-        onclick="ajouterExercice()"
-    >
-        💾 ENREGISTRER
-    </button>
-
-    <button
-        id="boutonAnnuler"
-        class="cancel"
-        onclick="annulerModification()"
-    >
-        ❌ ANNULER LA MODIFICATION
-    </button>
-
-    <div id="message" class="message"></div>
-
-</div>
-
-<div class="section">
-
-    <h2>🖼️ Galerie photos</h2>
-
-    <div id="galerie" class="gallery">
-        <div class="empty">Aucune photo</div>
-    </div>
-
-</div>
-
-<div class="section">
-
-    <h2>📝 Notes</h2>
-
-    <div id="listeNotes">
-        <div class="empty">Aucune note</div>
-    </div>
-
-</div>
-
-</div><script>
+/* =========================================
+   SUPABASE
+========================================= */
 
 const SUPABASE_URL =
 "https://cjtgjwepiotuhtfqwanw.supabase.co";
 
+/*
+   CLÉ PUBLISHABLE CORRECTE
+*/
 const SUPABASE_KEY =
-"sb_publishable_DXMY1V9ir7R_vwuWwA_Pe-r5NNP";
+"sb_publishable_DXMY1V9ir7R_vwuFysSWwA_Pe-r5NNP";
+
 
 const supabaseClient =
 window.supabase.createClient(
@@ -518,33 +597,49 @@ window.supabase.createClient(
     SUPABASE_KEY
 );
 
+
 let exercices = [];
+
 let categorieActuelle = null;
+
 let exerciceEnModification = null;
 
 
-/* =========================
-   CHARGEMENT
-========================= */
+/* =========================================
+   CHARGEMENT DES EXERCICES
+========================================= */
 
 async function chargerExercices() {
 
-    const { data, error } = await supabaseClient
-        .from("exercices")
-        .select("*")
-        .order("id", { ascending: false });
+    const { data, error } =
+        await supabaseClient
+            .from("exercices")
+            .select("*")
+            .order("id", {
+                ascending: false
+            });
+
 
     if (error) {
 
-        console.error(error);
+        console.error(
+            "Erreur Supabase :",
+            error
+        );
 
-        document.getElementById("listeExercices").innerHTML =
-            '<div class="empty">Erreur de chargement.</div>';
+        document.getElementById(
+            "listeExercices"
+        ).innerHTML =
+            '<div class="empty">❌ Erreur de chargement : ' +
+            echapperHTML(error.message) +
+            '</div>';
 
         return;
     }
 
+
     exercices = data || [];
+
 
     mettreAJourStats();
 
@@ -556,44 +651,73 @@ async function chargerExercices() {
 }
 
 
-/* =========================
-   STATS
-========================= */
+/* =========================================
+   STATISTIQUES
+========================================= */
 
 function mettreAJourStats() {
 
-    document.getElementById("statExercices").textContent =
+    document.getElementById(
+        "statExercices"
+    ).textContent =
         exercices.length;
 
-    document.getElementById("statPhotos").textContent =
-        exercices.filter(x => x.photo_url).length;
 
-    document.getElementById("statVideos").textContent =
-        exercices.filter(x => x.video_url).length;
+    document.getElementById(
+        "statPhotos"
+    ).textContent =
+        exercices.filter(
+            x => x.photo_url
+        ).length;
+
+
+    document.getElementById(
+        "statVideos"
+    ).textContent =
+        exercices.filter(
+            x => x.video_url
+        ).length;
 }
 
 
-/* =========================
+/* =========================================
    CATEGORIES
-========================= */
+========================================= */
 
-function selectionnerCategorie(categorie, bouton) {
+function selectionnerCategorie(
+    categorie,
+    bouton
+) {
 
     categorieActuelle = categorie;
 
+
     document
         .querySelectorAll(".category")
-        .forEach(b => b.classList.remove("active"));
+        .forEach(
+            b => b.classList.remove("active")
+        );
+
 
     bouton.classList.add("active");
 
-    document.getElementById("titreListe").textContent =
+
+    document.getElementById(
+        "titreListe"
+    ).textContent =
         "📋 " + categorie;
 
-    document.getElementById("filtreActuel").textContent =
+
+    document.getElementById(
+        "filtreActuel"
+    ).textContent =
         categorie;
 
-    document.getElementById("recherche").value = "";
+
+    document.getElementById(
+        "recherche"
+    ).value = "";
+
 
     afficherExercices();
 }
@@ -603,27 +727,41 @@ function afficherTous(bouton) {
 
     categorieActuelle = null;
 
+
     document
         .querySelectorAll(".category")
-        .forEach(b => b.classList.remove("active"));
+        .forEach(
+            b => b.classList.remove("active")
+        );
+
 
     bouton.classList.add("active");
 
-    document.getElementById("titreListe").textContent =
+
+    document.getElementById(
+        "titreListe"
+    ).textContent =
         "📋 Tous mes exercices";
 
-    document.getElementById("filtreActuel").textContent =
+
+    document.getElementById(
+        "filtreActuel"
+    ).textContent =
         "Tous";
 
-    document.getElementById("recherche").value = "";
+
+    document.getElementById(
+        "recherche"
+    ).value = "";
+
 
     afficherExercices();
 }
 
 
-/* =========================
-   AFFICHAGE EXERCICES
-========================= */
+/* =========================================
+   AFFICHAGE DES EXERCICES
+========================================= */
 
 function afficherExercices() {
 
@@ -634,134 +772,194 @@ function afficherExercices() {
             .toLowerCase()
             .trim();
 
-    let resultat = [...exercices];
+
+    let resultat = [
+        ...exercices
+    ];
+
 
     if (categorieActuelle) {
 
-        if (categorieActuelle === "Photos") {
+        if (
+            categorieActuelle === "Photos"
+        ) {
 
-            resultat = resultat.filter(
-                exercice => exercice.photo_url
-            );
+            resultat =
+                resultat.filter(
+                    exercice =>
+                        exercice.photo_url
+                );
 
         } else {
 
-            resultat = resultat.filter(
-                exercice =>
-                    exercice.categorie === categorieActuelle
-            );
+            resultat =
+                resultat.filter(
+                    exercice =>
+                        exercice.categorie ===
+                        categorieActuelle
+                );
         }
     }
 
+
     if (recherche) {
 
-        resultat = resultat.filter(exercice => {
+        resultat =
+            resultat.filter(
+                exercice => {
 
-            const texte =
-                (
-                    (exercice.nom || "") +
-                    " " +
-                    (exercice.description || "") +
-                    " " +
-                    (exercice.categorie || "")
-                ).toLowerCase();
+                    const texte =
+                        (
+                            (exercice.nom || "") +
+                            " " +
+                            (exercice.description || "") +
+                            " " +
+                            (exercice.categorie || "")
+                        )
+                        .toLowerCase();
 
-            return texte.includes(recherche);
 
-        });
+                    return texte.includes(
+                        recherche
+                    );
+
+                }
+            );
     }
 
+
     const liste =
-        document.getElementById("listeExercices");
+        document.getElementById(
+            "listeExercices"
+        );
+
 
     if (resultat.length === 0) {
 
         liste.innerHTML =
-            '<div class="empty">Aucun exercice dans cette catégorie.</div>';
+            '<div class="empty">' +
+            (
+                categorieActuelle
+                    ? "Aucun exercice dans cette catégorie."
+                    : "Aucun exercice enregistré."
+            ) +
+            '</div>';
 
         return;
     }
 
-    liste.innerHTML = resultat.map(exercice => {
 
-        let media = "";
+    liste.innerHTML =
+        resultat.map(
+            exercice => {
 
-        if (exercice.video_url) {
+                let media = "";
 
-            media += `
-                <video
-                    controls
-                    preload="metadata"
-                >
-                    <source src="${exercice.video_url}">
-                    Votre navigateur ne peut pas lire cette vidéo.
-                </video>
-            `;
-        }
 
-        if (exercice.photo_url) {
+                if (exercice.video_url) {
 
-            media += `
-                <img
-                    src="${exercice.photo_url}"
-                    alt="${echapperHTML(exercice.nom || "Photo")}"
-                >
-            `;
-        }
+                    media += `
+                        <video
+                            controls
+                            preload="metadata">
+                            <source
+                                src="${echapperHTML(exercice.video_url)}">
+                            Votre navigateur ne peut pas lire cette vidéo.
+                        </video>
+                    `;
+                }
 
-        const description =
-            exercice.description
-                ? `<p>${echapperHTML(exercice.description)}</p>`
-                : "";
 
-        const serieInfo =
-            exercice.series || exercice.repetitions
-                ? `<p>🏋️ ${exercice.series || 0} séries × ${exercice.repetitions || 0} répétitions</p>`
-                : "";
+                if (exercice.photo_url) {
 
-        return `
-            <div class="exercise">
+                    media += `
+                        <img
+                            src="${echapperHTML(exercice.photo_url)}"
+                            alt="${echapperHTML(
+                                exercice.nom || "Photo"
+                            )}">
+                    `;
+                }
 
-                <h3>${echapperHTML(exercice.nom || "Sans nom")}</h3>
 
-                <div class="category-name">
-                    ${echapperHTML(exercice.categorie || "")}
-                </div>
+                const description =
+                    exercice.description
+                        ? `
+                            <p>
+                                ${echapperHTML(
+                                    exercice.description
+                                )}
+                            </p>
+                        `
+                        : "";
 
-                ${serieInfo}
 
-                ${description}
+                const serieInfo =
+                    exercice.series ||
+                    exercice.repetitions
+                        ? `
+                            <p>
+                                🏋️
+                                ${exercice.series || 0}
+                                séries ×
+                                ${exercice.repetitions || 0}
+                                répétitions
+                            </p>
+                        `
+                        : "";
 
-                ${media}
 
-                <div class="exercise-buttons">
+                return `
 
-                    <button
-                        class="edit"
-                        onclick="modifierExercice(${exercice.id})"
-                    >
-                        ✏️ Modifier
-                    </button>
+                    <div class="exercise">
 
-                    <button
-                        class="delete"
-                        onclick="supprimerExercice(${exercice.id})"
-                    >
-                        🗑️ Supprimer
-                    </button>
+                        <h3>
+                            ${echapperHTML(
+                                exercice.nom ||
+                                "Sans nom"
+                            )}
+                        </h3>
 
-                </div>
+                        <div class="category-name">
+                            ${echapperHTML(
+                                exercice.categorie || ""
+                            )}
+                        </div>
 
-            </div>
-        `;
+                        ${serieInfo}
 
-    }).join("");
+                        ${description}
+
+                        ${media}
+
+                        <div class="exercise-buttons">
+
+                            <button
+                                class="edit"
+                                onclick="modifierExercice(${exercice.id})">
+                                ✏️ Modifier
+                            </button>
+
+                            <button
+                                class="delete"
+                                onclick="supprimerExercice(${exercice.id})">
+                                🗑️ Supprimer
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
 }
 
 
-/* =========================
+/* =========================================
    RECHERCHE
-========================= */
+========================================= */
 
 function rechercher() {
 
@@ -770,35 +968,65 @@ function rechercher() {
 }
 
 
-/* =========================
-   AJOUT
-========================= */
+/* =========================================
+   AJOUT / MODIFICATION
+========================================= */
 
 async function ajouterExercice() {
 
     const nom =
-        document.getElementById("nom").value.trim();
+        document
+            .getElementById("nom")
+            .value
+            .trim();
+
 
     const categorie =
-        document.getElementById("categorie").value;
+        document.getElementById(
+            "categorie"
+        ).value;
+
 
     const description =
-        document.getElementById("description").value.trim();
+        document
+            .getElementById("description")
+            .value
+            .trim();
+
 
     const series =
-        parseInt(document.getElementById("series").value) || null;
+        parseInt(
+            document.getElementById(
+                "series"
+            ).value
+        ) || null;
+
 
     const repetitions =
-        parseInt(document.getElementById("repetitions").value) || null;
+        parseInt(
+            document.getElementById(
+                "repetitions"
+            ).value
+        ) || null;
+
 
     const videoFile =
-        document.getElementById("video").files[0];
+        document.getElementById(
+            "video"
+        ).files[0];
+
 
     const photoFile =
-        document.getElementById("photo").files[0];
+        document.getElementById(
+            "photo"
+        ).files[0];
+
 
     const message =
-        document.getElementById("message");
+        document.getElementById(
+            "message"
+        );
+
 
     if (!nom) {
 
@@ -808,8 +1036,10 @@ async function ajouterExercice() {
         return;
     }
 
+
     message.textContent =
         "⏳ Enregistrement...";
+
 
     try {
 
@@ -818,73 +1048,116 @@ async function ajouterExercice() {
                 ? exerciceEnModification.video_url
                 : null;
 
+
         let photoUrl =
             exerciceEnModification
                 ? exerciceEnModification.photo_url
                 : null;
 
 
-        /* VIDEO */
+        /* =================================
+           VIDEO
+        ================================= */
 
         if (videoFile) {
 
             const nomFichier =
                 Date.now() +
                 "_" +
-                nettoyerNomFichier(videoFile.name);
+                nettoyerNomFichier(
+                    videoFile.name
+                );
+
 
             const chemin =
-                "videos/" + nomFichier;
+                "videos/" +
+                nomFichier;
+
 
             const { error } =
                 await supabaseClient
                     .storage
                     .from("medias")
-                    .upload(chemin, videoFile);
+                    .upload(
+                        chemin,
+                        videoFile
+                    );
 
-            if (error) throw error;
+
+            if (error) {
+
+                throw error;
+
+            }
+
 
             const { data } =
                 supabaseClient
                     .storage
                     .from("medias")
-                    .getPublicUrl(chemin);
+                    .getPublicUrl(
+                        chemin
+                    );
+
 
             videoUrl =
                 data.publicUrl;
         }
 
 
-        /* PHOTO */
+        /* =================================
+           PHOTO
+        ================================= */
 
         if (photoFile) {
 
             const nomFichier =
                 Date.now() +
                 "_" +
-                nettoyerNomFichier(photoFile.name);
+                nettoyerNomFichier(
+                    photoFile.name
+                );
+
 
             const chemin =
-                "photos/" + nomFichier;
+                "photos/" +
+                nomFichier;
+
 
             const { error } =
                 await supabaseClient
                     .storage
                     .from("medias")
-                    .upload(chemin, photoFile);
+                    .upload(
+                        chemin,
+                        photoFile
+                    );
 
-            if (error) throw error;
+
+            if (error) {
+
+                throw error;
+
+            }
+
 
             const { data } =
                 supabaseClient
                     .storage
                     .from("medias")
-                    .getPublicUrl(chemin);
+                    .getPublicUrl(
+                        chemin
+                    );
+
 
             photoUrl =
                 data.publicUrl;
         }
 
+
+        /* =================================
+           OBJET
+        ================================= */
 
         const objet = {
 
@@ -901,10 +1174,13 @@ async function ajouterExercice() {
             video_url: videoUrl,
 
             photo_url: photoUrl
+
         };
 
 
-        /* MODIFICATION */
+        /* =================================
+           MODIFICATION
+        ================================= */
 
         if (exerciceEnModification) {
 
@@ -912,16 +1188,28 @@ async function ajouterExercice() {
                 await supabaseClient
                     .from("exercices")
                     .update(objet)
-                    .eq("id", exerciceEnModification.id);
+                    .eq(
+                        "id",
+                        exerciceEnModification.id
+                    );
 
-            if (error) throw error;
+
+            if (error) {
+
+                throw error;
+
+            }
+
 
             message.textContent =
                 "✅ Exercice modifié.";
 
         }
 
-        /* AJOUT */
+
+        /* =================================
+           AJOUT
+        ================================= */
 
         else {
 
@@ -930,7 +1218,13 @@ async function ajouterExercice() {
                     .from("exercices")
                     .insert(objet);
 
-            if (error) throw error;
+
+            if (error) {
+
+                throw error;
+
+            }
+
 
             message.textContent =
                 "✅ Exercice enregistré.";
@@ -939,243 +1233,90 @@ async function ajouterExercice() {
 
         reinitialiserFormulaire();
 
+
         await chargerExercices();
+
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Erreur :",
+            error
+        );
+
 
         message.textContent =
-            "❌ Erreur : " + error.message;
+            "❌ Erreur : " +
+            error.message;
     }
 }
 
 
-/* =========================
+/* =========================================
    MODIFICATION
-========================= */
+========================================= */
 
 function modifierExercice(id) {
 
     const exercice =
-        exercices.find(x => x.id === id);
+        exercices.find(
+            x => x.id === id
+        );
 
-    if (!exercice) return;
+
+    if (!exercice) {
+
+        return;
+
+    }
+
 
     exerciceEnModification =
         exercice;
 
-    document.getElementById("nom").value =
+
+    document.getElementById(
+        "nom"
+    ).value =
         exercice.nom || "";
 
-    document.getElementById("categorie").value =
-        exercice.categorie || "Pectoraux";
 
-    document.getElementById("series").value =
+    document.getElementById(
+        "categorie"
+    ).value =
+        exercice.categorie ||
+        "Pectoraux";
+
+
+    document.getElementById(
+        "series"
+    ).value =
         exercice.series || "";
 
-    document.getElementById("repetitions").value =
+
+    document.getElementById(
+        "repetitions"
+    ).value =
         exercice.repetitions || "";
 
-    document.getElementById("description").value =
+
+    document.getElementById(
+        "description"
+    ).value =
         exercice.description || "";
 
-    document.getElementById("titreFormulaire").textContent =
+
+    document.getElementById(
+        "titreFormulaire"
+    ).textContent =
         "✏️ Modifier l'exercice";
 
-    document.getElementById("boutonPrincipal").textContent =
+
+    document.getElementById(
+        "boutonPrincipal"
+    ).textContent =
         "💾 ENREGISTRER LA MODIFICATION";
 
-    document.getElementById("boutonAnnuler").style.display =
-        "block";
 
-    document
-        .querySelector(".section:nth-of-type(3)")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-}
-
-
-/* =========================
-   ANNULER
-========================= */
-
-function annulerModification() {
-
-    reinitialiserFormulaire();
-
-}
-
-
-/* =========================
-   SUPPRESSION
-========================= */
-
-async function supprimerExercice(id) {
-
-    const confirmer =
-        confirm(
-            "Voulez-vous vraiment supprimer cet exercice ?"
-        );
-
-    if (!confirmer) return;
-
-    const { error } =
-        await supabaseClient
-            .from("exercices")
-            .delete()
-            .eq("id", id);
-
-    if (error) {
-
-        alert(
-            "Erreur lors de la suppression : " +
-            error.message
-        );
-
-        return;
-    }
-
-    await chargerExercices();
-
-}
-
-
-/* =========================
-   FORMULAIRE
-========================= */
-
-function reinitialiserFormulaire() {
-
-    exerciceEnModification = null;
-
-    document.getElementById("nom").value = "";
-
-    document.getElementById("categorie").value =
-        categorieActuelle || "Pectoraux";
-
-    document.getElementById("series").value = "";
-
-    document.getElementById("repetitions").value = "";
-
-    document.getElementById("description").value = "";
-
-    document.getElementById("video").value = "";
-
-    document.getElementById("photo").value = "";
-
-    document.getElementById("titreFormulaire").textContent =
-        "➕ Ajouter un exercice";
-
-    document.getElementById("boutonPrincipal").textContent =
-        "💾 ENREGISTRER";
-
-    document.getElementById("boutonAnnuler").style.display =
-        "none";
-}
-
-
-/* =========================
-   GALERIE
-========================= */
-
-function afficherGalerie() {
-
-    const galerie =
-        document.getElementById("galerie");
-
-    const photos =
-        exercices.filter(x => x.photo_url);
-
-    if (photos.length === 0) {
-
-        galerie.innerHTML =
-            '<div class="empty">Aucune photo</div>';
-
-        return;
-    }
-
-    galerie.innerHTML =
-        photos.map(exercice => `
-            <img
-                src="${exercice.photo_url}"
-                alt="${echapperHTML(exercice.nom || "Photo")}"
-            >
-        `).join("");
-}
-
-
-/* =========================
-   NOTES
-========================= */
-
-function afficherNotes() {
-
-    const liste =
-        document.getElementById("listeNotes");
-
-    const notes =
-        exercices.filter(
-            x =>
-                x.categorie === "Notes" &&
-                x.description
-        );
-
-    if (notes.length === 0) {
-
-        liste.innerHTML =
-            '<div class="empty">Aucune note</div>';
-
-        return;
-    }
-
-    liste.innerHTML =
-        notes.map(note => `
-            <div class="exercise">
-
-                <h3>
-                    ${echapperHTML(note.nom || "Note")}
-                </h3>
-
-                <div class="notes">
-                    ${echapperHTML(note.description || "")}
-                </div>
-
-            </div>
-        `).join("");
-}
-
-
-/* =========================
-   OUTILS
-========================= */
-
-function nettoyerNomFichier(nom) {
-
-    return nom
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^a-zA-Z0-9._-]/g, "_");
-}
-
-
-function echapperHTML(texte) {
-
-    return String(texte)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
-
-/* =========================
-   DEMARRAGE
-========================= */
-
-chargerExercices();
-
-</script></body>
-        </html>
+    document.getElementById(
+        "bout
