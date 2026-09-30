@@ -2,365 +2,437 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mon Carnet Musculation</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
-*{box-sizing:border-box}
+<title>Mon Carnet Musculation</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+*{
+    box-sizing:border-box;
+}
 
 body{
-margin:0;
-padding:12px;
-background:#090909;
-color:#fff;
-font-family:Arial,sans-serif
+    margin:0;
+    padding:12px;
+    background:#090909;
+    color:#fff;
+    font-family:Arial,sans-serif;
 }
 
 .container{
-max-width:1100px;
-margin:auto
+    max-width:1100px;
+    margin:auto;
 }
 
 header{
-text-align:center;
-padding:18px 5px
+    text-align:center;
+    padding:18px 5px;
 }
 
 header h1{
-margin:0;
-font-size:29px
+    margin:0;
+    font-size:29px;
 }
 
 header p{
-color:#999;
-margin:8px 0 0
+    color:#999;
+    margin:8px 0 0;
 }
 
 .card{
-background:#171717;
-border:1px solid #292929;
-border-radius:16px;
-padding:16px;
-margin-top:14px
+    background:#171717;
+    border:1px solid #292929;
+    border-radius:16px;
+    padding:16px;
+    margin-top:14px;
 }
 
 h2{
-margin-top:0
+    margin-top:0;
 }
 
 .search{
-font-size:17px;
-padding:14px
+    font-size:17px;
+    padding:14px;
 }
 
 .categories{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:8px
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
 }
 
 button{
-width:100%;
-padding:13px;
-border:0;
-border-radius:10px;
-font-weight:bold;
-color:white;
-cursor:pointer;
-font-size:14px
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:10px;
+    font-weight:bold;
+    color:white;
+    cursor:pointer;
+    font-size:14px;
 }
 
 .category{
-background:#292929
+    background:#292929;
 }
 
 .category:active{
-transform:scale(.98)
+    transform:scale(.98);
 }
 
 .save{
-background:#00c853;
-font-size:16px
+    background:#00c853;
+    font-size:16px;
 }
 
 .update{
-background:#ff9800
+    background:#ff9800;
 }
 
 .delete{
-background:#d50000
+    background:#d50000;
 }
 
 .cancel{
-background:#555;
-margin-top:8px
+    background:#555;
+    margin-top:8px;
 }
 
-input,select,textarea{
-width:100%;
-padding:13px;
-margin:6px 0 14px;
-background:#0d0d0d;
-color:white;
-border:1px solid #444;
-border-radius:9px;
-font-size:16px
+input,
+select,
+textarea{
+    width:100%;
+    padding:13px;
+    margin:6px 0 14px;
+    background:#0d0d0d;
+    color:white;
+    border:1px solid #444;
+    border-radius:9px;
+    font-size:16px;
 }
 
 textarea{
-min-height:100px;
-resize:vertical
+    min-height:100px;
+    resize:vertical;
 }
 
 label{
-display:block;
-font-weight:bold;
-margin-top:5px
+    display:block;
+    font-weight:bold;
+    margin-top:5px;
 }
 
 #message{
-text-align:center;
-margin-top:10px;
-padding:10px;
-border-radius:8px
+    text-align:center;
+    margin-top:10px;
+    padding:10px;
+    border-radius:8px;
 }
 
 .hidden{
-display:none!important
+    display:none !important;
 }
 
 .statsGrid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:8px
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
 }
 
 .stat{
-background:#222;
-padding:14px;
-border-radius:12px;
-text-align:center
+    background:#222;
+    padding:14px;
+    border-radius:12px;
+    text-align:center;
 }
 
 .stat strong{
-display:block;
-font-size:25px
+    display:block;
+    font-size:25px;
 }
 
 .stat span{
-color:#aaa;
-font-size:13px
+    color:#aaa;
+    font-size:13px;
 }
 
 .exercise{
-background:#222;
-border:1px solid #333;
-border-radius:14px;
-padding:15px;
-margin-top:12px
+    background:#222;
+    border:1px solid #333;
+    border-radius:14px;
+    padding:15px;
+    margin-top:12px;
 }
 
 .exercise h3{
-margin:0 0 6px;
-font-size:20px
+    margin:0 0 6px;
+    font-size:20px;
 }
 
 .small{
-color:#aaa;
-font-size:14px
+    color:#aaa;
+    font-size:14px;
 }
 
 .stats{
-background:#151515;
-padding:10px;
-border-radius:9px;
-margin-top:10px
+    background:#151515;
+    padding:10px;
+    border-radius:9px;
+    margin-top:10px;
 }
 
 .exercise img,
 .exercise video{
-width:100%;
-max-height:450px;
-object-fit:contain;
-background:#000;
-border-radius:10px;
-margin-top:10px
+    width:100%;
+    max-height:450px;
+    object-fit:contain;
+    background:#000;
+    border-radius:10px;
+    margin-top:10px;
 }
 
 .actions{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:8px;
-margin-top:10px
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-top:10px;
 }
 
 .note{
-background:#242424;
-border-left:4px solid #00c853;
-border-radius:10px;
-padding:14px;
-margin-top:10px;
-white-space:pre-wrap
+    background:#242424;
+    border-left:4px solid #00c853;
+    border-radius:10px;
+    padding:14px;
+    margin-top:10px;
+    white-space:pre-wrap;
 }
 
 .gallery{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:8px
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
 }
 
 .galleryItem{
-background:#222;
-border-radius:10px;
-padding:6px
+    background:#222;
+    border-radius:10px;
+    padding:6px;
 }
 
 .galleryItem img{
-width:100%;
-height:180px;
-object-fit:cover;
-border-radius:7px
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:7px;
 }
 
 .empty{
-text-align:center;
-color:#999;
-padding:20px
+    text-align:center;
+    color:#999;
+    padding:20px;
 }
 
 @media(min-width:700px){
 
-.categories{
-grid-template-columns:repeat(5,1fr)
-}
+    .categories{
+        grid-template-columns:repeat(5,1fr);
+    }
 
-.statsGrid{
-grid-template-columns:repeat(4,1fr)
-}
+    .statsGrid{
+        grid-template-columns:repeat(4,1fr);
+    }
 
-.gallery{
-grid-template-columns:repeat(4,1fr)
-}
-
+    .gallery{
+        grid-template-columns:repeat(4,1fr);
+    }
 }
 </style></head><body><div class="container"><header>
-<h1>🏋️ Mon Carnet Musculation</h1>
-<p>Exercices • vidéos • photos • notes</p>
-</header><div class="card"><h2>📊 Mon carnet</h2><div class="statsGrid"><div class="stat">
-<strong id="totalExercices">0</strong>
-<span>Exercices</span>
-</div><div class="stat">
-<strong id="totalPhotos">0</strong>
-<span>Photos</span>
-</div><div class="stat">
-<strong id="totalVideos">0</strong>
-<span>Vidéos</span>
-</div><div class="stat">
-<strong id="totalNotes">0</strong>
-<span>Notes</span>
-</div></div></div><div class="card"><h2>🔎 Rechercher</h2><input
-id="recherche"
-class="search"
-type="search"
-placeholder="Rechercher un exercice..."
-oninput="rechercher()"
+    <h1>🏋️ Mon Carnet Musculation</h1>
+    <p>Exercices • vidéos • photos • notes</p>
+</header><div class="card"><h2>📊 Mon carnet</h2>
 
-«»
+<div class="statsGrid">
 
-</div><div class="card"><h2>📂 Catégories</h2><div class="categories"><button class="category" onclick="filtrer('Pectoraux')">💪 Pectoraux</button>
-<button class="category" onclick="filtrer('Dos')">🔙 Dos</button>
-<button class="category" onclick="filtrer('Épaules')">🏋️ Épaules</button>
-<button class="category" onclick="filtrer('Biceps')">💪 Biceps</button>
-<button class="category" onclick="filtrer('Triceps')">💪 Triceps</button>
-<button class="category" onclick="filtrer('Jambes')">🦵 Jambes</button>
-<button class="category" onclick="filtrer('Abdos')">🔥 Abdos</button>
-<button class="category" onclick="afficherGalerie()">📷 Photos</button>
-<button class="category" onclick="afficherNotes()">📝 Notes</button>
-<button class="category" onclick="chargerExercices()">🏠 Tout</button>
+    <div class="stat">
+        <strong id="totalExercices">0</strong>
+        <span>Exercices</span>
+    </div>
 
-</div></div><div class="card"><h2 id="titreFormulaire">➕ Ajouter</h2><label>Catégorie</label>
+    <div class="stat">
+        <strong id="totalPhotos">0</strong>
+        <span>Photos</span>
+    </div>
 
-<select id="categorie"><option>Pectoraux</option>
-<option>Dos</option>
-<option>Épaules</option>
-<option>Biceps</option>
-<option>Triceps</option>
-<option>Jambes</option>
-<option>Abdos</option>
-<option>Photos</option>
-<option>Notes</option></select><label>Nom</label>
+    <div class="stat">
+        <strong id="totalVideos">0</strong>
+        <span>Vidéos</span>
+    </div>
+
+    <div class="stat">
+        <strong id="totalNotes">0</strong>
+        <span>Notes</span>
+    </div>
+
+</div>
+
+</div><div class="card"><h2>🔎 Rechercher</h2>
 
 <input
-id="nom"
-type="text"
-placeholder="Exemple : Développé couché"
+    id="recherche"
+    class="search"
+    type="search"
+    placeholder="Rechercher un exercice..."
+    oninput="rechercher()"
+>
 
-«»
+</div><div class="card"><h2>📂 Catégories</h2>
+
+<div class="categories">
+
+    <button class="category" onclick="filtrer('Pectoraux')">
+        💪 Pectoraux
+    </button>
+
+    <button class="category" onclick="filtrer('Dos')">
+        🔙 Dos
+    </button>
+
+    <button class="category" onclick="filtrer('Épaules')">
+        🏋️ Épaules
+    </button>
+
+    <button class="category" onclick="filtrer('Biceps')">
+        💪 Biceps
+    </button>
+
+    <button class="category" onclick="filtrer('Triceps')">
+        💪 Triceps
+    </button>
+
+    <button class="category" onclick="filtrer('Jambes')">
+        🦵 Jambes
+    </button>
+
+    <button class="category" onclick="filtrer('Abdos')">
+        🔥 Abdos
+    </button>
+
+    <button class="category" onclick="afficherGalerie()">
+        📷 Photos
+    </button>
+
+    <button class="category" onclick="afficherNotes()">
+        📝 Notes
+    </button>
+
+    <button class="category" onclick="chargerExercices()">
+        🏠 Tout
+    </button>
+
+</div>
+
+</div><div class="card"><h2 id="titreFormulaire">
+    ➕ Ajouter un exercice
+</h2>
+
+<label>Catégorie</label>
+
+<select id="categorie">
+
+    <option>Pectoraux</option>
+    <option>Dos</option>
+    <option>Épaules</option>
+    <option>Biceps</option>
+    <option>Triceps</option>
+    <option>Jambes</option>
+    <option>Abdos</option>
+    <option>Photos</option>
+    <option>Notes</option>
+
+</select>
+
+
+<label>Nom</label>
+
+<input
+    id="nom"
+    type="text"
+    placeholder="Exemple : Développé couché"
+>
+
 
 <label>Description / note</label>
 
 <textarea
-id="description"
-placeholder="Technique, conseils, matériel, notes..."
-></textarea><label>Séries</label>
+    id="description"
+    placeholder="Technique, conseils, matériel, notes..."
+></textarea>
+
+
+<label>Séries</label>
 
 <input
-id="series"
-type="number"
-min="0"
-placeholder="4"
+    id="series"
+    type="number"
+    min="0"
+    placeholder="4"
+>
 
-«»
 
 <label>Répétitions</label>
 
 <input
-id="repetitions"
-type="number"
-min="0"
-placeholder="10"
+    id="repetitions"
+    type="number"
+    min="0"
+    placeholder="10"
+>
 
-«»
 
 <label>🎥 Vidéo</label>
 
 <input
-id="video"
-type="file"
-accept="video/*"
+    id="video"
+    type="file"
+    accept="video/*"
+>
 
-«»
 
 <label>📷 Photo</label>
 
 <input
-id="photo"
-type="file"
-accept="image/*"
+    id="photo"
+    type="file"
+    accept="image/*"
+>
 
-«»
-
-<button
-id="boutonPrincipal"
-class="save"
-onclick="ajouterExercice()"
-
-«»
-
-💾 ENREGISTRER
-</button>
 
 <button
-id="boutonAnnuler"
-class="cancel hidden"
-onclick="annulerModification()"
-
-«»
-
-❌ ANNULER
+    id="boutonPrincipal"
+    class="save"
+    onclick="ajouterExercice()"
+>
+    💾 ENREGISTRER
 </button>
 
-<div id="message"></div></div><div class="card"><h2 id="titreListe">📚 Mes exercices</h2><div id="liste">
-⏳ Chargement...
-</div></div></div><script>
+
+<button
+    id="boutonAnnuler"
+    class="cancel hidden"
+    onclick="annulerModification()"
+>
+    ❌ ANNULER
+</button>
+
+
+<div id="message"></div>
+
+</div><div class="card"><h2 id="titreListe">
+    📚 Mes exercices
+</h2>
+
+<div id="liste">
+    ⏳ Chargement...
+</div>
+
+</div></div><script>
 
 const SUPABASE_URL =
 "https://cjtgjwepiotuhtfqwanw.supabase.co";
@@ -370,660 +442,1012 @@ const SUPABASE_KEY =
 
 const client =
 window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+    SUPABASE_URL,
+    SUPABASE_KEY
 );
 
-let toutesLesDonnees=[];
-let exerciceEnModification=null;
+let toutesLesDonnees = [];
+
+let exerciceEnModification = null;
 
 
 async function envoyerFichier(fichier){
 
-if(!fichier){
-return null;
-}
+    if(!fichier){
+        return null;
+    }
 
-const nomFichier=
-Date.now()+"_"+
-Math.random().toString(36).substring(2)+"_"+
-fichier.name.replace(
-/[^a-zA-Z0-9._-]/g,
-"_"
-);
+    const nomFichier =
+        Date.now() +
+        "_" +
+        Math.random()
+            .toString(36)
+            .substring(2) +
+        "_" +
+        fichier.name.replace(
+            /[^a-zA-Z0-9._-]/g,
+            "_"
+        );
 
-const resultat=
-await client.storage
-.from("medias")
-.upload(
-nomFichier,
-fichier
-);
+    const resultat =
+        await client.storage
+        .from("medias")
+        .upload(
+            nomFichier,
+            fichier
+        );
 
-if(resultat.error){
-throw resultat.error;
-}
+    if(resultat.error){
+        throw resultat.error;
+    }
 
-return client.storage
-.from("medias")
-.getPublicUrl(nomFichier)
-.data.publicUrl;
-
+    return client.storage
+        .from("medias")
+        .getPublicUrl(
+            nomFichier
+        )
+        .data.publicUrl;
 }
 
 
 async function ajouterExercice(){
 
-const message=
-document.getElementById("message");
+    const message =
+        document.getElementById("message");
 
-message.innerHTML="⏳ Préparation...";
+    message.innerHTML =
+        "⏳ Préparation...";
 
-try{
+    try{
 
-const categorie=
-document.getElementById("categorie").value;
+        const categorie =
+            document.getElementById(
+                "categorie"
+            ).value;
 
-const nom=
-document.getElementById("nom").value.trim();
+        const nom =
+            document.getElementById(
+                "nom"
+            ).value.trim();
 
-const description=
-document.getElementById("description").value.trim();
+        const description =
+            document.getElementById(
+                "description"
+            ).value.trim();
 
-const series=
-document.getElementById("series").value;
+        const series =
+            document.getElementById(
+                "series"
+            ).value;
 
-const repetitions=
-document.getElementById("repetitions").value;
+        const repetitions =
+            document.getElementById(
+                "repetitions"
+            ).value;
 
-const video=
-document.getElementById("video").files[0];
+        const video =
+            document.getElementById(
+                "video"
+            ).files[0];
 
-const photo=
-document.getElementById("photo").files[0];
+        const photo =
+            document.getElementById(
+                "photo"
+            ).files[0];
 
-if(!nom){
+        if(!nom){
 
-message.innerHTML=
-"⚠️ Indique un nom.";
+            message.innerHTML =
+                "⚠️ Indique un nom.";
 
-return;
-}
+            return;
+        }
 
-let videoUrl=null;
-let photoUrl=null;
+        let videoUrl = null;
 
-if(video){
+        let photoUrl = null;
 
-message.innerHTML=
-"🎥 Envoi de la vidéo...";
 
-videoUrl=
-await envoyerFichier(video);
+        if(video){
 
-}
+            message.innerHTML =
+                "🎥 Envoi de la vidéo...";
 
-if(photo){
+            videoUrl =
+                await envoyerFichier(
+                    video
+                );
+        }
 
-message.innerHTML=
-"📷 Envoi de la photo...";
 
-photoUrl=
-await envoyerFichier(photo);
+        if(photo){
 
-}
+            message.innerHTML =
+                "📷 Envoi de la photo...";
 
-message.innerHTML=
-"☁️ Enregistrement...";
+            photoUrl =
+                await envoyerFichier(
+                    photo
+                );
+        }
 
-const resultat=
-await client
-.from("exercices")
-.insert({
 
-nom:nom,
-categorie:categorie,
-description:description||null,
-series:series?Number(series):null,
-repetitions:repetitions?Number(repetitions):null,
-video_url:videoUrl,
-photo_url:photoUrl
+        message.innerHTML =
+            "☁️ Enregistrement...";
 
-});
 
-if(resultat.error){
-throw resultat.error;
-}
+        const resultat =
+            await client
+            .from("exercices")
+            .insert({
 
-message.innerHTML=
-"✅ ENREGISTRÉ !";
+                nom: nom,
 
-viderFormulaire();
+                categorie: categorie,
 
-chargerExercices();
+                description:
+                    description || null,
 
-}
+                series:
+                    series
+                    ? Number(series)
+                    : null,
 
-catch(erreur){
+                repetitions:
+                    repetitions
+                    ? Number(repetitions)
+                    : null,
 
-message.innerHTML=
-"❌ ERREUR : "+erreur.message;
+                video_url:
+                    videoUrl,
 
-}
+                photo_url:
+                    photoUrl
+            });
 
+
+        if(resultat.error){
+            throw resultat.error;
+        }
+
+
+        message.innerHTML =
+            "✅ EXERCICE ENREGISTRÉ !";
+
+
+        viderFormulaire();
+
+        chargerExercices();
+
+    }
+    catch(erreur){
+
+        message.innerHTML =
+            "❌ ERREUR : " +
+            erreur.message;
+    }
 }
 
 
 async function chargerExercices(){
 
-const liste=
-document.getElementById("liste");
+    const liste =
+        document.getElementById(
+            "liste"
+        );
 
-liste.innerHTML=
-"⏳ Chargement...";
+    liste.innerHTML =
+        "⏳ Chargement...";
 
-const resultat=
-await client
-.from("exercices")
-.select("*")
-.order("id",{ascending:false});
 
-if(resultat.error){
+    const resultat =
+        await client
+        .from("exercices")
+        .select("*")
+        .order(
+            "id",
+            {
+                ascending:false
+            }
+        );
 
-liste.innerHTML=
-"❌ "+resultat.error.message;
 
-return;
-}
+    if(resultat.error){
 
-toutesLesDonnees=
-resultat.data||[];
+        liste.innerHTML =
+            "❌ " +
+            resultat.error.message;
 
-actualiserStats();
+        return;
+    }
 
-document.getElementById("titreListe").innerHTML=
-"📚 Mes exercices";
 
-afficher(toutesLesDonnees);
+    toutesLesDonnees =
+        resultat.data || [];
 
+
+    actualiserStats();
+
+
+    document.getElementById(
+        "titreListe"
+    ).innerHTML =
+        "📚 Mes exercices";
+
+
+    afficher(
+        toutesLesDonnees
+    );
 }
 
 
 function actualiserStats(){
 
-document.getElementById("totalExercices").textContent=
-toutesLesDonnees.filter(
-e=>e.categorie!=="Photos"&&e.categorie!=="Notes"
-).length;
+    document.getElementById(
+        "totalExercices"
+    ).textContent =
+        toutesLesDonnees.filter(
+            function(e){
+                return e.categorie !== "Photos" &&
+                       e.categorie !== "Notes";
+            }
+        ).length;
 
-document.getElementById("totalPhotos").textContent=
-toutesLesDonnees.filter(
-e=>e.photo_url
-).length;
 
-document.getElementById("totalVideos").textContent=
-toutesLesDonnees.filter(
-e=>e.video_url
-).length;
+    document.getElementById(
+        "totalPhotos"
+    ).textContent =
+        toutesLesDonnees.filter(
+            function(e){
+                return e.photo_url;
+            }
+        ).length;
 
-document.getElementById("totalNotes").textContent=
-toutesLesDonnees.filter(
-e=>e.categorie==="Notes"
-).length;
 
+    document.getElementById(
+        "totalVideos"
+    ).textContent =
+        toutesLesDonnees.filter(
+            function(e){
+                return e.video_url;
+            }
+        ).length;
+
+
+    document.getElementById(
+        "totalNotes"
+    ).textContent =
+        toutesLesDonnees.filter(
+            function(e){
+                return e.categorie === "Notes";
+            }
+        ).length;
 }
 
 
 function afficher(exercices){
 
-const liste=
-document.getElementById("liste");
+    const liste =
+        document.getElementById(
+            "liste"
+        );
 
-liste.innerHTML="";
+    liste.innerHTML = "";
 
-if(!exercices.length){
 
-liste.innerHTML=
-"<div class='empty'>Aucun résultat.</div>";
+    if(!exercices.length){
 
-return;
-}
+        liste.innerHTML =
+            "<div class='empty'>" +
+            "Aucun résultat." +
+            "</div>";
 
-exercices.forEach(
-function(exercice){
+        return;
+    }
 
-const bloc=
-document.createElement("div");
 
-bloc.className="exercise";
+    exercices.forEach(
+        function(exercice){
 
-let html="";
+            const bloc =
+                document.createElement(
+                    "div"
+                );
 
-html+=
-"<h3>🏋️ "+
-securiser(exercice.nom)+
-"</h3>";
+            bloc.className =
+                "exercise";
 
-html+=
-"<div class='small'>📂 "+
-securiser(exercice.categorie||"")+
-"</div>";
 
-if(exercice.description){
+            let html = "";
 
-html+=
-"<p>"+
-securiser(exercice.description)+
-"</p>";
 
-}
+            html +=
+                "<h3>🏋️ " +
+                securiser(
+                    exercice.nom
+                ) +
+                "</h3>";
 
-if(
-exercice.series!==null||
-exercice.repetitions!==null
-){
 
-html+=
-"<div class='stats'>🔢 <b>"+
-(exercice.series??"-")+
-"</b> séries × <b>"+
-(exercice.repetitions??"-")+
-"</b> répétitions</div>";
+            html +=
+                "<div class='small'>📂 " +
+                securiser(
+                    exercice.categorie || ""
+                ) +
+                "</div>";
 
-}
 
-if(exercice.video_url){
+            if(exercice.description){
 
-html+=
-"<video controls playsinline>"+
-"<source src='"+
-securiser(exercice.video_url)+
-"'>"+
-"</video>";
+                html +=
+                    "<p>" +
+                    securiser(
+                        exercice.description
+                    ) +
+                    "</p>";
+            }
 
-}
 
-if(exercice.photo_url){
+            if(
+                exercice.series !== null ||
+                exercice.repetitions !== null
+            ){
 
-html+=
-"<img src='"+
-securiser(exercice.photo_url)+
-"' alt='Photo'>";
+                html +=
+                    "<div class='stats'>" +
+                    "🔢 <b>" +
+                    (exercice.series ?? "-") +
+                    "</b> séries × <b>" +
+                    (exercice.repetitions ?? "-") +
+                    "</b> répétitions" +
+                    "</div>";
+            }
 
-}
 
-html+=
-"<div class='actions'>"+
-"<button class='update' onclick='modifierExercice("+
-exercice.id+
-")'>✏️ Modifier</button>"+
-"<button class='delete' onclick='supprimer("+
-exercice.id+
-")'>🗑️ Supprimer</button>"+
-"</div>";
+            if(exercice.video_url){
 
-bloc.innerHTML=html;
+                html +=
+                    "<video controls playsinline>" +
+                    "<source src='" +
+                    securiser(
+                        exercice.video_url
+                    ) +
+                    "'>" +
+                    "</video>";
+            }
 
-liste.appendChild(bloc);
 
-}
-);
+            if(exercice.photo_url){
 
+                html +=
+                    "<img src='" +
+                    securiser(
+                        exercice.photo_url
+                    ) +
+                    "' alt='Photo'>";
+            }
+
+
+            html +=
+                "<div class='actions'>" +
+
+                "<button " +
+                "class='update' " +
+                "onclick='modifierExercice(" +
+                exercice.id +
+                ")'>" +
+                "✏️ Modifier" +
+                "</button>" +
+
+                "<button " +
+                "class='delete' " +
+                "onclick='supprimer(" +
+                exercice.id +
+                ")'>" +
+                "🗑️ Supprimer" +
+                "</button>" +
+
+                "</div>";
+
+
+            bloc.innerHTML =
+                html;
+
+
+            liste.appendChild(
+                bloc
+            );
+
+        }
+    );
 }
 
 
 function rechercher(){
 
-const texte=
-document.getElementById("recherche")
-.value
-.toLowerCase()
-.trim();
+    const texte =
+        document.getElementById(
+            "recherche"
+        )
+        .value
+        .toLowerCase()
+        .trim();
 
-if(!texte){
 
-afficher(toutesLesDonnees);
+    if(!texte){
 
-return;
+        document.getElementById(
+            "titreListe"
+        ).innerHTML =
+            "📚 Mes exercices";
+
+        afficher(
+            toutesLesDonnees
+        );
+
+        return;
+    }
+
+
+    const resultats =
+        toutesLesDonnees.filter(
+            function(e){
+
+                return (
+                    (e.nom || "")
+                        .toLowerCase()
+                        .includes(texte)
+                    ||
+                    (e.description || "")
+                        .toLowerCase()
+                        .includes(texte)
+                    ||
+                    (e.categorie || "")
+                        .toLowerCase()
+                        .includes(texte)
+                );
+            }
+        );
+
+
+    document.getElementById(
+        "titreListe"
+    ).innerHTML =
+        "🔎 Résultats de recherche";
+
+
+    afficher(
+        resultats
+    );
 }
 
-const resultats=
-toutesLesDonnees.filter(
-e=>
-(e.nom||"").toLowerCase().includes(texte)||
-(e.description||"").toLowerCase().includes(texte)||
-(e.categorie||"").toLowerCase().includes(texte)
-);
 
-afficher(resultats);
+function filtrer(categorie){
 
-document.getElementById("titreListe").innerHTML=
-"🔎 Résultats de recherche";
-
-}
+    document.getElementById(
+        "recherche"
+    ).value = "";
 
 
-async function filtrer(categorie){
+    const resultats =
+        toutesLesDonnees.filter(
+            function(e){
+                return e.categorie === categorie;
+            }
+        );
 
-document.getElementById("recherche").value="";
 
-const resultats=
-toutesLesDonnees.filter(
-e=>e.categorie===categorie
-);
+    document.getElementById(
+        "titreListe"
+    ).innerHTML =
+        "📂 " + categorie;
 
-document.getElementById("titreListe").innerHTML=
-"📂 "+categorie;
 
-afficher(resultats);
-
+    afficher(
+        resultats
+    );
 }
 
 
 function afficherGalerie(){
 
-document.getElementById("recherche").value="";
+    document.getElementById(
+        "recherche"
+    ).value = "";
 
-const photos=
-toutesLesDonnees.filter(
-e=>e.photo_url
-);
 
-document.getElementById("titreListe").innerHTML=
-"📷 Galerie photos";
+    const photos =
+        toutesLesDonnees.filter(
+            function(e){
+                return e.photo_url;
+            }
+        );
 
-const liste=
-document.getElementById("liste");
 
-if(!photos.length){
+    document.getElementById(
+        "titreListe"
+    ).innerHTML =
+        "📷 Galerie photos";
 
-liste.innerHTML=
-"<div class='empty'>Aucune photo enregistrée.</div>";
 
-return;
-}
+    const liste =
+        document.getElementById(
+            "liste"
+        );
 
-liste.innerHTML=
-"<div class='gallery'></div>";
 
-const galerie=
-liste.querySelector(".gallery");
+    if(!photos.length){
 
-photos.forEach(
-function(photo){
+        liste.innerHTML =
+            "<div class='empty'>" +
+            "Aucune photo enregistrée." +
+            "</div>";
 
-const item=
-document.createElement("div");
+        return;
+    }
 
-item.className="galleryItem";
 
-item.innerHTML=
-"<img src='"+
-securiser(photo.photo_url)+
-"' alt='"+
-securiser(photo.nom)+
-"'>"+
-"<div class='small'>"+
-securiser(photo.nom)+
-"</div>";
+    liste.innerHTML =
+        "<div class='gallery'></div>";
 
-galerie.appendChild(item);
 
-}
-);
+    const galerie =
+        liste.querySelector(
+            ".gallery"
+        );
 
+
+    photos.forEach(
+        function(photo){
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+            item.className =
+                "galleryItem";
+
+
+            item.innerHTML =
+                "<img src='" +
+                securiser(
+                    photo.photo_url
+                ) +
+                "' alt='" +
+                securiser(
+                    photo.nom
+                ) +
+                "'>" +
+
+                "<div class='small'>" +
+                securiser(
+                    photo.nom
+                ) +
+                "</div>";
+
+
+            galerie.appendChild(
+                item
+            );
+        }
+    );
 }
 
 
 function afficherNotes(){
 
-document.getElementById("recherche").value="";
+    document.getElementById(
+        "recherche"
+    ).value = "";
 
-const notes=
-toutesLesDonnees.filter(
-e=>e.categorie==="Notes"
-);
 
-document.getElementById("titreListe").innerHTML=
-"📝 Mes notes";
+    const notes =
+        toutesLesDonnees.filter(
+            function(e){
+                return e.categorie === "Notes";
+            }
+        );
 
-const liste=
-document.getElementById("liste");
 
-if(!notes.length){
+    document.getElementById(
+        "titreListe"
+    ).innerHTML =
+        "📝 Mes notes";
 
-liste.innerHTML=
-"<div class='empty'>Aucune note enregistrée.</div>";
 
-return;
-}
+    const liste =
+        document.getElementById(
+            "liste"
+        );
 
-liste.innerHTML="";
 
-notes.forEach(
-function(note){
+    if(!notes.length){
 
-const bloc=
-document.createElement("div");
+        liste.innerHTML =
+            "<div class='empty'>" +
+            "Aucune note enregistrée." +
+            "</div>";
 
-bloc.className="note";
+        return;
+    }
 
-bloc.innerHTML=
-"<h3>📝 "+
-securiser(note.nom)+
-"</h3>"+
-"<div>"+
-securiser(note.description||"")+
-"</div>"+
-"<div class='actions'>"+
-"<button class='update' onclick='modifierExercice("+
-note.id+
-")'>✏️ Modifier</button>"+
-"<button class='delete' onclick='supprimer("+
-note.id+
-")'>🗑️ Supprimer</button>"+
-"</div>";
 
-liste.appendChild(bloc);
+    liste.innerHTML = "";
 
-}
-);
 
+    notes.forEach(
+        function(note){
+
+            const bloc =
+                document.createElement(
+                    "div"
+                );
+
+            bloc.className =
+                "note";
+
+
+            bloc.innerHTML =
+                "<h3>📝 " +
+                securiser(
+                    note.nom
+                ) +
+                "</h3>" +
+
+                "<div>" +
+                securiser(
+                    note.description || ""
+                ) +
+                "</div>" +
+
+                "<div class='actions'>" +
+
+                "<button " +
+                "class='update' " +
+                "onclick='modifierExercice(" +
+                note.id +
+                ")'>" +
+                "✏️ Modifier" +
+                "</button>" +
+
+                "<button " +
+                "class='delete' " +
+                "onclick='supprimer(" +
+                note.id +
+                ")'>" +
+                "🗑️ Supprimer" +
+                "</button>" +
+
+                "</div>";
+
+
+            liste.appendChild(
+                bloc
+            );
+        }
+    );
 }
 
 
 async function modifierExercice(id){
 
-const resultat=
-await client
-.from("exercices")
-.select("*")
-.eq("id",id)
-.single();
+    const resultat =
+        await client
+        .from("exercices")
+        .select("*")
+        .eq(
+            "id",
+            id
+        )
+        .single();
 
-if(resultat.error){
 
-alert(
-"Erreur : "+resultat.error.message
-);
+    if(resultat.error){
 
-return;
-}
+        alert(
+            "Erreur : " +
+            resultat.error.message
+        );
 
-const e=resultat.data;
+        return;
+    }
 
-exerciceEnModification=e.id;
 
-document.getElementById("categorie").value=
-e.categorie||"Pectoraux";
+    const exercice =
+        resultat.data;
 
-document.getElementById("nom").value=
-e.nom||"";
 
-document.getElementById("description").value=
-e.description||"";
+    exerciceEnModification =
+        exercice.id;
 
-document.getElementById("series").value=
-e.series??"";
 
-document.getElementById("repetitions").value=
-e.repetitions??"";
+    document.getElementById(
+        "categorie"
+    ).value =
+        exercice.categorie ||
+        "Pectoraux";
 
-document.getElementById("titreFormulaire").innerHTML=
-"✏️ Modifier";
 
-document.getElementById("boutonPrincipal").innerHTML=
-"💾 ENREGISTRER LES MODIFICATIONS";
+    document.getElementById(
+        "nom"
+    ).value =
+        exercice.nom || "";
 
-document.getElementById("boutonPrincipal").onclick=
-enregistrerModification;
 
-document.getElementById("boutonAnnuler")
-.classList.remove("hidden");
+    document.getElementById(
+        "description"
+    ).value =
+        exercice.description || "";
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
 
+    document.getElementById(
+        "series"
+    ).value =
+        exercice.series ?? "";
+
+
+    document.getElementById(
+        "repetitions"
+    ).value =
+        exercice.repetitions ?? "";
+
+
+    document.getElementById(
+        "titreFormulaire"
+    ).innerHTML =
+        "✏️ Modifier l'exercice";
+
+
+    document.getElementById(
+        "boutonPrincipal"
+    ).innerHTML =
+        "💾 ENREGISTRER LES MODIFICATIONS";
+
+
+    document.getElementById(
+        "boutonPrincipal"
+    ).onclick =
+        enregistrerModification;
+
+
+    document.getElementById(
+        "boutonAnnuler"
+    ).classList.remove(
+        "hidden"
+    );
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 }
 
 
 async function enregistrerModification(){
 
-if(!exerciceEnModification){
-return;
-}
+    if(!exerciceEnModification){
+        return;
+    }
 
-const message=
-document.getElementById("message");
 
-message.innerHTML=
-"⏳ Modification...";
+    const message =
+        document.getElementById(
+            "message"
+        );
 
-try{
 
-const resultat=
-await client
-.from("exercices")
-.update({
+    message.innerHTML =
+        "⏳ Modification...";
 
-categorie:
-document.getElementById("categorie").value,
 
-nom:
-document.getElementById("nom").value.trim(),
+    try{
 
-description:
-document.getElementById("description").value.trim()||null,
+        const resultat =
+            await client
+            .from("exercices")
+            .update({
 
-series:
-document.getElementById("series").value
-?Number(document.getElementById("series").value)
-:null,
+                categorie:
+                    document.getElementById(
+                        "categorie"
+                    ).value,
 
-repetitions:
-document.getElementById("repetitions").value
-?Number(document.getElementById("repetitions").value)
-:null
+                nom:
+                    document.getElementById(
+                        "nom"
+                    ).value.trim(),
 
-})
-.eq("id",exerciceEnModification);
+                description:
+                    document.getElementById(
+                        "description"
+                    ).value.trim() ||
+                    null,
 
-if(resultat.error){
-throw resultat.error;
-}
+                series:
+                    document.getElementById(
+                        "series"
+                    ).value
+                    ? Number(
+                        document.getElementById(
+                            "series"
+                        ).value
+                    )
+                    : null,
 
-message.innerHTML=
-"✅ MODIFICATION ENREGISTRÉE !";
+                repetitions:
+                    document.getElementById(
+                        "repetitions"
+                    ).value
+                    ? Number(
+                        document.getElementById(
+                            "repetitions"
+                        ).value
+                    )
+                    : null
 
-annulerModification();
+            })
+            .eq(
+                "id",
+                exerciceEnModification
+            );
 
-chargerExercices();
 
-}
-catch(erreur){
+        if(resultat.error){
+            throw resultat.error;
+        }
 
-message.innerHTML=
-"❌ ERREUR : "+erreur.message;
 
-}
+        message.innerHTML =
+            "✅ MODIFICATION ENREGISTRÉE !";
 
+
+        annulerModification();
+
+        chargerExercices();
+
+    }
+    catch(erreur){
+
+        message.innerHTML =
+            "❌ ERREUR : " +
+            erreur.message;
+    }
 }
 
 
 function annulerModification(){
 
-exerciceEnModification=null;
+    exerciceEnModification =
+        null;
 
-viderFormulaire();
 
-document.getElementById("titreFormulaire").innerHTML=
-"➕ Ajouter";
+    viderFormulaire();
 
-document.getElementById("boutonPrincipal").innerHTML=
-"💾 ENREGISTRER";
 
-document.getElementById("boutonPrincipal").onclick=
-ajouterExercice;
+    document.getElementById(
+        "titreFormulaire"
+    ).innerHTML =
+        "➕ Ajouter un exercice";
 
-document.getElementById("boutonAnnuler")
-.classList.add("hidden");
 
+    document.getElementById(
+        "boutonPrincipal"
+    ).innerHTML =
+        "💾 ENREGISTRER";
+
+
+    document.getElementById(
+        "boutonPrincipal"
+    ).onclick =
+        ajouterExercice;
+
+
+    document.getElementById(
+        "boutonAnnuler"
+    ).classList.add(
+        "hidden"
+    );
 }
 
 
 function viderFormulaire(){
 
-document.getElementById("nom").value="";
-document.getElementById("description").value="";
-document.getElementById("series").value="";
-document.getElementById("repetitions").value="";
-document.getElementById("video").value="";
-document.getElementById("photo").value="";
+    document.getElementById(
+        "nom"
+    ).value = "";
 
+
+    document.getElementById(
+        "description"
+    ).value = "";
+
+
+    document.getElementById(
+        "series"
+    ).value = "";
+
+
+    document.getElementById(
+        "repetitions"
+    ).value = "";
+
+
+    document.getElementById(
+        "video"
+    ).value = "";
+
+
+    document.getElementById(
+        "photo"
+    ).value = "";
 }
 
 
 async function supprimer(id){
 
-if(!confirm("Supprimer cet élément ?")){
-return;
-}
+    if(!confirm(
+        "Supprimer cet élément ?"
+    )){
+        return;
+    }
 
-const resultat=
-await client
-.from("exercices")
-.delete()
-.eq("id",id);
 
-if(resultat.error){
+    const resultat =
+        await client
+        .from("exercices")
+        .delete()
+        .eq(
+            "id",
+            id
+        );
 
-alert(
-"Erreur : "+resultat.error.message
-);
 
-return;
-}
+    if(resultat.error){
 
-chargerExercices();
+        alert(
+            "Erreur : " +
+            resultat.error.message
+        );
 
+        return;
+    }
+
+
+    chargerExercices();
 }
 
 
 function securiser(texte){
 
-return String(texte)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
+    return String(
+        texte
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 }
 
 
 chargerExercices();
 
 </script></body>
-    </html>
+                            </html>
