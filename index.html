@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!DOCTYPE html><html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Mon Carnet Musculation</title>
-
-<style>
+<title>Mon Carnet Musculation</title><style>
 * {
     box-sizing: border-box;
 }
@@ -272,6 +268,25 @@ textarea {
     text-align: center;
 }
 
+.loading {
+    background: #111827;
+    border: 1px solid #263244;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    color: #60a5fa;
+}
+
+.error-box {
+    background: #351515;
+    border: 1px solid #dc2626;
+    border-radius: 12px;
+    padding: 20px;
+    color: #fecaca;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
 footer {
     text-align: center;
     padding: 30px;
@@ -287,191 +302,180 @@ footer {
         grid-template-columns: repeat(4, 1fr);
     }
 }
-</style>
-</head>
-
-<body>
-
-<header>
+</style></head><body><header>
     <h1>💪 Mon Carnet Musculation</h1>
     <p>Mes exercices, mes vidéos, mes photos et mes notes</p>
-</header>
-
-<div class="container">
-
-    <div class="stats">
-        <div class="stat">
-            <strong id="statExercices">0</strong>
-            <span>Exercices</span>
-        </div>
-
-        <div class="stat">
-            <strong id="statPhotos">0</strong>
-            <span>Photos</span>
-        </div>
-
-        <div class="stat">
-            <strong id="statVideos">0</strong>
-            <span>Vidéos</span>
-        </div>
+</header><div class="container"><div class="stats">
+    <div class="stat">
+        <strong id="statExercices">0</strong>
+        <span>Exercices</span>
     </div>
 
-    <h2>🏋️ Mes catégories</h2>
-
-    <div class="categories">
-
-        <button class="category" onclick="filtrerCategorie('Pectoraux', this)">
-            🏋️ Pectoraux
-        </button>
-
-        <button class="category" onclick="filtrerCategorie('Dos', this)">
-            🔥 Dos
-        </button>
-
-        <button class="category" onclick="filtrerCategorie('Épaules', this)">
-            💪 Épaules
-        </button>
-
-        <button class="category" onclick="filtrerCategorie('Biceps', this)">
-            💪 Biceps
-        </button>
-
-        <button class="category" onclick="filtrerCategorie('Triceps', this)">
-            💪 Triceps
-        </button>
-
-        <button class="category" onclick="filtrerCategorie('Jambes', this)">
-            🦵 Jambes
-        </button>
-
-        <button class="category" onclick="filtrerCategorie('Abdos', this)">
-            🔥 Abdos
-        </button>
-
-        <button class="category" onclick="filtrerPhotos(this)">
-            📷 Photos
-        </button>
-
+    <div class="stat">
+        <strong id="statPhotos">0</strong>
+        <span>Photos</span>
     </div>
 
-    <div class="toolbar">
-
-        <button id="btnTous" class="active" onclick="afficherTous(this)">
-            📋 TOUS LES EXERCICES
-        </button>
-
+    <div class="stat">
+        <strong id="statVideos">0</strong>
+        <span>Vidéos</span>
     </div>
+</div>
 
-    <input
-        id="recherche"
-        class="search"
-        type="text"
-        placeholder="🔎 Rechercher un exercice..."
-        oninput="afficherExercices()"
-    >
+<h2>🏋️ Mes catégories</h2>
 
-    <div id="listeExercices"></div>
+<div class="categories">
 
-    <div class="form-box" id="sectionFormulaire">
+    <button class="category" onclick="filtrerCategorie('Pectoraux', this)">
+        🏋️ Pectoraux
+    </button>
 
-        <h2 id="titreFormulaire">➕ Ajouter un exercice</h2>
+    <button class="category" onclick="filtrerCategorie('Dos', this)">
+        🔥 Dos
+    </button>
 
-        <input type="hidden" id="exerciceId">
+    <button class="category" onclick="filtrerCategorie('Épaules', this)">
+        💪 Épaules
+    </button>
 
-        <label>Nom de l'exercice</label>
+    <button class="category" onclick="filtrerCategorie('Biceps', this)">
+        💪 Biceps
+    </button>
 
-        <input
-            id="nom"
-            type="text"
-            placeholder="Exemple : Développé couché"
-        >
+    <button class="category" onclick="filtrerCategorie('Triceps', this)">
+        💪 Triceps
+    </button>
 
-        <label>Catégorie</label>
+    <button class="category" onclick="filtrerCategorie('Jambes', this)">
+        🦵 Jambes
+    </button>
 
-        <select id="categorie">
+    <button class="category" onclick="filtrerCategorie('Abdos', this)">
+        🔥 Abdos
+    </button>
 
-            <option value="Pectoraux">Pectoraux</option>
-            <option value="Dos">Dos</option>
-            <option value="Épaules">Épaules</option>
-            <option value="Biceps">Biceps</option>
-            <option value="Triceps">Triceps</option>
-            <option value="Jambes">Jambes</option>
-            <option value="Abdos">Abdos</option>
-
-        </select>
-
-        <label>Nombre de séries</label>
-
-        <input
-            id="series"
-            type="number"
-            value="4"
-            min="1"
-        >
-
-        <label>Nombre de répétitions</label>
-
-        <input
-            id="repetitions"
-            type="number"
-            value="10"
-            min="1"
-        >
-
-        <label>Description / notes</label>
-
-        <textarea
-            id="description"
-            placeholder="Technique, poids, conseils, sensations..."
-        ></textarea>
-
-        <label>🎥 Vidéo de démonstration</label>
-
-        <input
-            id="video"
-            type="file"
-            accept="video/*"
-        >
-
-        <label>📷 Photo</label>
-
-        <input
-            id="photo"
-            type="file"
-            accept="image/*"
-        >
-
-        <button class="save" onclick="sauvegarderExercice()">
-            💾 ENREGISTRER
-        </button>
-
-        <button
-            id="btnAnnuler"
-            class="cancel"
-            onclick="annulerModification()"
-        >
-            ❌ ANNULER LA MODIFICATION
-        </button>
-
-        <div id="message" class="message"></div>
-
-    </div>
-
-    <h2>🖼️ Galerie photos</h2>
-
-    <div id="galerie" class="gallery"></div>
-
-    <h2>📝 Notes</h2>
-
-    <div id="notes"></div>
+    <button class="category" onclick="filtrerPhotos(this)">
+        📷 Photos
+    </button>
 
 </div>
 
-<footer>
-    Mon Carnet Musculation
-</footer>
+<div class="toolbar">
 
-<script>
+    <button id="btnTous" class="active" onclick="afficherTous(this)">
+        📋 TOUS LES EXERCICES
+    </button>
+
+</div>
+
+<input
+    id="recherche"
+    class="search"
+    type="text"
+    placeholder="🔎 Rechercher un exercice..."
+    oninput="afficherExercices()"
+>
+
+<div id="connexion" class="loading">
+    🔄 Connexion à la base de données...
+</div>
+
+<div id="listeExercices"></div>
+
+<div class="form-box" id="sectionFormulaire">
+
+    <h2 id="titreFormulaire">➕ Ajouter un exercice</h2>
+
+    <input type="hidden" id="exerciceId">
+
+    <label>Nom de l'exercice</label>
+
+    <input
+        id="nom"
+        type="text"
+        placeholder="Exemple : Développé couché"
+    >
+
+    <label>Catégorie</label>
+
+    <select id="categorie">
+        <option value="Pectoraux">Pectoraux</option>
+        <option value="Dos">Dos</option>
+        <option value="Épaules">Épaules</option>
+        <option value="Biceps">Biceps</option>
+        <option value="Triceps">Triceps</option>
+        <option value="Jambes">Jambes</option>
+        <option value="Abdos">Abdos</option>
+    </select>
+
+    <label>Nombre de séries</label>
+
+    <input
+        id="series"
+        type="number"
+        value="4"
+        min="1"
+    >
+
+    <label>Nombre de répétitions</label>
+
+    <input
+        id="repetitions"
+        type="number"
+        value="10"
+        min="1"
+    >
+
+    <label>Description / notes</label>
+
+    <textarea
+        id="description"
+        placeholder="Technique, poids, conseils, sensations..."
+    ></textarea>
+
+    <label>🎥 Vidéo de démonstration</label>
+
+    <input
+        id="video"
+        type="file"
+        accept="video/*"
+    >
+
+    <label>📷 Photo</label>
+
+    <input
+        id="photo"
+        type="file"
+        accept="image/*"
+    >
+
+    <button class="save" onclick="sauvegarderExercice()">
+        💾 ENREGISTRER
+    </button>
+
+    <button
+        id="btnAnnuler"
+        class="cancel"
+        onclick="annulerModification()"
+    >
+        ❌ ANNULER LA MODIFICATION
+    </button>
+
+    <div id="message" class="message"></div>
+
+</div>
+
+<h2>🖼️ Galerie photos</h2>
+
+<div id="galerie" class="gallery"></div>
+
+<h2>📝 Notes</h2>
+
+<div id="notes"></div>
+
+</div><footer>
+    Mon Carnet Musculation
+</footer><script>
 
 /* ============================================================
    CONFIGURATION SUPABASE
@@ -507,11 +511,53 @@ let modePhotos = false;
 
 function headersSupabase() {
 
+    /*
+     * IMPORTANT :
+     * La nouvelle clé sb_publishable_... n'est pas
+     * une ancienne clé JWT anon.
+     *
+     * Elle doit être envoyée avec "apikey".
+     * On ne la met donc PAS dans Authorization: Bearer.
+     */
+
     return {
         "apikey": SUPABASE_KEY,
-        "Authorization": "Bearer " + SUPABASE_KEY,
         "Content-Type": "application/json"
     };
+
+}
+
+
+/* ============================================================
+   REQUETE AVEC TIMEOUT
+   ============================================================ */
+
+async function fetchAvecTimeout(url, options = {}, timeout = 15000) {
+
+    const controller =
+        new AbortController();
+
+    const timer =
+        setTimeout(
+            () => controller.abort(),
+            timeout
+        );
+
+    try {
+
+        return await fetch(
+            url,
+            {
+                ...options,
+                signal: controller.signal
+            }
+        );
+
+    } finally {
+
+        clearTimeout(timer);
+
+    }
 
 }
 
@@ -522,7 +568,8 @@ function headersSupabase() {
 
 function message(texte) {
 
-    document.getElementById("message").innerHTML = texte;
+    document.getElementById("message").innerHTML =
+        texte;
 
 }
 
@@ -553,41 +600,102 @@ function echapperHTML(texte) {
 
 async function chargerExercices() {
 
+    const connexion =
+        document.getElementById("connexion");
+
+    const zone =
+        document.getElementById("listeExercices");
+
+    connexion.style.display = "block";
+
+    connexion.className = "loading";
+
+    connexion.innerHTML =
+        "🔄 Connexion à Supabase...";
+
     try {
 
-        const response = await fetch(
-            TABLE_URL + "?select=*&order=id.desc",
-            {
-                method: "GET",
-                headers: headersSupabase(),
-                cache: "no-store"
-            }
+        const url =
+            TABLE_URL +
+            "?select=*&order=id.desc";
+
+        console.log(
+            "Connexion Supabase :",
+            url
         );
 
-        const texte = await response.text();
+        const response =
+            await fetchAvecTimeout(
+                url,
+                {
+                    method: "GET",
+                    headers: headersSupabase(),
+                    cache: "no-store"
+                },
+                15000
+            );
+
+        const texte =
+            await response.text();
+
+        console.log(
+            "Réponse Supabase :",
+            response.status,
+            texte
+        );
 
         if (!response.ok) {
 
-            console.error(
-                "Erreur Supabase",
-                response.status,
-                texte
-            );
+            connexion.className =
+                "error-box";
 
-            document.getElementById("listeExercices").innerHTML =
-                '<div class="empty">❌ Erreur Supabase : ' +
-                echapperHTML(texte) +
-                '</div>';
+            connexion.innerHTML =
+                "<strong>❌ Supabase a refusé la requête.</strong><br><br>" +
+                "Code HTTP : " +
+                response.status +
+                "<br><br>" +
+                "<strong>Réponse :</strong><br>" +
+                echapperHTML(texte);
+
+            zone.innerHTML = "";
 
             return;
+
         }
 
-        exercices = JSON.parse(texte);
+        let donnees;
 
-        console.log(
-            "Exercices récupérés :",
-            exercices
-        );
+        try {
+
+            donnees =
+                JSON.parse(texte);
+
+        } catch (erreurJSON) {
+
+            throw new Error(
+                "Supabase a répondu avec des données qui ne sont pas du JSON valide."
+            );
+
+        }
+
+        if (!Array.isArray(donnees)) {
+
+            throw new Error(
+                "La réponse Supabase n'est pas une liste d'exercices."
+            );
+
+        }
+
+        exercices =
+            donnees;
+
+        connexion.className =
+            "message";
+
+        connexion.innerHTML =
+            "✅ Connexion réussie — " +
+            exercices.length +
+            " exercice(s) récupéré(s).";
 
         mettreAJourStats();
 
@@ -597,14 +705,39 @@ async function chargerExercices() {
 
         afficherNotes();
 
+        console.log(
+            "Exercices récupérés :",
+            exercices
+        );
+
     } catch (erreur) {
 
-        console.error(erreur);
+        console.error(
+            "Erreur chargement :",
+            erreur
+        );
 
-        document.getElementById("listeExercices").innerHTML =
-            '<div class="empty">❌ Impossible de contacter Supabase.<br><br>' +
-            echapperHTML(erreur.message) +
-            '</div>';
+        connexion.className =
+            "error-box";
+
+        if (erreur.name === "AbortError") {
+
+            connexion.innerHTML =
+                "<strong>❌ La connexion à Supabase a dépassé 15 secondes.</strong><br><br>" +
+                "La page ne restera plus bloquée indéfiniment.<br>" +
+                "Vérifie la connexion Internet et recharge la page.";
+
+        } else {
+
+            connexion.innerHTML =
+                "<strong>❌ Impossible de charger les exercices.</strong><br><br>" +
+                echapperHTML(
+                    erreur.message
+                );
+
+        }
+
+        zone.innerHTML = "";
 
     }
 
@@ -621,10 +754,14 @@ function mettreAJourStats() {
         exercices.length;
 
     document.getElementById("statPhotos").textContent =
-        exercices.filter(e => e.photo_url).length;
+        exercices.filter(
+            e => e.photo_url
+        ).length;
 
     document.getElementById("statVideos").textContent =
-        exercices.filter(e => e.video_url).length;
+        exercices.filter(
+            e => e.video_url
+        ).length;
 
 }
 
@@ -644,41 +781,57 @@ function afficherExercices() {
         .toLowerCase()
         .trim();
 
-    let liste = [...exercices];
+    let liste =
+        [...exercices];
 
     if (modePhotos) {
 
-        liste = liste.filter(
-            e => e.photo_url
-        );
+        liste =
+            liste.filter(
+                e => e.photo_url
+            );
 
     } else if (filtreActuel !== "TOUS") {
 
-        liste = liste.filter(
-            e =>
-                String(e.categorie || "")
-                .toLowerCase() ===
-                filtreActuel.toLowerCase()
-        );
+        liste =
+            liste.filter(
+                e =>
+                    String(
+                        e.categorie || ""
+                    )
+                    .toLowerCase() ===
+                    filtreActuel.toLowerCase()
+            );
 
     }
 
     if (recherche) {
 
-        liste = liste.filter(e => {
+        liste =
+            liste.filter(e => {
 
-            const nom =
-                String(e.nom || "").toLowerCase();
+                const nom =
+                    String(
+                        e.nom || ""
+                    ).toLowerCase();
 
-            const description =
-                String(e.description || "").toLowerCase();
+                const description =
+                    String(
+                        e.description || ""
+                    ).toLowerCase();
 
-            return (
-                nom.includes(recherche) ||
-                description.includes(recherche)
-            );
+                const categorie =
+                    String(
+                        e.categorie || ""
+                    ).toLowerCase();
 
-        });
+                return (
+                    nom.includes(recherche) ||
+                    description.includes(recherche) ||
+                    categorie.includes(recherche)
+                );
+
+            });
 
     }
 
@@ -688,90 +841,92 @@ function afficherExercices() {
             '<div class="empty">Aucun exercice dans cette catégorie.</div>';
 
         return;
+
     }
 
-    zone.innerHTML = liste.map(e => {
+    zone.innerHTML =
+        liste.map(e => {
 
-        const nom =
-            echapperHTML(e.nom);
+            const nom =
+                echapperHTML(e.nom);
 
-        const categorie =
-            echapperHTML(e.categorie);
+            const categorie =
+                echapperHTML(e.categorie);
 
-        const description =
-            echapperHTML(e.description);
+            const description =
+                echapperHTML(e.description);
 
-        let html = `
-            <div class="card">
+            let html = `
+                <div class="card">
 
-                <h3>${nom}</h3>
+                    <h3>${nom}</h3>
 
-                <div class="info">
-                    🏷️ ${categorie}<br>
-                    💪 ${e.series || 0} séries ×
-                    ${e.repetitions || 0} répétitions
+                    <div class="info">
+                        🏷️ ${categorie}<br>
+                        💪 ${e.series || 0} séries ×
+                        ${e.repetitions || 0} répétitions
+                    </div>
+            `;
+
+            if (description) {
+
+                html += `
+                    <p class="info">
+                        📝 ${description}
+                    </p>
+                `;
+
+            }
+
+            if (e.video_url) {
+
+                html += `
+                    <video
+                        class="video"
+                        controls
+                        preload="metadata"
+                        src="${echapperHTML(e.video_url)}">
+                    </video>
+                `;
+
+            }
+
+            if (e.photo_url) {
+
+                html += `
+                    <img
+                        class="photo"
+                        src="${echapperHTML(e.photo_url)}"
+                        alt="${nom}"
+                        loading="lazy">
+                `;
+
+            }
+
+            html += `
+
+                    <div class="actions">
+
+                        <button
+                            class="edit"
+                            onclick="modifierExercice(${Number(e.id)})">
+                            ✏️ Modifier
+                        </button>
+
+                        <button
+                            class="delete"
+                            onclick="supprimerExercice(${Number(e.id)})">
+                            🗑️ Supprimer
+                        </button>
+
+                    </div>
+
                 </div>
-        `;
-
-        if (description) {
-
-            html += `
-                <p class="info">
-                    📝 ${description}
-                </p>
             `;
 
-        }
+            return html;
 
-        if (e.video_url) {
-
-            html += `
-                <video
-                    class="video"
-                    controls
-                    preload="metadata"
-                    src="${e.video_url}">
-                </video>
-            `;
-
-        }
-
-        if (e.photo_url) {
-
-            html += `
-                <img
-                    class="photo"
-                    src="${e.photo_url}"
-                    alt="${nom}"
-                    loading="lazy">
-            `;
-
-        }
-
-        html += `
-
-                <div class="actions">
-
-                    <button
-                        class="edit"
-                        onclick="modifierExercice(${e.id})">
-                        ✏️ Modifier
-                    </button>
-
-                    <button
-                        class="delete"
-                        onclick="supprimerExercice(${e.id})">
-                        🗑️ Supprimer
-                    </button>
-
-                </div>
-
-            </div>
-        `;
-
-        return html;
-
-    }).join("");
+        }).join("");
 
 }
 
@@ -780,17 +935,29 @@ function afficherExercices() {
    FILTRE CATEGORIE
    ============================================================ */
 
-function filtrerCategorie(categorie, bouton) {
+function filtrerCategorie(
+    categorie,
+    bouton
+) {
 
     modePhotos = false;
 
-    filtreActuel = categorie;
+    filtreActuel =
+        categorie;
 
-    document.querySelectorAll(".category")
-        .forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(
+        ".category"
+    )
+    .forEach(
+        b => b.classList.remove("active")
+    );
 
-    document.querySelectorAll(".toolbar button")
-        .forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(
+        ".toolbar button"
+    )
+    .forEach(
+        b => b.classList.remove("active")
+    );
 
     bouton.classList.add("active");
 
@@ -807,13 +974,22 @@ function filtrerPhotos(bouton) {
 
     modePhotos = true;
 
-    filtreActuel = "PHOTOS";
+    filtreActuel =
+        "PHOTOS";
 
-    document.querySelectorAll(".category")
-        .forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(
+        ".category"
+    )
+    .forEach(
+        b => b.classList.remove("active")
+    );
 
-    document.querySelectorAll(".toolbar button")
-        .forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(
+        ".toolbar button"
+    )
+    .forEach(
+        b => b.classList.remove("active")
+    );
 
     bouton.classList.add("active");
 
@@ -830,13 +1006,22 @@ function afficherTous(bouton) {
 
     modePhotos = false;
 
-    filtreActuel = "TOUS";
+    filtreActuel =
+        "TOUS";
 
-    document.querySelectorAll(".category")
-        .forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(
+        ".category"
+    )
+    .forEach(
+        b => b.classList.remove("active")
+    );
 
-    document.querySelectorAll(".toolbar button")
-        .forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(
+        ".toolbar button"
+    )
+    .forEach(
+        b => b.classList.remove("active")
+    );
 
     bouton.classList.add("active");
 
@@ -849,7 +1034,10 @@ function afficherTous(bouton) {
    UPLOAD STORAGE
    ============================================================ */
 
-async function envoyerFichier(fichier, prefixe) {
+async function envoyerFichier(
+    fichier,
+    prefixe
+) {
 
     if (!fichier) {
         return null;
@@ -875,26 +1063,32 @@ async function envoyerFichier(fichier, prefixe) {
     const url =
         STORAGE_URL +
         "/" +
-        encodeURIComponent(nomFichier);
+        encodeURIComponent(
+            nomFichier
+        );
 
-    const response = await fetch(
-        url,
-        {
-            method: "POST",
+    const response =
+        await fetchAvecTimeout(
+            url,
+            {
+                method: "POST",
 
-            headers: {
-                "apikey": SUPABASE_KEY,
-                "Authorization":
-                    "Bearer " + SUPABASE_KEY,
-                "x-upsert": "false",
-                "Content-Type":
-                    fichier.type ||
-                    "application/octet-stream"
+                headers: {
+                    "apikey":
+                        SUPABASE_KEY,
+
+                    "x-upsert":
+                        "false",
+
+                    "Content-Type":
+                        fichier.type ||
+                        "application/octet-stream"
+                },
+
+                body: fichier
             },
-
-            body: fichier
-        }
-    );
+            60000
+        );
 
     const texte =
         await response.text();
@@ -908,7 +1102,8 @@ async function envoyerFichier(fichier, prefixe) {
         );
 
         throw new Error(
-            "Erreur upload : " + texte
+            "Erreur upload : " +
+            texte
         );
 
     }
@@ -929,32 +1124,48 @@ async function envoyerFichier(fichier, prefixe) {
 async function sauvegarderExercice() {
 
     const id =
-        document.getElementById("exerciceId").value;
+        document.getElementById(
+            "exerciceId"
+        ).value;
 
     const nom =
-        document.getElementById("nom").value.trim();
+        document.getElementById(
+            "nom"
+        ).value.trim();
 
     const categorie =
-        document.getElementById("categorie").value;
+        document.getElementById(
+            "categorie"
+        ).value;
 
     const series =
         parseInt(
-            document.getElementById("series").value
+            document.getElementById(
+                "series"
+            ).value
         ) || 0;
 
     const repetitions =
         parseInt(
-            document.getElementById("repetitions").value
+            document.getElementById(
+                "repetitions"
+            ).value
         ) || 0;
 
     const description =
-        document.getElementById("description").value.trim();
+        document.getElementById(
+            "description"
+        ).value.trim();
 
     const videoFile =
-        document.getElementById("video").files[0];
+        document.getElementById(
+            "video"
+        ).files[0];
 
     const photoFile =
-        document.getElementById("photo").files[0];
+        document.getElementById(
+            "photo"
+        ).files[0];
 
     if (!nom) {
 
@@ -968,11 +1179,15 @@ async function sauvegarderExercice() {
 
     try {
 
-        message("⏳ Enregistrement en cours...");
+        message(
+            "⏳ Enregistrement en cours..."
+        );
 
-        let videoUrl = null;
+        let videoUrl =
+            null;
 
-        let photoUrl = null;
+        let photoUrl =
+            null;
 
         if (videoFile) {
 
@@ -1002,22 +1217,21 @@ async function sauvegarderExercice() {
 
         }
 
-
         if (id) {
 
             const ancien =
                 exercices.find(
-                    e => String(e.id) === String(id)
+                    e =>
+                        String(e.id) ===
+                        String(id)
                 );
 
             const donnees = {
-
                 nom,
                 categorie,
                 series,
                 repetitions,
                 description
-
             };
 
             if (videoUrl) {
@@ -1028,7 +1242,8 @@ async function sauvegarderExercice() {
             } else if (ancien) {
 
                 donnees.video_url =
-                    ancien.video_url || null;
+                    ancien.video_url ||
+                    null;
 
             }
 
@@ -1040,17 +1255,17 @@ async function sauvegarderExercice() {
             } else if (ancien) {
 
                 donnees.photo_url =
-                    ancien.photo_url || null;
+                    ancien.photo_url ||
+                    null;
 
             }
 
             const response =
-                await fetch(
+                await fetchAvecTimeout(
                     TABLE_URL +
                     "?id=eq." +
                     encodeURIComponent(id),
                     {
-
                         method: "PATCH",
 
                         headers: {
@@ -1063,8 +1278,8 @@ async function sauvegarderExercice() {
                             JSON.stringify(
                                 donnees
                             )
-
-                    }
+                    },
+                    15000
                 );
 
             const texte =
@@ -1085,22 +1300,21 @@ async function sauvegarderExercice() {
         } else {
 
             const donnees = {
-
                 nom,
                 categorie,
                 series,
                 repetitions,
                 description,
-                video_url: videoUrl,
-                photo_url: photoUrl
-
+                video_url:
+                    videoUrl,
+                photo_url:
+                    photoUrl
             };
 
             const response =
-                await fetch(
+                await fetchAvecTimeout(
                     TABLE_URL,
                     {
-
                         method: "POST",
 
                         headers: {
@@ -1113,8 +1327,8 @@ async function sauvegarderExercice() {
                             JSON.stringify(
                                 donnees
                             )
-
-                    }
+                    },
+                    15000
                 );
 
             const texte =
@@ -1145,11 +1359,15 @@ async function sauvegarderExercice() {
 
     } catch (erreur) {
 
-        console.error(erreur);
+        console.error(
+            erreur
+        );
 
         message(
             "❌ Erreur : " +
-            echapperHTML(erreur.message)
+            echapperHTML(
+                erreur.message
+            )
         );
 
     }
@@ -1165,7 +1383,9 @@ function modifierExercice(id) {
 
     const exercice =
         exercices.find(
-            e => Number(e.id) === Number(id)
+            e =>
+                Number(e.id) ===
+                Number(id)
         );
 
     if (!exercice) {
@@ -1178,35 +1398,52 @@ function modifierExercice(id) {
 
     }
 
-    document.getElementById("exerciceId")
-        .value = exercice.id;
+    document.getElementById(
+        "exerciceId"
+    ).value =
+        exercice.id;
 
-    document.getElementById("nom")
-        .value = exercice.nom || "";
+    document.getElementById(
+        "nom"
+    ).value =
+        exercice.nom || "";
 
-    document.getElementById("categorie")
-        .value = exercice.categorie || "Pectoraux";
+    document.getElementById(
+        "categorie"
+    ).value =
+        exercice.categorie ||
+        "Pectoraux";
 
-    document.getElementById("series")
-        .value = exercice.series || 4;
+    document.getElementById(
+        "series"
+    ).value =
+        exercice.series || 4;
 
-    document.getElementById("repetitions")
-        .value = exercice.repetitions || 10;
+    document.getElementById(
+        "repetitions"
+    ).value =
+        exercice.repetitions || 10;
 
-    document.getElementById("description")
-        .value = exercice.description || "";
+    document.getElementById(
+        "description"
+    ).value =
+        exercice.description || "";
 
-    document.getElementById("titreFormulaire")
-        .textContent =
+    document.getElementById(
+        "titreFormulaire"
+    ).textContent =
         "✏️ Modifier l'exercice";
 
-    document.getElementById("btnAnnuler")
-        .style.display = "block";
+    document.getElementById(
+        "btnAnnuler"
+    ).style.display =
+        "block";
 
-    document.getElementById("sectionFormulaire")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
+    document.getElementById(
+        "sectionFormulaire"
+    ).scrollIntoView({
+        behavior: "smooth"
+    });
 
 }
 
@@ -1219,12 +1456,15 @@ function annulerModification() {
 
     viderFormulaire();
 
-    document.getElementById("titreFormulaire")
-        .textContent =
+    document.getElementById(
+        "titreFormulaire"
+    ).textContent =
         "➕ Ajouter un exercice";
 
-    document.getElementById("btnAnnuler")
-        .style.display = "none";
+    document.getElementById(
+        "btnAnnuler"
+    ).style.display =
+        "none";
 
 }
 
@@ -1235,26 +1475,33 @@ function annulerModification() {
 
 function viderFormulaire() {
 
-    document.getElementById("exerciceId")
-        .value = "";
+    document.getElementById(
+        "exerciceId"
+    ).value = "";
 
-    document.getElementById("nom")
-        .value = "";
+    document.getElementById(
+        "nom"
+    ).value = "";
 
-    document.getElementById("description")
-        .value = "";
+    document.getElementById(
+        "description"
+    ).value = "";
 
-    document.getElementById("video")
-        .value = "";
+    document.getElementById(
+        "video"
+    ).value = "";
 
-    document.getElementById("photo")
-        .value = "";
+    document.getElementById(
+        "photo"
+    ).value = "";
 
-    document.getElementById("series")
-        .value = 4;
+    document.getElementById(
+        "series"
+    ).value = 4;
 
-    document.getElementById("repetitions")
-        .value = 10;
+    document.getElementById(
+        "repetitions"
+    ).value = 10;
 
 }
 
@@ -1267,7 +1514,9 @@ async function supprimerExercice(id) {
 
     const exercice =
         exercices.find(
-            e => Number(e.id) === Number(id)
+            e =>
+                Number(e.id) ===
+                Number(id)
         );
 
     if (!exercice) {
@@ -1292,18 +1541,16 @@ async function supprimerExercice(id) {
         );
 
         const response =
-            await fetch(
+            await fetchAvecTimeout(
                 TABLE_URL +
                 "?id=eq." +
                 encodeURIComponent(id),
                 {
-
                     method: "DELETE",
-
                     headers:
                         headersSupabase()
-
-                }
+                },
+                15000
             );
 
         const texte =
@@ -1325,7 +1572,9 @@ async function supprimerExercice(id) {
 
     } catch (erreur) {
 
-        console.error(erreur);
+        console.error(
+            erreur
+        );
 
         message(
             "❌ Erreur de suppression : " +
@@ -1346,7 +1595,9 @@ async function supprimerExercice(id) {
 function afficherGalerie() {
 
     const galerie =
-        document.getElementById("galerie");
+        document.getElementById(
+            "galerie"
+        );
 
     const photos =
         exercices.filter(
@@ -1365,13 +1616,17 @@ function afficherGalerie() {
     galerie.innerHTML =
         photos.map(e => {
 
+            const url =
+                echapperHTML(
+                    e.photo_url
+                );
+
             return `
                 <img
-                    src="${e.photo_url}"
+                    src="${url}"
                     alt="${echapperHTML(e.nom)}"
                     loading="lazy"
-                    onclick="window.open('${e.photo_url}', '_blank')"
-                >
+                    onclick="window.open('${url}', '_blank')">
             `;
 
         }).join("");
@@ -1386,13 +1641,17 @@ function afficherGalerie() {
 function afficherNotes() {
 
     const zone =
-        document.getElementById("notes");
+        document.getElementById(
+            "notes"
+        );
 
     const notes =
         exercices.filter(
             e =>
                 e.description &&
-                e.description.trim() !== ""
+                String(
+                    e.description
+                ).trim() !== ""
         );
 
     if (notes.length === 0) {
@@ -1435,7 +1694,9 @@ document.addEventListener(
     function() {
 
         afficherTous(
-            document.getElementById("btnTous")
+            document.getElementById(
+                "btnTous"
+            )
         );
 
         chargerExercices();
@@ -1443,7 +1704,5 @@ document.addEventListener(
     }
 );
 
-</script>
-
-</body>
-    </html>
+</script></body>
+            </html>
