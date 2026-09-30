@@ -1,2112 +1,624 @@
-<!DOCTYPE html><html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mon Carnet Musculation</title><style>
-* {
-    box-sizing: border-box;
-}
-
-:root {
-    --orange: #ff7a00;
-    --orange-light: #ff9d3d;
-    --orange-dark: #d95f00;
-    --black: #080808;
-    --dark: #111111;
-    --card: #171717;
-    --card-light: #202020;
-    --border: #2c2c2c;
-    --text: #ffffff;
-    --muted: #a1a1a1;
-    --green: #22c55e;
-    --yellow: #facc15;
-    --red: #ef4444;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at top, #211306 0%, #0b0b0b 35%, #050505 100%);
-    color: var(--text);
-    min-height: 100vh;
-}
-
-button,
-input,
-select,
-textarea {
-    font-family: inherit;
-}
-
-button {
-    -webkit-tap-highlight-color: transparent;
-}
-
-.container {
-    width: 94%;
-    max-width: 1150px;
-    margin: auto;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-header {
-    position: relative;
-    overflow: hidden;
-    background:
-        linear-gradient(135deg, #080808 0%, #17100a 50%, #0b0b0b 100%);
-    border-bottom: 1px solid #3b220d;
-    padding: 32px 18px 28px;
-    text-align: center;
-}
-
-header::before {
-    content: "";
-    position: absolute;
-    width: 250px;
-    height: 250px;
-    background: var(--orange);
-    opacity: 0.08;
-    border-radius: 50%;
-    top: -150px;
-    left: 50%;
-    transform: translateX(-50%);
-    filter: blur(20px);
-}
-
-.logo {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 66px;
-    height: 66px;
-    border-radius: 20px;
-    background: linear-gradient(145deg, var(--orange), var(--orange-dark));
-    box-shadow: 0 10px 35px rgba(255, 122, 0, 0.25);
-    font-size: 32px;
-    margin-bottom: 12px;
-}
-
-header h1 {
-    position: relative;
-    margin: 0;
-    font-size: 29px;
-    font-weight: 900;
-    letter-spacing: -0.5px;
-}
-
-header h1 span {
-    color: var(--orange);
-}
-
-header p {
-    position: relative;
-    margin: 9px 0 0;
-    color: var(--muted);
-    font-size: 14px;
-}
-
-/* =========================
-   STATUS
-========================= */
-
-.status-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin: 18px auto 0;
-    width: fit-content;
-    padding: 8px 14px;
-    border: 1px solid #302719;
-    border-radius: 999px;
-    background: rgba(255, 122, 0, 0.06);
-    color: #d8d8d8;
-    font-size: 12px;
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--orange);
-    box-shadow: 0 0 10px rgba(255, 122, 0, 0.7);
-}
-
-/* =========================
-   STATS
-========================= */
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin: 22px 0;
-}
-
-.stat {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(145deg, #181818, #111111);
-    border: 1px solid var(--border);
-    border-radius: 17px;
-    padding: 18px 10px;
-    text-align: center;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.22);
-}
-
-.stat::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 3px;
-    background: var(--orange);
-    opacity: 0.8;
-}
-
-.stat strong {
-    display: block;
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--orange);
-}
-
-.stat span {
-    display: block;
-    margin-top: 5px;
-    color: var(--muted);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* =========================
-   TITRES
-========================= */
-
-.section-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 30px 0 14px;
-}
-
-.section-title h2 {
-    margin: 0;
-    font-size: 21px;
-}
-
-.section-title .line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(
-        90deg,
-        #3b260f,
-        transparent
-    );
-}
-
-/* =========================
-   CATEGORIES
-========================= */
-
-.categories {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-.category {
-    position: relative;
-    overflow: hidden;
-    border: 1px solid #2c2c2c;
-    border-radius: 13px;
-    padding: 15px 10px;
-    background: linear-gradient(145deg, #1a1a1a, #111111);
-    color: #eeeeee;
-    font-size: 14px;
-    font-weight: 800;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.category:hover {
-    border-color: var(--orange);
-    transform: translateY(-2px);
-}
-
-.category.active {
-    background: linear-gradient(
-        135deg,
-        var(--orange),
-        var(--orange-dark)
-    );
-    border-color: var(--orange);
-    color: white;
-    box-shadow: 0 8px 20px rgba(255,122,0,0.18);
-}
-
-/* =========================
-   TOOLBAR
-========================= */
-
-.toolbar {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.toolbar button {
-    border: 1px solid #333;
-    padding: 13px 18px;
-    border-radius: 12px;
-    background: #181818;
-    color: white;
-    cursor: pointer;
-    font-weight: 800;
-    transition: 0.2s;
-}
-
-.toolbar button:hover,
-.toolbar button.active {
-    background: linear-gradient(
-        135deg,
-        var(--orange),
-        var(--orange-dark)
-    );
-    border-color: var(--orange);
-}
-
-/* =========================
-   SEARCH
-========================= */
-
-.search-wrapper {
-    position: relative;
-    margin: 17px 0;
-}
-
-.search-icon {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--orange);
-    font-size: 18px;
-    pointer-events: none;
-}
-
-.search {
-    width: 100%;
-    padding: 15px 15px 15px 45px;
-    border-radius: 13px;
-    border: 1px solid #303030;
-    outline: none;
-    background: #121212;
-    color: white;
-    font-size: 16px;
-    transition: 0.2s;
-}
-
-.search:focus {
-    border-color: var(--orange);
-    box-shadow: 0 0 0 3px rgba(255,122,0,0.08);
-}
-
-.search::placeholder {
-    color: #777;
-}
-
-/* =========================
-   CONNEXION
-========================= */
-
-.loading,
-.message,
-.error-box {
-    border-radius: 13px;
-    padding: 14px 16px;
-    margin: 15px 0;
-    word-break: break-word;
-}
-
-.loading {
-    background: #151515;
-    border: 1px solid #292929;
-    color: var(--orange-light);
-    text-align: center;
-}
-
-.message {
-    background: #171717;
-    border: 1px solid #333;
-    color: #ddd;
-}
-
-.error-box {
-    background: #351515;
-    border: 1px solid #8f2929;
-    color: #fecaca;
-    line-height: 1.5;
-}
-
-/* =========================
-   EXERCISE CARD
-========================= */
-
-.card {
-    position: relative;
-    overflow: hidden;
-    background:
-        linear-gradient(145deg, #1a1a1a, #111111);
-    border: 1px solid #292929;
-    border-radius: 19px;
-    padding: 19px;
-    margin-bottom: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.22);
-}
-
-.card::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: var(--orange);
-}
-
-.card h3 {
-    margin: 0 0 12px;
-    padding-left: 5px;
-    color: white;
-    font-size: 20px;
-}
-
-.info {
-    color: #c8c8c8;
-    line-height: 1.6;
-}
-
-.exercise-category {
-    display: inline-block;
-    margin-bottom: 8px;
-    padding: 5px 9px;
-    border-radius: 999px;
-    background: rgba(255,122,0,0.1);
-    color: var(--orange-light);
-    font-size: 12px;
-    font-weight: bold;
-}
-
-/* =========================
-   PERFORMANCE
-========================= */
-
-.performance {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 16px;
-}
-
-.performance-box {
-    background: #0d0d0d;
-    border: 1px solid #292929;
-    border-radius: 13px;
-    padding: 14px 10px;
-    text-align: center;
-}
-
-.performance-label {
-    display: block;
-    color: #777;
-    font-size: 11px;
-    margin-bottom: 7px;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-.performance-value {
-    display: block;
-    font-size: 17px;
-    font-weight: 900;
-}
-
-.weight-value {
-    color: var(--orange);
-}
-
-.charge-leger {
-    color: var(--yellow);
-}
-
-.charge-correct {
-    color: var(--green);
-}
-
-.charge-lourd {
-    color: var(--red);
-}
-
-/* =========================
-   MEDIA
-========================= */
-
-.video {
-    width: 100%;
-    max-height: 500px;
-    margin-top: 14px;
-    border-radius: 14px;
-    background: #000;
-    border: 1px solid #292929;
-}
-
-.photo {
-    width: 100%;
-    max-height: 500px;
-    object-fit: contain;
-    margin-top: 14px;
-    border-radius: 14px;
-    background: #000;
-    border: 1px solid #292929;
-}
-
-/* =========================
-   ACTIONS
-========================= */
-
-.actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 9px;
-    margin-top: 16px;
-}
-
-.actions button {
-    border: 0;
-    padding: 12px 10px;
-    border-radius: 11px;
-    color: white;
-    cursor: pointer;
-    font-weight: 800;
-    transition: 0.2s;
-}
-
-.actions button:hover {
-    transform: translateY(-1px);
-}
-
-.edit {
-    background: linear-gradient(
-        135deg,
-        #ff8a00,
-        #db5d00
-    );
-}
-
-.delete {
-    background: #252525;
-    border: 1px solid #3a3a3a !important;
-}
-
-.delete:hover {
-    background: #b91c1c;
-}
-
-/* =========================
-   FORMULAIRE
-========================= */
-
-.form-box {
-    background:
-        linear-gradient(145deg, #191919, #111111);
-    border: 1px solid #2c2c2c;
-    border-radius: 19px;
-    padding: 20px;
-    margin-top: 28px;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.25);
-}
-
-.form-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.form-icon {
-    width: 45px;
-    height: 45px;
-    border-radius: 13px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(
-        135deg,
-        var(--orange),
-        var(--orange-dark)
-    );
-    font-size: 22px;
-}
-
-.form-header h2 {
-    margin: 0;
-    font-size: 20px;
-}
-
-label {
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 7px;
-    color: #d2d2d2;
-    font-size: 13px;
-    font-weight: bold;
-}
-
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 14px;
-    border-radius: 11px;
-    border: 1px solid #333;
-    outline: none;
-    background: #0d0d0d;
-    color: white;
-    font-size: 16px;
-    transition: 0.2s;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: var(--orange);
-    box-shadow: 0 0 0 3px rgba(255,122,0,0.08);
-}
-
-textarea {
-    min-height: 110px;
-    resize: vertical;
-}
-
-input[type="file"] {
-    padding: 10px;
-    font-size: 14px;
-}
-
-input[type="file"]::file-selector-button {
-    border: 0;
-    padding: 9px 12px;
-    border-radius: 8px;
-    background: #272727;
-    color: white;
-    cursor: pointer;
-    margin-right: 8px;
-}
-
-.save {
-    width: 100%;
-    margin-top: 22px;
-    padding: 16px;
-    border: 0;
-    border-radius: 13px;
-    background: linear-gradient(
-        135deg,
-        var(--orange),
-        var(--orange-dark)
-    );
-    color: white;
-    font-size: 17px;
-    font-weight: 900;
-    cursor: pointer;
-    box-shadow: 0 8px 25px rgba(255,122,0,0.2);
-    transition: 0.2s;
-}
-
-.save:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(255,122,0,0.28);
-}
-
-.cancel {
-    width: 100%;
-    margin-top: 10px;
-    padding: 13px;
-    border: 1px solid #3a3a3a;
-    border-radius: 11px;
-    background: #222;
-    color: white;
-    cursor: pointer;
-    display: none;
-}
-
-/* =========================
-   GALERIE
-========================= */
-
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-.gallery img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 13px;
-    cursor: pointer;
-    border: 1px solid #292929;
-    transition: 0.2s;
-}
-
-.gallery img:hover {
-    transform: scale(1.02);
-    border-color: var(--orange);
-}
-
-/* =========================
-   EMPTY
-========================= */
-
-.empty {
-    background: #141414;
-    border: 1px dashed #353535;
-    border-radius: 14px;
-    padding: 24px 15px;
-    color: #777;
-    text-align: center;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-    text-align: center;
-    padding: 35px 15px;
-    color: #666;
-    font-size: 12px;
-}
-
-.footer-orange {
-    color: var(--orange);
-}
-
-/* =========================
-   DESKTOP
-========================= */
-
-@media (min-width: 700px) {
-
-    .container {
-        width: 92%;
-    }
-
-    .categories {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    .gallery {
-        grid-template-columns: repeat(4, 1fr);
-    }
-
-    .gallery img {
-        height: 210px;
-    }
-
-    .form-box {
-        padding: 28px;
-    }
-}
-
-@media (max-width: 480px) {
-
-    header h1 {
-        font-size: 24px;
-    }
-
-    .stats {
-        gap: 7px;
-    }
-
-    .stat {
-        padding: 14px 5px;
-    }
-
-    .stat strong {
-        font-size: 23px;
-    }
-
-    .stat span {
-        font-size: 10px;
-    }
-}
-</style></head><body><header><div class="logo">💪</div>
-
+<title>Mon Carnet Musculation</title>
+<style>
+*{box-sizing:border-box}
+:root{--o:#ff7a00;--o2:#ff9d3d;--o3:#d95f00;--m:#a1a1a1;--g:#22c55e;--y:#facc15;--r:#ef4444}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at top,#211306 0%,#0b0b0b 35%,#050505 100%);color:#fff;min-height:100vh}
+button,input,select,textarea{font-family:inherit}
+.container{width:94%;max-width:1150px;margin:auto}
+header{background:linear-gradient(135deg,#080808,#17100a 50%,#0b0b0b);border-bottom:1px solid #3b220d;padding:32px 18px 28px;text-align:center}
+.logo{display:inline-flex;align-items:center;justify-content:center;width:66px;height:66px;border-radius:20px;background:linear-gradient(145deg,var(--o),var(--o3));box-shadow:0 10px 35px rgba(255,122,0,.25);font-size:32px;margin-bottom:12px}
+header h1{margin:0;font-size:29px;font-weight:900}
+header h1 span{color:var(--o)}
+header p{margin:9px 0 0;color:var(--m);font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+.stat{background:linear-gradient(145deg,#181818,#111);border:1px solid #2c2c2c;border-bottom:3px solid var(--o);border-radius:17px;padding:18px 10px;text-align:center}
+.stat strong{display:block;font-size:28px;font-weight:900;color:var(--o)}
+.stat span{display:block;margin-top:5px;color:var(--m);font-size:12px;text-transform:uppercase}
+.section-title{display:flex;align-items:center;gap:10px;margin:30px 0 14px}
+.section-title h2{margin:0;font-size:21px}
+.section-title .line{flex:1;height:1px;background:linear-gradient(90deg,#3b260f,transparent)}
+.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.category{border:1px solid #2c2c2c;border-radius:13px;padding:15px 10px;background:linear-gradient(145deg,#1a1a1a,#111);color:#eee;font-size:14px;font-weight:800;cursor:pointer}
+.category:hover{border-color:var(--o)}
+.category.active,.toolbar button.active{background:linear-gradient(135deg,var(--o),var(--o3));border-color:var(--o);color:#fff}
+.toolbar{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
+.toolbar button{border:1px solid #333;padding:13px 18px;border-radius:12px;background:#181818;color:#fff;cursor:pointer;font-weight:800}
+.search-wrapper{position:relative;margin:17px 0}
+.search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);pointer-events:none}
+.search{padding-left:45px!important}
+.loading,.message,.error-box{border-radius:13px;padding:14px 16px;margin:15px 0;word-break:break-word}
+.loading{background:#151515;border:1px solid #292929;color:var(--o2);text-align:center}
+.message{background:#171717;border:1px solid #333;color:#ddd}
+.message:empty{display:none}
+.error-box{background:#351515;border:1px solid #8f2929;color:#fecaca;line-height:1.5}
+.card{position:relative;overflow:hidden;background:linear-gradient(145deg,#1a1a1a,#111);border:1px solid #292929;border-left:4px solid var(--o);border-radius:19px;padding:19px;margin-bottom:16px}
+.card h3{margin:0 0 12px;font-size:20px}
+.info{color:#c8c8c8;line-height:1.6;white-space:pre-wrap}
+.exercise-category{display:inline-block;margin-bottom:8px;padding:5px 9px;border-radius:999px;background:rgba(255,122,0,.1);color:var(--o2);font-size:12px;font-weight:bold}
+.performance{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}
+.performance-box{background:#0d0d0d;border:1px solid #292929;border-radius:13px;padding:14px 10px;text-align:center}
+.performance-label{display:block;color:#777;font-size:11px;margin-bottom:7px;text-transform:uppercase;font-weight:bold}
+.performance-value{display:block;font-size:17px;font-weight:900}
+.weight-value{color:var(--o)}
+.charge-leger{color:var(--y)}.charge-correct{color:var(--g)}.charge-lourd{color:var(--r)}
+.video,.photo{width:100%;max-height:500px;margin-top:14px;border-radius:14px;background:#000;border:1px solid #292929}
+.photo{object-fit:contain}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}
+.actions button{border:0;padding:12px 10px;border-radius:11px;color:#fff;cursor:pointer;font-weight:800}
+.edit{background:linear-gradient(135deg,#ff8a00,#db5d00)}
+.delete{background:#252525;border:1px solid #3a3a3a!important}
+.delete:hover{background:#b91c1c}
+.form-box{background:linear-gradient(145deg,#191919,#111);border:1px solid #2c2c2c;border-radius:19px;padding:20px;margin-top:28px}
+.form-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.form-icon{width:45px;height:45px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--o),var(--o3));font-size:22px}
+.form-header h2{margin:0;font-size:20px}
+label{display:block;margin:15px 0 7px;color:#d2d2d2;font-size:13px;font-weight:bold}
+input,select,textarea{width:100%;padding:14px;border-radius:11px;border:1px solid #333;outline:none;background:#0d0d0d;color:#fff;font-size:16px}
+input:focus,select:focus,textarea:focus{border-color:var(--o)}
+textarea{min-height:110px;resize:vertical}
+input[type=file]{padding:10px;font-size:14px}
+.save{width:100%;margin-top:22px;padding:16px;border:0;border-radius:13px;background:linear-gradient(135deg,var(--o),var(--o3));color:#fff;font-size:17px;font-weight:900;cursor:pointer}
+.cancel{width:100%;margin-top:10px;padding:13px;border:1px solid #3a3a3a;border-radius:11px;background:#222;color:#fff;cursor:pointer;display:none}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.gallery img{width:100%;height:180px;object-fit:cover;border-radius:13px;cursor:pointer;border:1px solid #292929}
+.gallery img:hover{border-color:var(--o)}
+.empty{background:#141414;border:1px dashed #353535;border-radius:14px;padding:24px 15px;color:#777;text-align:center}
+.note{background:#141414;border:1px solid #292929;border-radius:13px;padding:14px;margin-bottom:10px}
+.note b{color:var(--o2)}
+footer{text-align:center;padding:35px 15px;color:#666;font-size:12px}
+@media(min-width:700px){.categories{grid-template-columns:repeat(4,1fr)}.gallery{grid-template-columns:repeat(4,1fr)}.gallery img{height:210px}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">💪</div>
 <h1>Mon Carnet <span>Musculation</span></h1>
-
 <p>Mes exercices • mes performances • mes progrès</p>
+</header>
 
-<div class="status-bar">
-    <span class="status-dot"></span>
-    <span>Mon carnet personnel</span>
+<div class="container">
+
+<div class="stats">
+<div class="stat"><strong id="statExercices">0</strong><span>Exercices</span></div>
+<div class="stat"><strong id="statPhotos">0</strong><span>Photos</span></div>
+<div class="stat"><strong id="statVideos">0</strong><span>Vidéos</span></div>
 </div>
 
-</header><div class="container"><div class="stats">
-
-    <div class="stat">
-        <strong id="statExercices">0</strong>
-        <span>Exercices</span>
-    </div>
-
-    <div class="stat">
-        <strong id="statPhotos">0</strong>
-        <span>Photos</span>
-    </div>
-
-    <div class="stat">
-        <strong id="statVideos">0</strong>
-        <span>Vidéos</span>
-    </div>
-
-</div>
-
-
-<div class="section-title">
-    <h2>🏋️ Mes catégories</h2>
-    <div class="line"></div>
-</div>
-
+<div class="section-title"><h2>🏋️ Mes catégories</h2><div class="line"></div></div>
 
 <div class="categories">
-
-    <button class="category" onclick="filtrerCategorie('Pectoraux', this)">
-        🏋️ Pectoraux
-    </button>
-
-    <button class="category" onclick="filtrerCategorie('Dos', this)">
-        🔥 Dos
-    </button>
-
-    <button class="category" onclick="filtrerCategorie('Épaules', this)">
-        💪 Épaules
-    </button>
-
-    <button class="category" onclick="filtrerCategorie('Biceps', this)">
-        💪 Biceps
-    </button>
-
-    <button class="category" onclick="filtrerCategorie('Triceps', this)">
-        💪 Triceps
-    </button>
-
-    <button class="category" onclick="filtrerCategorie('Jambes', this)">
-        🦵 Jambes
-    </button>
-
-    <button class="category" onclick="filtrerCategorie('Abdos', this)">
-        🔥 Abdos
-    </button>
-
-    <button class="category" onclick="filtrerPhotos(this)">
-        📷 Photos
-    </button>
-
+<button class="category" onclick="filtrerCategorie('Pectoraux',this)">🏋️ Pectoraux</button>
+<button class="category" onclick="filtrerCategorie('Dos',this)">🔥 Dos</button>
+<button class="category" onclick="filtrerCategorie('Épaules',this)">💪 Épaules</button>
+<button class="category" onclick="filtrerCategorie('Biceps',this)">💪 Biceps</button>
+<button class="category" onclick="filtrerCategorie('Triceps',this)">💪 Triceps</button>
+<button class="category" onclick="filtrerCategorie('Jambes',this)">🦵 Jambes</button>
+<button class="category" onclick="filtrerCategorie('Abdos',this)">🔥 Abdos</button>
+<button class="category" onclick="filtrerPhotos(this)">📷 Photos</button>
 </div>
-
 
 <div class="toolbar">
-
-    <button
-        id="btnTous"
-        class="active"
-        onclick="afficherTous(this)">
-        📋 TOUS LES EXERCICES
-    </button>
-
+<button class="active" onclick="afficherTous(this)">📋 TOUS LES EXERCICES</button>
 </div>
-
 
 <div class="search-wrapper">
-
-    <span class="search-icon">🔎</span>
-
-    <input
-        id="recherche"
-        class="search"
-        type="text"
-        placeholder="Rechercher un exercice..."
-        oninput="afficherExercices"
-    >
-
+<span class="search-icon">🔎</span>
+<input id="recherche" class="search" type="text" placeholder="Rechercher un exercice..." oninput="afficherExercices()">
 </div>
 
-
-<div id="connexion" class="loading">
-    🔄 Connexion à Supabase...
-</div>
-
+<div id="connexion" class="loading">🔄 Connexion à Supabase...</div>
 
 <div id="listeExercices"></div>
 
-
 <div class="form-box" id="sectionFormulaire">
-
-    <div class="form-header">
-
-        <div class="form-icon">➕</div>
-
-        <h2 id="titreFormulaire">
-            Ajouter un exercice
-        </h2>
-
-    </div>
-
-
-    <input type="hidden" id="exerciceId">
-
-
-    <label>🏋️ Nom de l'exercice</label>
-
-    <input
-        id="nom"
-        type="text"
-        placeholder="Exemple : Développé couché"
-    >
-
-
-    <label>📂 Catégorie</label>
-
-    <select id="categorie">
-
-        <option value="Pectoraux">Pectoraux</option>
-        <option value="Dos">Dos</option>
-        <option value="Épaules">Épaules</option>
-        <option value="Biceps">Biceps</option>
-        <option value="Triceps">Triceps</option>
-        <option value="Jambes">Jambes</option>
-        <option value="Abdos">Abdos</option>
-
-    </select>
-
-
-    <label>🔢 Nombre de séries</label>
-
-    <input
-        id="series"
-        type="number"
-        value="4"
-        min="1"
-    >
-
-
-    <label>🔁 Nombre de répétitions</label>
-
-    <input
-        id="repetitions"
-        type="number"
-        value="10"
-        min="1"
-    >
-
-
-    <label>⚖️ Poids utilisé (kg)</label>
-
-    <input
-        id="poids"
-        type="number"
-        value=""
-        min="0"
-        step="0.5"
-        placeholder="Exemple : 60"
-    >
-
-
-    <label>🎯 Charge</label>
-
-    <select id="charge">
-
-        <option value="">-- Choisir --</option>
-        <option value="Trop léger">🟡 Trop léger</option>
-        <option value="Correct">🟢 Correct</option>
-        <option value="Trop lourd">🔴 Trop lourd</option>
-
-    </select>
-
-
-    <label>📝 Description / notes</label>
-
-    <textarea
-        id="description"
-        placeholder="Technique, conseils, sensations..."
-    ></textarea>
-
-
-    <label>🎥 Vidéo de démonstration</label>
-
-    <input
-        id="video"
-        type="file"
-        accept="video/*"
-    >
-
-
-    <label>📷 Photo</label>
-
-    <input
-        id="photo"
-        type="file"
-        accept="image/*"
-    >
-
-
-    <button
-        class="save"
-        onclick="sauvegarderExercice()">
-        💾 ENREGISTRER L'EXERCICE
-    </button>
-
-
-    <button
-        id="btnAnnuler"
-        class="cancel"
-        onclick="annulerModification()">
-        ❌ ANNULER LA MODIFICATION
-    </button>
-
-
-    <div id="message" class="message"></div>
-
+<div class="form-header">
+<div class="form-icon">➕</div>
+<h2 id="titreFormulaire">Ajouter un exercice</h2>
 </div>
 
+<input type="hidden" id="exerciceId">
 
-<div class="section-title">
-    <h2>🖼️ Galerie photos</h2>
-    <div class="line"></div>
+<label>🏋️ Nom de l'exercice</label>
+<input id="nom" type="text" placeholder="Exemple : Développé couché">
+
+<label>📂 Catégorie</label>
+<select id="categorie">
+<option value="Pectoraux">Pectoraux</option>
+<option value="Dos">Dos</option>
+<option value="Épaules">Épaules</option>
+<option value="Biceps">Biceps</option>
+<option value="Triceps">Triceps</option>
+<option value="Jambes">Jambes</option>
+<option value="Abdos">Abdos</option>
+</select>
+
+<label>🔢 Nombre de séries</label>
+<input id="series" type="number" value="4" min="1">
+
+<label>🔁 Nombre de répétitions</label>
+<input id="repetitions" type="number" value="10" min="1">
+
+<label>⚖️ Poids utilisé (kg)</label>
+<input id="poids" type="number" min="0" step="0.5" placeholder="Exemple : 60">
+
+<label>🎯 Charge</label>
+<select id="charge">
+<option value="">-- Choisir --</option>
+<option value="Trop léger">🟡 Trop léger</option>
+<option value="Correct">🟢 Correct</option>
+<option value="Trop lourd">🔴 Trop lourd</option>
+</select>
+
+<label>📝 Description / notes</label>
+<textarea id="description" placeholder="Technique, conseils, sensations..."></textarea>
+
+<label>🎥 Vidéo de démonstration</label>
+<input id="video" type="file" accept="video/*">
+
+<label>📷 Photo</label>
+<input id="photo" type="file" accept="image/*">
+
+<button class="save" onclick="sauvegarderExercice()">💾 ENREGISTRER L'EXERCICE</button>
+<button id="btnAnnuler" class="cancel" onclick="annulerModification()">❌ ANNULER LA MODIFICATION</button>
+
+<div id="message" class="message"></div>
 </div>
 
+<div class="section-title"><h2>🖼️ Galerie photos</h2><div class="line"></div></div>
 <div id="galerie" class="gallery"></div>
 
-
-<div class="section-title">
-    <h2>📝 Notes</h2>
-    <div class="line"></div>
-</div>
-
+<div class="section-title"><h2>📝 Notes</h2><div class="line"></div></div>
 <div id="notes"></div>
 
-</div><footer>
-    <span class="footer-orange">●</span>
-    Mon Carnet Musculation
-    <span class="footer-orange">●</span>
-</footer><script>
+</div>
 
-/* ============================================================
-   CONFIGURATION SUPABASE
-   ============================================================ */
+<footer>● Mon Carnet Musculation ●</footer>
 
-const SUPABASE_URL =
-    "https://cjtgjwepiotuhtfqwanw.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_DXMY1V9ir7R_vwuFysSWwA_Pe-r5NNP";
-
-const TABLE_URL =
-    SUPABASE_URL + "/rest/v1/exercices";
-
-const STORAGE_URL =
-    SUPABASE_URL + "/storage/v1/object/medias";
-
-
-/* ============================================================
-   VARIABLES
-   ============================================================ */
+<script>
+const SUPABASE_URL = "https://cjtgjwepiotuhtfqwanw.supabase.co";
+const SUPABASE_KEY = "sb_publishable_DXMY1V9ir7R_vwuFysSWwA_Pe-r5NNP";
+const TABLE_URL = SUPABASE_URL + "/rest/v1/exercices";
+const STORAGE_URL = SUPABASE_URL + "/storage/v1/object/medias";
+const PUBLIC_URL = SUPABASE_URL + "/storage/v1/object/public/medias/";
 
 let exercices = [];
-
 let filtreActuel = "TOUS";
-
 let modePhotos = false;
 
-
-/* ============================================================
-   HEADERS SUPABASE
-   ============================================================ */
+const $ = id => document.getElementById(id);
 
 function headersSupabase() {
-
-    return {
-        "apikey": SUPABASE_KEY,
-        "Content-Type": "application/json"
-    };
-
+  return { "apikey": SUPABASE_KEY, "Content-Type": "application/json" };
 }
 
-
-/* ============================================================
-   FETCH AVEC TIMEOUT
-   ============================================================ */
-
-async function fetchAvecTimeout(
-    url,
-    options = {},
-    timeout = 15000
-) {
-
-    const controller =
-        new AbortController();
-
-    const timer =
-        setTimeout(
-            function() {
-                controller.abort();
-            },
-            timeout
-        );
-
-    try {
-
-        return await fetch(
-            url,
-            {
-                ...options,
-                signal:
-                    controller.signal
-            }
-        );
-
-    } finally {
-
-        clearTimeout(timer);
-
-    }
-
+async function fetchAvecTimeout(url, options = {}, timeout = 15000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
 }
-
-
-/* ============================================================
-   MESSAGE
-   ============================================================ */
 
 function message(texte) {
-
-    const zone =
-        document.getElementById("message");
-
-    if (zone) {
-        zone.innerHTML = texte;
-    }
-
+  const zone = $("message");
+  if (zone) zone.innerHTML = texte;
 }
-
-
-/* ============================================================
-   ECHAPPER HTML
-   ============================================================ */
 
 function echapperHTML(texte) {
-
-    if (
-        texte === null ||
-        texte === undefined
-    ) {
-        return "";
-    }
-
-    return String(texte)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
+  if (texte === null || texte === undefined) return "";
+  return String(texte)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
-
-/* ============================================================
-   EXTRAIRE POIDS / CHARGE
-   ============================================================ */
-
-function extraireDonneesMusculation(
-    description
-) {
-
-    const texte =
-        String(description || "");
-
-    const poidsMatch =
-        texte.match(
-            /\[POIDS:([0-9]+(?:[.,][0-9]+)?)\]/i
-        );
-
-    const chargeMatch =
-        texte.match(
-            /\[CHARGE:(Trop léger|Correct|Trop lourd)\]/i
-        );
-
-    let poids = "";
-
-    if (poidsMatch) {
-
-        poids =
-            poidsMatch[1]
-                .replace(",", ".");
-
-    }
-
-    const charge =
-        chargeMatch
-            ? chargeMatch[1]
-            : "";
-
-    let notePropre =
-        texte
-            .replace(
-                /\[POIDS:[0-9]+(?:[.,][0-9]+)?\]\s*/gi,
-                ""
-            )
-            .replace(
-                /\[CHARGE:(?:Trop léger|Correct|Trop lourd)\]\s*/gi,
-                ""
-            )
-            .trim();
-
-    return {
-        poids: poids,
-        charge: charge,
-        description: notePropre
-    };
-
+function urlMedia(u) {
+  if (!u) return "";
+  return /^https?:\/\//i.test(u) ? u : PUBLIC_URL + u;
 }
 
+/* Poids et charge sont stockés dans la description : [POIDS:60] [CHARGE:Correct] */
+const RE_POIDS = /\[{1,2}POIDS:([0-9]+(?:[.,][0-9]+)?)\]{1,2}\s*/gi;
+const RE_CHARGE = /\[{1,2}CHARGE:(Trop léger|Correct|Trop lourd)\]{1,2}\s*/gi;
 
-/* ============================================================
-   CONSTRUIRE DESCRIPTION
-   ============================================================ */
-
-function construireDescription(
-    description,
-    poids,
-    charge
-) {
-
-    let texte =
-        String(description || "")
-            .trim();
-
-    texte =
-        texte
-            .replace(
-                /\[POIDS:[0-9]+(?:[.,][0-9]+)?\]\s*/gi,
-                ""
-            )
-            .replace(
-                /\[CHARGE:(?:Trop léger|Correct|Trop lourd)\]\s*/gi,
-                ""
-            )
-            .trim();
-
-    const informations = [];
-
-    if (
-        poids !== null &&
-        poids !== undefined &&
-        String(poids).trim() !== ""
-    ) {
-
-        informations.push(
-            "[[POIDS:" +
-            String(poids).replace(",", ".") +
-            "]]"
-        );
-
-    }
-
-    if (
-        charge === "Trop léger" ||
-        charge === "Correct" ||
-        charge === "Trop lourd"
-    ) {
-
-        informations.push(
-            "[[CHARGE:" +
-            charge +
-            "]]"
-        );
-
-    }
-
-    if (informations.length > 0) {
-
-        return (
-            informations.join(" ") +
-            (
-                texte
-                    ? "\n" + texte
-                    : ""
-            )
-        );
-
-    }
-
-    return texte;
-
+function extraireDonneesMusculation(description) {
+  const texte = String(description || "");
+  const p = new RegExp(RE_POIDS.source, "i").exec(texte);
+  const c = new RegExp(RE_CHARGE.source, "i").exec(texte);
+  return {
+    poids: p ? p[1].replace(",", ".") : "",
+    charge: c ? c[1] : "",
+    description: texte.replace(RE_POIDS, "").replace(RE_CHARGE, "").trim()
+  };
 }
 
-
-/* ============================================================
-   CLASSE CHARGE
-   ============================================================ */
+function construireDescription(description, poids, charge) {
+  const texte = String(description || "").replace(RE_POIDS, "").replace(RE_CHARGE, "").trim();
+  const infos = [];
+  if (poids !== null && poids !== undefined && String(poids).trim() !== "") {
+    infos.push("[POIDS:" + String(poids).replace(",", ".") + "]");
+  }
+  if (["Trop léger", "Correct", "Trop lourd"].includes(charge)) {
+    infos.push("[CHARGE:" + charge + "]");
+  }
+  if (infos.length > 0) return infos.join(" ") + (texte ? "\n" + texte : "");
+  return texte;
+}
 
 function classeCharge(charge) {
-
-    if (charge === "Trop léger") {
-        return "charge-leger";
-    }
-
-    if (charge === "Correct") {
-        return "charge-correct";
-    }
-
-    if (charge === "Trop lourd") {
-        return "charge-lourd";
-    }
-
-    return "";
-
+  if (charge === "Trop léger") return "charge-leger";
+  if (charge === "Correct") return "charge-correct";
+  if (charge === "Trop lourd") return "charge-lourd";
+  return "";
 }
 
-
-/* ============================================================
-   CHARGER LES EXERCICES
-   ============================================================ */
+/* ---------- CHARGEMENT ---------- */
 
 async function chargerExercices() {
-
-    const connexion =
-        document.getElementById("connexion");
-
-    const zone =
-        document.getElementById("listeExercices");
-
-    connexion.style.display = "block";
-
-    connexion.className = "loading";
-
-    connexion.innerHTML =
-        "🔄 Connexion à Supabase...";
-
-    try {
-
-        const url =
-            TABLE_URL +
-            "?select=*&order=id.desc";
-
-        const response =
-            await fetchAvecTimeout(
-                url,
-                {
-                    method: "GET",
-                    headers: headersSupabase(),
-                    cache: "no-store"
-                },
-                15000
-            );
-
-        const texte =
-            await response.text();
-
-        if (!response.ok) {
-
-            connexion.className =
-                "error-box";
-
-            connexion.innerHTML =
-                "<strong>❌ ERREUR SUPABASE</strong><br><br>" +
-                "Code HTTP : <strong>" +
-                response.status +
-                "</strong><br><br>" +
-                "<strong>Réponse :</strong><br>" +
-                echapperHTML(texte) +
-                "<br><br>" +
-                "Tes exercices ne sont PAS supprimés.";
-
-            zone.innerHTML = "";
-
-            return;
-
-        }
-
-        let donnees;
-
-        try {
-
-            donnees =
-                JSON.parse(texte);
-
-        } catch (erreurJSON) {
-
-            throw new Error(
-                "La réponse de Supabase n'est pas valide."
-            );
-
-        }
-
-        if (!Array.isArray(donnees)) {
-
-            throw new Error(
-                "Supabase n'a pas renvoyé une liste d'exercices."
-            );
-
-        }
-
-        exercices =
-            donnees;
-
-        connexion.className =
-            "message";
-
-        connexion.innerHTML =
-            "🟢 Connexion réussie — " +
-            exercices.length +
-            " exercice(s)";
-
-        mettreAJourStats();
-
-        afficherExercices();
-
-        afficherGalerie();
-
-        afficherNotes();
-
-    } catch (erreur) {
-
-        console.error(
-            "ERREUR SUPABASE :",
-            erreur
-        );
-
-        connexion.className =
-            "error-box";
-
-        if (
-            erreur.name === "AbortError"
-        ) {
-
-            connexion.innerHTML =
-                "<strong>❌ Délai de connexion dépassé.</strong><br><br>" +
-                "Supabase n'a pas répondu après 15 secondes.<br><br>" +
-                "Tes exercices ne sont PAS supprimés.";
-
-        } else {
-
-            connexion.innerHTML =
-                "<strong>❌ Impossible de contacter Supabase.</strong><br><br>" +
-                "<strong>Erreur :</strong><br>" +
-                echapperHTML(
-                    erreur.message
-                ) +
-                "<br><br>" +
-                "Tes données ne sont PAS supprimées.";
-
-        }
-
-        zone.innerHTML = "";
-
-    }
-
-}
-
-
-/* ============================================================
-   STATISTIQUES
-   ============================================================ */
-
-function mettreAJourStats() {
-
-    document.getElementById(
-        "statExercices"
-    ).textContent =
-        exercices.length;
-
-    document.getElementById(
-        "statPhotos"
-    ).textContent =
-        exercices.filter(
-            e => e.photo_url
-        ).length;
-
-    document.getElementById(
-        "statVideos"
-    ).textContent =
-        exercices.filter(
-            e => e.video_url
-        ).length;
-
-}
-
-
-/* ============================================================
-   AFFICHER EXERCICES
-   ============================================================ */
-
-function afficherExercices() {
-
-    const zone =
-        document.getElementById(
-            "listeExercices"
-        );
-
-    const recherche =
-        document.getElementById(
-            "recherche"
-        )
-        .value
-        .toLowerCase()
-        .trim();
-
-    let liste =
-        [...exercices];
-
-    if (modePhotos) {
-
-        liste =
-            liste.filter(
-                e => e.photo_url
-            );
-
-    } else if (
-        filtreActuel !== "TOUS"
-    ) {
-
-        liste =
-            liste.filter(
-                e =>
-                    String(
-                        e.categorie || ""
-                    )
-                    .toLowerCase() ===
-                    filtreActuel.toLowerCase()
-            );
-
-    }
-
-    if (recherche) {
-
-        liste =
-            liste.filter(function(e) {
-
-                const nom =
-                    String(
-                        e.nom || ""
-                    ).toLowerCase();
-
-                const description =
-                    String(
-                        e.description || ""
-                    ).toLowerCase();
-
-                const categorie =
-                    String(
-                        e.categorie || ""
-                    ).toLowerCase();
-
-                return (
-                    nom.includes(recherche) ||
-                    description.includes(recherche) ||
-                    categorie.includes(recherche)
-                );
-
-            });
-
-    }
-
-    if (liste.length === 0) {
-
-        zone.innerHTML =
-            '<div class="empty">Aucun exercice dans cette sélection.</div>';
-
-        return;
-
-    }
-
-    zone.innerHTML =
-        liste.map(function(e) {
-
-            const nom =
-                echapperHTML(e.nom);
-
-            const categorie =
-                echapperHTML(e.categorie);
-
-            const donnees =
-                extraireDonneesMusculation(
-                    e.description
-                );
-
-            const description =
-                echapperHTML(
-                    donnees.description
-                );
-
-            let chargeAffichage =
-                "Non renseignée";
-
-            if (
-                donnees.charge === "Trop léger"
-            ) {
-                chargeAffichage =
-                    "🟡 Trop léger";
-            }
-
-            if (
-                donnees.charge === "Correct"
-            ) {
-                chargeAffichage =
-                    "🟢 Correct";
-            }
-
-            if (
-                donnees.charge === "Trop lourd"
-            ) {
-                chargeAffichage =
-                    "🔴 Trop lourd";
-            }
-
-            const classe =
-                classeCharge(
-                    donnees.charge
-                );
-
-            let html = `
-
-                <div class="card">
-
-                    <h3>
-                        ${nom}
-                    </h3>
-
-                    <div class="exercise-category">
-                        🏷️ ${categorie}
-                    </div>
-
-                    <div class="info">
-                        💪 ${e.series || 0}
-                        séries ×
-                        ${e.repetitions || 0}
-                        répétitions
-                    </div>
-
-            `;
-
-
-            if (
-                donnees.poids ||
-                donnees.charge
-            ) {
-
-                html += `
-
-                    <div class="performance">
-
-                        <div class="performance-box">
-
-                            <span class="performance-label">
-                                ⚖️ Poids
-                            </span>
-
-                            <span class="performance-value weight-value">
-                                ${
-                                    donnees.poids
-                                    ? echapperHTML(
-                                        donnees.poids
-                                    ) + " kg"
-                                    : "Non renseigné"
-                                }
-                            </span>
-
-                        </div>
-
-                        <div class="performance-box">
-
-                            <span class="performance-label">
-                                🎯 Charge
-                            </span>
-
-                            <span class="performance-value ${classe}">
-                                ${chargeAffichage}
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                `;
-
-            }
-
-
-            if (description) {
-
-                html += `
-
-                    <p class="info">
-                        📝 ${description}
-                    </p>
-
-                `;
-
-            }
-
-
-            if (e.video_url) {
-
-                html += `
-
-                    <video
-                        class="video"
-                        controls
-                        preload="metadata"
-                        src="${echapperHTML(e.video_url)}">
-                    </video>
-
-                `;
-
-            }
-
-
-            if (e.photo_url) {
-
-                html += `
-
-                    <img
-                        class="photo"
-                        src="${echapperHTML(e.photo_url)}"
-                        alt="${nom}"
-                        loading="lazy">
-
-                `;
-
-            }
-
-
-            html += `
-
-                    <div class="actions">
-
-                        <button
-                            class="edit"
-                            onclick="modifierExercice(${Number(e.id)})">
-                            ✏️ Modifier
-                        </button>
-
-                        <button
-                            class="delete"
-                            onclick="supprimerExercice(${Number(e.id)})">
-                            🗑️ Supprimer
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-            return html;
-
-        }).join("");
-
-}
-
-
-/* ============================================================
-   FILTRE CATEGORIE
-   ============================================================ */
-
-function filtrerCategorie(
-    categorie,
-    bouton
-) {
-
-    modePhotos = false;
-
-    filtreActuel =
-        categorie;
-
-    document.querySelectorAll(
-        ".category"
-    )
-    .forEach(
-        b => b.classList.remove("active")
+  const connexion = $("connexion");
+  const zone = $("listeExercices");
+  connexion.style.display = "block";
+  connexion.className = "loading";
+  connexion.innerHTML = "🔄 Connexion à Supabase...";
+
+  try {
+    const response = await fetchAvecTimeout(
+      TABLE_URL + "?select=*&order=id.desc",
+      { method: "GET", headers: headersSupabase(), cache: "no-store" }
     );
-
-    document.querySelectorAll(
-        ".toolbar button"
-    )
-    .forEach(
-        b => b.classList.remove("active")
-    );
-
-    bouton.classList.add("active");
-
-    afficherExercices();
-
-}
-
-
-/* ============================================================
-   PHOTOS
-   ============================================================ */
-
-function filtrerPhotos(bouton) {
-
-    modePhotos = true;
-
-    filtreActuel =
-        "PHOTOS";
-
-    document.querySelectorAll(
-        ".category"
-    )
-    .forEach(
-        b => b.classList.remove("active")
-    );
-
-    document.querySelectorAll(
-        ".toolbar button"
-    )
-    .forEach(
-        b => b.classList.remove("active")
-    );
-
-    bouton.classList.add("active");
-
-    afficherExercices();
-
-}
-
-
-/* ============================================================
-   TOUS
-   ============================================================ */
-
-function afficherTous(bouton) {
-
-    modePhotos = false;
-
-    filtreActuel =
-        "TOUS";
-
-    document.querySelectorAll(
-        ".category"
-    )
-    .forEach(
-        b => b.classList.remove("active")
-    );
-
-    document.querySelectorAll(
-        ".toolbar button"
-    )
-    .forEach(
-        b => b.classList.remove("active")
-    );
-
-    bouton.classList.add("active");
-
-    afficherExercices();
-
-}
-
-
-/* ============================================================
-   UPLOAD STORAGE
-   ============================================================ */
-
-async function envoyerFichier(
-    fichier,
-    prefixe
-) {
-
-    if (!fichier) {
-        return null;
-    }
-
-    const extension =
-        fichier.name.includes(".")
-            ? fichier.name.substring(
-                fichier.name.lastIndexOf(".")
-            )
-            : "";
-
-    const nomFichier =
-        prefixe +
-        "_" +
-        Date.now() +
-        "_" +
-        Math.random()
-            .toString(36)
-            .substring(2, 9) +
-        extension;
-
-    const url =
-        STORAGE_URL +
-        "/" +
-        encodeURIComponent(
-            nomFichier
-        );
-
-    const response =
-        await fetchAvecTimeout(
-            url,
-            {
-                method: "POST",
-
-                headers: {
-                    "apikey":
-                        SUPABASE_KEY,
-
-                    "x-upsert":
-                        "false",
-
-                    "Content-Type":
-                        fichier.type ||
-                        "application/octet-stream"
-                },
-
-                body: fichier
-            },
-            60000
-        );
-
-    const texte =
-        await response.text();
+    const texte = await response.text();
 
     if (!response.ok) {
-
-        throw new Error(
-            "Erreur upload : " +
-            texte
-        );
-
+      connexion.className = "error-box";
+      connexion.innerHTML =
+        "<strong>❌ ERREUR SUPABASE</strong><br><br>Code HTTP : <strong>" +
+        response.status + "</strong><br><br><strong>Réponse :</strong><br>" +
+        echapperHTML(texte) + "<br><br>Tes exercices ne sont PAS supprimés.";
+      zone.innerHTML = "";
+      return;
     }
 
-    return (
-        SUPABASE_URL +
-        "/storage/v1/object/public/medias/" +
-        nomFichier
-    );
+    let donnees;
+    try { donnees = JSON.parse(texte); }
+    catch (e) { throw new Error("La réponse de Supabase n'est pas valide."); }
 
+    if (!Array.isArray(donnees)) {
+      throw new Error("Supabase n'a pas renvoyé une liste d'exercices.");
+    }
+
+    exercices = donnees;
+    connexion.className = "message";
+    connexion.innerHTML = "🟢 Connexion réussie — " + exercices.length + " exercice(s)";
+
+    mettreAJourStats();
+    afficherExercices();
+    afficherGalerie();
+    afficherNotes();
+
+  } catch (erreur) {
+    console.error("ERREUR SUPABASE :", erreur);
+    connexion.className = "error-box";
+    if (erreur.name === "AbortError") {
+      connexion.innerHTML =
+        "<strong>❌ Délai de connexion dépassé.</strong><br><br>" +
+        "Supabase n'a pas répondu après 15 secondes.<br><br>Tes exercices ne sont PAS supprimés.";
+    } else {
+      connexion.innerHTML =
+        "<strong>❌ Impossible de contacter Supabase.</strong><br><br><strong>Erreur :</strong><br>" +
+        echapperHTML(erreur.message) + "<br><br>Tes données ne sont PAS supprimées.";
+    }
+    zone.innerHTML = "";
+  }
 }
 
+function mettreAJourStats() {
+  $("statExercices").textContent = exercices.length;
+  $("statPhotos").textContent = exercices.filter(e => e.photo_url).length;
+  $("statVideos").textContent = exercices.filter(e => e.video_url).length;
+}
 
-/* ============================================================
-   SAUVEGARDER
-   ============================================================ */
+/* ---------- AFFICHAGE ---------- */
 
-async function sauvegarderExercice() {
+function afficherExercices() {
+  const zone = $("listeExercices");
+  const recherche = $("recherche").value.toLowerCase().trim();
+  let liste = [...exercices];
 
-    const id =
-        document.getElementById(
-            "exerciceId"
-        ).value;
+  if (modePhotos) {
+    liste = liste.filter(e => e.photo_url);
+  } else if (filtreActuel !== "TOUS") {
+    liste = liste.filter(e => String(e.categorie || "").toLowerCase() === filtreActuel.toLowerCase());
+  }
 
-    const nom =
-        document.getElementById(
-            "nom"
-        ).value.trim();
+  if (recherche) {
+    liste = liste.filter(e =>
+      String(e.nom || "").toLowerCase().includes(recherche) ||
+      String(e.description || "").toLowerCase().includes(recherche) ||
+      String(e.categorie || "").toLowerCase().includes(recherche)
+    );
+  }
 
-    const categorie =
-        document.getElementById(
-            "categorie"
-        ).value;
+  if (liste.length === 0) {
+    zone.innerHTML = '<div class="empty">Aucun exercice dans cette sélection.</div>';
+    return;
+  }
 
-    const series =
-        parseInt(
-            document.getElementById(
-                "series"
-            ).value
-        ) || 0;
+  zone.innerHTML = liste.map(function (e) {
+    const nom = echapperHTML(e.nom);
+    const categorie = echapperHTML(e.categorie);
+    const d = extraireDonneesMusculation(e.description);
+    const description = echapperHTML(d.description);
 
-    const repetitions =
-        parseInt(
-            document.getElementById(
-                "repetitions"
-            ).value
-        ) || 0;
+    let chargeAffichage = "Non renseignée";
+    if (d.charge === "Trop léger") chargeAffichage = "🟡 Trop léger";
+    if (d.charge === "Correct") chargeAffichage = "🟢 Correct";
+    if (d.charge === "Trop lourd") chargeAffichage = "🔴 Trop lourd";
 
-    const poids =
-        document.getElementById(
-            "poids"
-        ).value.trim();
+    let html = `
+      <div class="card">
+        <h3>${nom}</h3>
+        <div class="exercise-category">🏷️ ${categorie}</div>
+        <div class="info">💪 ${e.series || 0} séries × ${e.repetitions || 0} répétitions</div>`;
 
-    const charge =
-        document.getElementById(
-            "charge"
-        ).value;
-
-    const descriptionTexte =
-        document.getElementById(
-            "description"
-        ).value.trim();
-
-    const description =
-        construireDescription(
-            descriptionTexte,
-            poids,
-            charge
-        );
-
-    const videoFile =
-        document.getElementById(
-            "video"
-        ).files[0];
-
-    const photoFile =
-        document.getElementById(
-            "photo"
-        ).files[0];
-
-    if (!nom) {
-
-        alert(
-            "Entre le nom de l'exercice."
-        );
-
-        return;
-
+    if (d.poids || d.charge) {
+      html += `
+        <div class="performance">
+          <div class="performance-box">
+            <span class="performance-label">⚖️ Poids</span>
+            <span class="performance-value weight-value">${d.poids ? echapperHTML(d.poids) + " kg" : "Non renseigné"}</span>
+          </div>
+          <div class="performance-box">
+            <span class="performance-label">🎯 Charge</span>
+            <span class="performance-value ${classeCharge(d.charge)}">${chargeAffichage}</span>
+          </div>
+        </div>`;
     }
 
-    try {
+    if (description) html += `<p class="info">📝 ${description}</p>`;
 
-        message(
-            "⏳ Enregistrement en cours..."
-        );
+    if (e.video_url) {
+      html += `<video class="video" controls preload="metadata" src="${echapperHTML(urlMedia(e.video_url))}"></video>`;
+    }
+    if (e.photo_url) {
+      html += `<img class="photo" src="${echapperHTML(urlMedia(e.photo_url))}" alt="${nom}" loading="lazy">`;
+    }
 
-        let videoUrl = null;
+    html += `
+        <div class="actions">
+          <button class="edit" onclick="modifierExercice(${Number(e.id)})">✏️ Modifier</button>
+          <button class="delete" onclick="supprimerExercice(${Number(e.id)})">🗑️ Supprimer</button>
+        </div>
+      </div>`;
+    return html;
+  }).join("");
+}
 
-        let photoUrl = null;
+function afficherGalerie() {
+  const zone = $("galerie");
+  const avecPhoto = exercices.filter(e => e.photo_url);
+  if (avecPhoto.length === 0) {
+    zone.innerHTML = '<div class="empty" style="grid-column:1/-1">Aucune photo pour le moment.</div>';
+    return;
+  }
+  zone.innerHTML = avecPhoto.map(e => {
+    const u = echapperHTML(urlMedia(e.photo_url));
+    return `<img src="${u}" alt="${echapperHTML(e.nom)}" loading="lazy" onclick="window.open(this.src,'_blank')">`;
+  }).join("");
+}
 
+function afficherNotes() {
+  const zone = $("notes");
+  const notes = exercices
+    .map(e => ({ nom: e.nom, texte: extraireDonneesMusculation(e.description).description }))
+    .filter(n => n.texte);
+  if (notes.length === 0) {
+    zone.innerHTML = '<div class="empty">Aucune note pour le moment.</div>';
+    return;
+  }
+  zone.innerHTML = notes.map(n =>
+    `<div class="note"><b>${echapperHTML(n.nom)}</b><div class="info">${echapperHTML(n.texte)}</div></div>`
+  ).join("");
+}
 
-        if (videoFile) {
+/* ---------- FILTRES ---------- */
 
-            message(
-                "⏳ Envoi de la vidéo..."
-            );
+function resetActifs(bouton) {
+  document.querySelectorAll(".category").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll(".toolbar button").forEach(b => b.classList.remove("active"));
+  bouton.classList.add("active");
+}
 
-            videoUrl =
-                await envoyerFichier(
-                    videoFile,
-                    "video"
-                );
+function filtrerCategorie(categorie, bouton) {
+  modePhotos = false;
+  filtreActuel = categorie;
+  resetActifs(bouton);
+  afficherExercices();
+}
 
-        }
+function filtrerPhotos(bouton) {
+  modePhotos = true;
+  filtreActuel = "PHOTOS";
+  resetActifs(bouton);
+  afficherExercices();
+}
 
+function afficherTous(bouton) {
+  modePhotos = false;
+  filtreActuel = "TOUS";
+  resetActifs(bouton);
+  afficherExercices();
+}
 
-        if (photoFile) {
+/* ---------- UPLOAD ---------- */
 
-            message(
-                "⏳ Envoi de la photo..."
-            );
+async function envoyerFichier(fichier, prefixe) {
+  if (!fichier) return null;
 
-            photoUrl =
-                await envoyerFichier(
-                    photoFile,
-                    "photo"
-                );
+  const extension = fichier.name.includes(".")
+    ? fichier.name.substring(fichier.name.lastIndexOf("."))
+    : "";
+  const nomFichier = prefixe + "_" + Date.now() + "_" +
+    Math.random().toString(36).substring(2, 9) + extension;
 
-        }
+  const response = await fetchAvecTimeout(
+    STORAGE_URL + "/" + encodeURIComponent(nomFichier),
+    {
+      method: "POST",
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "x-upsert": "false",
+        "Content-Type": fichier.type || "application/octet-stream"
+      },
+      body: fichier
+    },
+    60000
+  );
 
+  const texte = await response.text();
+  if (!response.ok) throw new Error("Erreur upload : " + texte);
 
-        if (id) {
+  return PUBLIC_URL + nomFichier;
+}
 
-            const ancien =
-                exercices.find(
-                    e =>
-                        String(e.id) ===
-                        String(id)
-                );
+/* ---------- SAUVEGARDER ---------- */
 
-            const donnees = {
+async function sauvegarderExercice() {
+  const id = $("exerciceId").value;
+  const nom = $("nom").value.trim();
+  const categorie = $("categorie").value;
+  const series = parseInt($("series").value) || 0;
+  const repetitions = parseInt($("repetitions").value) || 0;
+  const poids = $("poids").value.trim();
+  const charge = $("charge").value;
+  const description = construireDescription($("description").value.trim(), poids, charge);
+  const videoFile = $("video").files[0];
+  const photoFile = $("photo").files[0];
 
-                nom: nom,
+  if (!nom) {
+    alert("Entre le nom de l'exercice.");
+    return;
+  }
 
-                categorie: categorie,
+  try {
+    message("⏳ Enregistrement en cours...");
 
-                series: series,
+    let videoUrl = null;
+    let photoUrl = null;
 
-                repetitions: repetitions,
+    if (videoFile) {
+      message("⏳ Envoi de la vidéo...");
+      videoUrl = await envoyerFichier(videoFile, "video");
+    }
+    if (photoFile) {
+      message("⏳ Envoi de la photo...");
+      photoUrl = await envoyerFichier(photoFile, "photo");
+    }
 
-                description: description
+    const donnees = { nom, categorie, series, repetitions, description };
+    let url = TABLE_URL;
+    let methode = "POST";
 
-            };
+    if (id) {
+      const ancien = exercices.find(e => String(e.id) === String(id));
+      donnees.video_url = videoUrl || (ancien ? ancien.video_url || null : null);
+      donnees.photo_url = photoUrl || (ancien ? ancien.photo_url || null : null);
+      url = TABLE_URL + "?id=eq." + encodeURIComponent(id);
+      methode = "PATCH";
+    } else {
+      donnees.video_url = videoUrl;
+      donnees.photo_url = photoUrl;
+    }
 
+    const response = await fetchAvecTimeout(url, {
+      method: methode,
+      headers: { ...headersSupabase(), "Prefer": "return=representation" },
+      body: JSON.stringify(donnees)
+    }, 15000);
 
-            if (videoUrl) {
+    const texte = await response.text();
+    if (!response.ok) throw new Error("Erreur enregistrement : " + texte);
 
-                donnees.video_url =
-                    videoUrl;
+    message("✅ Exercice enregistré !");
+    reinitialiserFormulaire();
+    await chargerExercices();
 
-            } else if (ancien) {
+  } catch (erreur) {
+    console.error(erreur);
+    message("❌ " + echapperHTML(erreur.name === "AbortError" ? "Délai dépassé." : erreur.message));
+  }
+}
 
-                donnees.video_url =
-                    ancien.video_url || null;
+/* ---------- MODIFIER / SUPPRIMER ---------- */
 
-            }
+function reinitialiserFormulaire() {
+  $("exerciceId").value = "";
+  $("nom").value = "";
+  $("categorie").value = "Pectoraux";
+  $("series").value = 4;
+  $("repetitions").value = 10;
+  $("poids").value = "";
+  $("charge").value = "";
+  $("description").value = "";
+  $("video").value = "";
+  $("photo").value = "";
+  $("titreFormulaire").textContent = "Ajouter un exercice";
+  $("btnAnnuler").style.display = "none";
+}
 
+function annulerModification() {
+  reinitialiserFormulaire();
+  message("");
+}
 
-            if (photoUrl) {
+function modifierExercice(id) {
+  const e = exercices.find(x => Number(x.id) === Number(id));
+  if (!e) return;
+  const d = extraireDonneesMusculation(e.description);
 
-                donnees.photo_url =
-                    photoUrl;
+  $("exerciceId").value = e.id;
+  $("nom").value = e.nom || "";
+  $("categorie").value = e.categorie || "Pectoraux";
+  $("series").value = e.series || 1;
+  $("repetitions").value = e.repetitions || 1;
+  $("poids").value = d.poids;
+  $("charge").value = d.charge;
+  $("description").value = d.description;
+  $("video").value = "";
+  $("photo").value = "";
+  $("titreFormulaire").textContent = "Modifier l'exercice";
+  $("btnAnnuler").style.display = "block";
+  message("✏️ Modification en cours. Laisse photo et vidéo vides pour les garder.");
+  $("sectionFormulaire").scrollIntoView({ behavior: "smooth" });
+}
 
-            } else if (ancien) {
+async function supprimerExercice(id) {
+  if (!confirm("Supprimer cet exercice définitivement ?")) return;
+  try {
+    const response = await fetchAvecTimeout(
+      TABLE_URL + "?id=eq." + encodeURIComponent(id),
+      { method: "DELETE", headers: headersSupabase() },
+      15000
+    );
+    if (!response.ok) throw new Error(await response.text());
+    await chargerExercices();
+  } catch (erreur) {
+    console.error(erreur);
+    alert("Suppression impossible : " + erreur.message);
+  }
+}
 
-                donnees.photo_url =
-                    ancien.photo_url || null;
+/* ---------- DÉMARRAGE ---------- */
 
-            }
-
-
-            const response =
-                await fetchAvecTimeout(
-                    TABLE_URL +
-                    "?id=eq." +
-                    encodeURIComponent(id),
-                    {
-                        method: "PATCH",
-
-                        headers: {
-                            ...headersSupabase(),
-                            "Prefer":
-                                "return=representation"
-                        },
-
-                        body:
-                            JSON.stringify(
-                                donnees
-                            )
-                    },
-                    15000
-                );
-
-
-            const texte =
-                await response.text();
-
-
-            if (!response.ok) {
-
-              
+chargerExercices();
+</script>
+</body>
+</html>
