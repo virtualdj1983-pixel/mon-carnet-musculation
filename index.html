@@ -345,161 +345,201 @@ footer {
 </style></head><body><header>
     <h1>💪 Mon Carnet Musculation</h1>
     <p>Mes exercices, mes vidéos, mes photos et mes notes</p>
-</header><div class="container"><div class="stats"><div class="stat">
-    <strong id="statExercices">0</strong>
-    <span>Exercices</span>
+</header><div class="container"><div class="stats">
+    <div class="stat">
+        <strong id="statExercices">0</strong>
+        <span>Exercices</span>
+    </div>
+
+    <div class="stat">
+        <strong id="statPhotos">0</strong>
+        <span>Photos</span>
+    </div>
+
+    <div class="stat">
+        <strong id="statVideos">0</strong>
+        <span>Vidéos</span>
+    </div>
 </div>
 
-<div class="stat">
-    <strong id="statPhotos">0</strong>
-    <span>Photos</span>
+<h2>🏋️ Mes catégories</h2>
+
+<div class="categories">
+
+    <button class="category" onclick="filtrerCategorie('Pectoraux', this)">
+        🏋️ Pectoraux
+    </button>
+
+    <button class="category" onclick="filtrerCategorie('Dos', this)">
+        🔥 Dos
+    </button>
+
+    <button class="category" onclick="filtrerCategorie('Épaules', this)">
+        💪 Épaules
+    </button>
+
+    <button class="category" onclick="filtrerCategorie('Biceps', this)">
+        💪 Biceps
+    </button>
+
+    <button class="category" onclick="filtrerCategorie('Triceps', this)">
+        💪 Triceps
+    </button>
+
+    <button class="category" onclick="filtrerCategorie('Jambes', this)">
+        🦵 Jambes
+    </button>
+
+    <button class="category" onclick="filtrerCategorie('Abdos', this)">
+        🔥 Abdos
+    </button>
+
+    <button class="category" onclick="filtrerPhotos(this)">
+        📷 Photos
+    </button>
+
 </div>
 
-<div class="stat">
-    <strong id="statVideos">0</strong>
-    <span>Vidéos</span>
+<div class="toolbar">
+
+    <button
+        id="btnTous"
+        class="active"
+        onclick="afficherTous(this)">
+        📋 TOUS LES EXERCICES
+    </button>
+
 </div>
 
-</div><h2>🏋️ Mes catégories</h2><div class="categories"><button class="category" onclick="filtrerCategorie('Pectoraux', this)">
-    🏋️ Pectoraux
-</button>
-
-<button class="category" onclick="filtrerCategorie('Dos', this)">
-    🔥 Dos
-</button>
-
-<button class="category" onclick="filtrerCategorie('Épaules', this)">
-    💪 Épaules
-</button>
-
-<button class="category" onclick="filtrerCategorie('Biceps', this)">
-    💪 Biceps
-</button>
-
-<button class="category" onclick="filtrerCategorie('Triceps', this)">
-    💪 Triceps
-</button>
-
-<button class="category" onclick="filtrerCategorie('Jambes', this)">
-    🦵 Jambes
-</button>
-
-<button class="category" onclick="filtrerCategorie('Abdos', this)">
-    🔥 Abdos
-</button>
-
-<button class="category" onclick="filtrerPhotos(this)">
-    📷 Photos
-</button>
-
-</div><div class="toolbar"><button id="btnTous" class="active" onclick="afficherTous(this)">
-    📋 TOUS LES EXERCICES
-</button>
-
-</div><input
-id="recherche"
-class="search"
-type="text"
-placeholder="🔎 Rechercher un exercice..."
-oninput="afficherExercices()"
-
-«»
+<input
+    id="recherche"
+    class="search"
+    type="text"
+    placeholder="🔎 Rechercher un exercice..."
+    oninput="afficherExercices()"
+>
 
 <div id="connexion" class="loading">
     🔄 Connexion à Supabase...
-</div><div id="listeExercices"></div><div class="form-box" id="sectionFormulaire"><h2 id="titreFormulaire">➕ Ajouter un exercice</h2><input type="hidden" id="exerciceId"><label>Nom de l'exercice</label>
+</div>
 
-<input
-id="nom"
-type="text"
-placeholder="Exemple : Développé couché"
+<div id="listeExercices"></div>
 
-«»
+<div class="form-box" id="sectionFormulaire">
 
-<label>Catégorie</label>
+    <h2 id="titreFormulaire">
+        ➕ Ajouter un exercice
+    </h2>
 
-<select id="categorie">
-    <option value="Pectoraux">Pectoraux</option>
-    <option value="Dos">Dos</option>
-    <option value="Épaules">Épaules</option>
-    <option value="Biceps">Biceps</option>
-    <option value="Triceps">Triceps</option>
-    <option value="Jambes">Jambes</option>
-    <option value="Abdos">Abdos</option>
-</select><label>Nombre de séries</label>
+    <input type="hidden" id="exerciceId">
 
-<input
-id="series"
-type="number"
-value="4"
-min="1"
+    <label>Nom de l'exercice</label>
 
-«»
+    <input
+        id="nom"
+        type="text"
+        placeholder="Exemple : Développé couché"
+    >
 
-<label>Nombre de répétitions</label>
+    <label>Catégorie</label>
 
-<input
-id="repetitions"
-type="number"
-value="10"
-min="1"
+    <select id="categorie">
+        <option value="Pectoraux">Pectoraux</option>
+        <option value="Dos">Dos</option>
+        <option value="Épaules">Épaules</option>
+        <option value="Biceps">Biceps</option>
+        <option value="Triceps">Triceps</option>
+        <option value="Jambes">Jambes</option>
+        <option value="Abdos">Abdos</option>
+    </select>
 
-«»
+    <label>Nombre de séries</label>
 
-<label>⚖️ Poids utilisé (kg)</label>
+    <input
+        id="series"
+        type="number"
+        value="4"
+        min="1"
+    >
 
-<input
-id="poids"
-type="number"
-value=""
-min="0"
-step="0.5"
-placeholder="Exemple : 60"
+    <label>Nombre de répétitions</label>
 
-«»
+    <input
+        id="repetitions"
+        type="number"
+        value="10"
+        min="1"
+    >
 
-<label>🎯 Charge</label>
+    <label>⚖️ Poids utilisé (kg)</label>
 
-<select id="charge">
-    <option value="">-- Choisir --</option>
-    <option value="Trop léger">🟡 Trop léger</option>
-    <option value="Correct">🟢 Correct</option>
-    <option value="Trop lourd">🔴 Trop lourd</option>
-</select><label>📝 Description / notes</label>
+    <input
+        id="poids"
+        type="number"
+        value=""
+        min="0"
+        step="0.5"
+        placeholder="Exemple : 60"
+    >
 
-<textarea
-    id="description"
-    placeholder="Technique, conseils, sensations..."
-></textarea><label>🎥 Vidéo de démonstration</label>
+    <label>🎯 Charge</label>
 
-<input
-id="video"
-type="file"
-accept="video/*"
+    <select id="charge">
+        <option value="">-- Choisir --</option>
+        <option value="Trop léger">🟡 Trop léger</option>
+        <option value="Correct">🟢 Correct</option>
+        <option value="Trop lourd">🔴 Trop lourd</option>
+    </select>
 
-«»
+    <label>📝 Description / notes</label>
 
-<label>📷 Photo</label>
+    <textarea
+        id="description"
+        placeholder="Technique, conseils, sensations..."
+    ></textarea>
 
-<input
-id="photo"
-type="file"
-accept="image/*"
+    <label>🎥 Vidéo de démonstration</label>
 
-«»
+    <input
+        id="video"
+        type="file"
+        accept="video/*"
+    >
 
-<button class="save" onclick="sauvegarderExercice()">
-    💾 ENREGISTRER
-</button><button
-id="btnAnnuler"
-class="cancel"
-onclick="annulerModification()"
+    <label>📷 Photo</label>
 
-«»
+    <input
+        id="photo"
+        type="file"
+        accept="image/*"
+    >
 
-❌ ANNULER LA MODIFICATION
+    <button
+        class="save"
+        onclick="sauvegarderExercice()">
+        💾 ENREGISTRER
+    </button>
 
-</button><div id="message" class="message"></div></div><h2>🖼️ Galerie photos</h2><div id="galerie" class="gallery"></div><h2>📝 Notes</h2><div id="notes"></div></div><footer>
+    <button
+        id="btnAnnuler"
+        class="cancel"
+        onclick="annulerModification()">
+        ❌ ANNULER LA MODIFICATION
+    </button>
+
+    <div id="message" class="message"></div>
+
+</div>
+
+<h2>🖼️ Galerie photos</h2>
+
+<div id="galerie" class="gallery"></div>
+
+<h2>📝 Notes</h2>
+
+<div id="notes"></div>
+
+</div><footer>
     Mon Carnet Musculation
 </footer><script>
 
@@ -508,16 +548,16 @@ onclick="annulerModification()"
    ============================================================ */
 
 const SUPABASE_URL =
-"https://cjtgjwepiotuhtfqwanw.supabase.co";
+    "https://cjtgjwepiotuhtfqwanw.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_DXMY1V9ir7R_vwuFysSWwA_Pe-r5NNP";
+    "sb_publishable_DXMY1V9ir7R_vwuFysSWwA_Pe-r5NNP";
 
 const TABLE_URL =
-SUPABASE_URL + "/rest/v1/exercices";
+    SUPABASE_URL + "/rest/v1/exercices";
 
 const STORAGE_URL =
-SUPABASE_URL + "/storage/v1/object/medias";
+    SUPABASE_URL + "/storage/v1/object/medias";
 
 
 /* ============================================================
@@ -549,30 +589,25 @@ function headersSupabase() {
    FETCH AVEC TIMEOUT
    ============================================================ */
 
-async function fetchAvecTimeout(
-    url,
-    options = {},
-    timeout = 15000
-) {
+async function fetchAvecTimeout(url, options = {}, timeout = 15000) {
 
-    const controller =
-        new AbortController();
+    const controller = new AbortController();
 
-    const timer =
-        setTimeout(
-            () => controller.abort(),
-            timeout
-        );
+    const timer = setTimeout(function() {
+        controller.abort();
+    }, timeout);
 
     try {
 
-        return await fetch(
+        const response = await fetch(
             url,
             {
                 ...options,
                 signal: controller.signal
             }
         );
+
+        return response;
 
     } finally {
 
@@ -589,8 +624,12 @@ async function fetchAvecTimeout(
 
 function message(texte) {
 
-    document.getElementById("message").innerHTML =
-        texte;
+    const zone =
+        document.getElementById("message");
+
+    if (zone) {
+        zone.innerHTML = texte;
+    }
 
 }
 
@@ -620,12 +659,6 @@ function echapperHTML(texte) {
 
 /* ============================================================
    EXTRAIRE POIDS / CHARGE
-
-   IMPORTANT :
-   Les doubles crochets doivent rester exactement comme ceci :
-
-   [[POIDS:60]]
-   [[CHARGE:Correct]]
    ============================================================ */
 
 function extraireDonneesMusculation(description) {
@@ -671,8 +704,8 @@ function extraireDonneesMusculation(description) {
             .trim();
 
     return {
-        poids,
-        charge,
+        poids: poids,
+        charge: charge,
         description: notePropre
     };
 
@@ -722,12 +755,9 @@ function construireDescription(
     }
 
     if (
-        charge &&
-        (
-            charge === "Trop léger" ||
-            charge === "Correct" ||
-            charge === "Trop lourd"
-        )
+        charge === "Trop léger" ||
+        charge === "Correct" ||
+        charge === "Trop lourd"
     ) {
 
         informations.push(
@@ -805,7 +835,7 @@ async function chargerExercices() {
             "?select=*&order=id.desc";
 
         console.log(
-            "URL Supabase :",
+            "Connexion Supabase :",
             url
         );
 
@@ -828,11 +858,6 @@ async function chargerExercices() {
             response.status
         );
 
-        console.log(
-            "Réponse Supabase :",
-            texte
-        );
-
         if (!response.ok) {
 
             connexion.className =
@@ -843,11 +868,10 @@ async function chargerExercices() {
                 "Code HTTP : <strong>" +
                 response.status +
                 "</strong><br><br>" +
-                "<strong>Réponse du serveur :</strong><br>" +
+                "<strong>Réponse :</strong><br>" +
                 echapperHTML(texte) +
                 "<br><br>" +
-                "Tes exercices ne sont pas supprimés. " +
-                "La page n'arrive simplement pas à les lire.";
+                "Tes exercices ne sont PAS supprimés.";
 
             zone.innerHTML = "";
 
@@ -905,19 +929,22 @@ async function chargerExercices() {
     } catch (erreur) {
 
         console.error(
-            "ERREUR CHARGEMENT SUPABASE :",
+            "ERREUR SUPABASE :",
             erreur
         );
 
         connexion.className =
             "error-box";
 
-        if (erreur.name === "AbortError") {
+        if (
+            erreur.name === "AbortError"
+        ) {
 
             connexion.innerHTML =
                 "<strong>❌ Délai de connexion dépassé.</strong><br><br>" +
                 "Supabase n'a pas répondu après 15 secondes.<br><br>" +
-                "Vérifie Internet puis recharge la page.";
+                "Tes exercices ne sont PAS supprimés.<br>" +
+                "Recharge la page et réessaie.";
 
         } else {
 
@@ -928,7 +955,7 @@ async function chargerExercices() {
                     erreur.message
                 ) +
                 "<br><br>" +
-                "Tes données ne sont pas supprimées.";
+                "Tes données ne sont PAS supprimées.";
 
         }
 
@@ -1015,7 +1042,7 @@ function afficherExercices() {
     if (recherche) {
 
         liste =
-            liste.filter(e => {
+            liste.filter(function(e) {
 
                 const nom =
                     String(
@@ -1052,7 +1079,7 @@ function afficherExercices() {
     }
 
     zone.innerHTML =
-        liste.map(e => {
+        liste.map(function(e) {
 
             const nom =
                 echapperHTML(e.nom);
@@ -1096,24 +1123,21 @@ function afficherExercices() {
                     "Non renseignée";
 
                 if (
-                    donnees.charge ===
-                    "Trop léger"
+                    donnees.charge === "Trop léger"
                 ) {
 
                     chargeAffichage =
                         "🟡 Trop léger";
 
                 } else if (
-                    donnees.charge ===
-                    "Correct"
+                    donnees.charge === "Correct"
                 ) {
 
                     chargeAffichage =
                         "🟢 Correct";
 
                 } else if (
-                    donnees.charge ===
-                    "Trop lourd"
+                    donnees.charge === "Trop lourd"
                 ) {
 
                     chargeAffichage =
@@ -1386,12 +1410,6 @@ async function envoyerFichier(
 
     if (!response.ok) {
 
-        console.error(
-            "Erreur upload :",
-            response.status,
-            texte
-        );
-
         throw new Error(
             "Erreur upload : " +
             texte
@@ -1491,11 +1509,8 @@ async function sauvegarderExercice() {
             "⏳ Enregistrement en cours..."
         );
 
-        let videoUrl =
-            null;
-
-        let photoUrl =
-            null;
+        let videoUrl = null;
+        let photoUrl = null;
 
         if (videoFile) {
 
@@ -1535,11 +1550,11 @@ async function sauvegarderExercice() {
                 );
 
             const donnees = {
-                nom,
-                categorie,
-                series,
-                repetitions,
-                description
+                nom: nom,
+                categorie: categorie,
+                series: series,
+                repetitions: repetitions,
+                description: description
             };
 
             if (videoUrl) {
@@ -1550,8 +1565,7 @@ async function sauvegarderExercice() {
             } else if (ancien) {
 
                 donnees.video_url =
-                    ancien.video_url ||
-                    null;
+                    ancien.video_url || null;
 
             }
 
@@ -1563,8 +1577,7 @@ async function sauvegarderExercice() {
             } else if (ancien) {
 
                 donnees.photo_url =
-                    ancien.photo_url ||
-                    null;
+                    ancien.photo_url || null;
 
             }
 
@@ -1608,15 +1621,13 @@ async function sauvegarderExercice() {
         } else {
 
             const donnees = {
-                nom,
-                categorie,
-                series,
-                repetitions,
-                description,
-                video_url:
-                    videoUrl,
-                photo_url:
-                    photoUrl
+                nom: nom,
+                categorie: categorie,
+                series: series,
+                repetitions: repetitions,
+                description: description,
+                video_url: videoUrl,
+                photo_url: photoUrl
             };
 
             const response =
@@ -1668,6 +1679,7 @@ async function sauvegarderExercice() {
     } catch (erreur) {
 
         console.error(
+            "Erreur sauvegarde :",
             erreur
         );
 
@@ -1945,7 +1957,7 @@ function afficherGalerie() {
     }
 
     galerie.innerHTML =
-        photos.map(e => {
+        photos.map(function(e) {
 
             const url =
                 echapperHTML(
@@ -1978,7 +1990,7 @@ function afficherNotes() {
 
     const notes =
         exercices
-            .map(e => {
+            .map(function(e) {
 
                 const donnees =
                     extraireDonneesMusculation(
@@ -1991,11 +2003,14 @@ function afficherNotes() {
                 };
 
             })
-            .filter(
-                x =>
+            .filter(function(x) {
+
+                return (
                     x.note &&
                     x.note.trim() !== ""
-            );
+                );
+
+            });
 
     if (notes.length === 0) {
 
@@ -2007,7 +2022,7 @@ function afficherNotes() {
     }
 
     zone.innerHTML =
-        notes.map(x => {
+        notes.map(function(x) {
 
             return `
                 <div class="card">
@@ -2032,20 +2047,34 @@ function afficherNotes() {
    DEMARRAGE
    ============================================================ */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
+function demarrerApplication() {
 
-        afficherTous(
-            document.getElementById(
-                "btnTous"
-            )
-        );
+    console.log(
+        "Mon Carnet Musculation : démarrage"
+    );
 
-        chargerExercices();
+    afficherTous(
+        document.getElementById("btnTous")
+    );
 
-    }
-);
+    chargerExercices();
+
+}
+
+if (
+    document.readyState === "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        demarrerApplication
+    );
+
+} else {
+
+    demarrerApplication();
+
+}
 
 </script></body>
-        </html>
+    </html>
