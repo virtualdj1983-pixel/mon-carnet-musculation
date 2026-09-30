@@ -3,2754 +3,2061 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mon Carnet Musculation</title><style>
-* {
-    box-sizing: border-box;
-}
-
-:root {
-    --orange: #ff7a00;
-    --orange-light: #ff9d3d;
-    --orange-dark: #d95f00;
-    --black: #080808;
-    --dark: #111111;
-    --card: #171717;
-    --border: #2c2c2c;
-    --text: #ffffff;
-    --muted: #a1a1a1;
-    --green: #22c55e;
-    --yellow: #facc15;
-    --red: #ef4444;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at top, #211306 0%, #0b0b0b 35%, #050505 100%);
-    color: var(--text);
-    min-height: 100vh;
-}
-
-button,
-input,
-select,
-textarea {
-    font-family: inherit;
-}
-
-button {
-    -webkit-tap-highlight-color: transparent;
-}
-
-.container {
-    width: 94%;
-    max-width: 1150px;
-    margin: auto;
-}
-
-/* HEADER */
-
-header {
-    position: relative;
-    overflow: hidden;
-    background:
-        linear-gradient(135deg, #080808 0%, #17100a 50%, #0b0b0b 100%);
-    border-bottom: 1px solid #3b220d;
-    padding: 32px 18px 28px;
-    text-align: center;
-}
-
-header::before {
-    content: "";
-    position: absolute;
-    width: 250px;
-    height: 250px;
-    background: var(--orange);
-    opacity: 0.08;
-    border-radius: 50%;
-    top: -150px;
-    left: 50%;
-    transform: translateX(-50%);
-    filter: blur(20px);
-}
-
-.logo {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 66px;
-    height: 66px;
-    border-radius: 20px;
-    background: linear-gradient(145deg, var(--orange), var(--orange-dark));
-    box-shadow: 0 10px 35px rgba(255, 122, 0, 0.25);
-    font-size: 32px;
-    margin-bottom: 12px;
-}
+:root{
+    --orange:#ff7a00;
+    --orange-light:#ff9d3d;
+    --orange-dark:#d95f00;
+    --black:#080808;
+    --dark:#111;
+    --card:#171717;
+    --card-light:#202020;
+    --border:#2c2c2c;
+    --text:#fff;
+    --muted:#a1a1a1;
+    --green:#22c55e;
+    --yellow:#facc15;
+    --red:#ef4444;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:linear-gradient(180deg,#080808,#111);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,input,select,textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+header{
+    padding:22px 16px;
+    border-bottom:1px solid var(--border);
+    background:#0b0b0b;
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+
+.header-inner{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo{
+    width:52px;
+    height:52px;
+    border-radius:15px;
+    background:linear-gradient(135deg,var(--orange),var(--orange-dark));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+    box-shadow:0 8px 25px rgba(255,122,0,.25);
+}
+
+.header-title h1{
+    font-size:23px;
+}
 
-header h1 {
-    position: relative;
-    margin: 0;
-    font-size: 29px;
-    font-weight: 900;
+.header-title p{
+    color:var(--muted);
+    margin-top:4px;
+    font-size:13px;
 }
 
-header h1 span {
-    color: var(--orange);
+main{
+    max-width:1200px;
+    margin:auto;
+    padding:20px 14px 50px;
 }
 
-header p {
-    position: relative;
-    margin: 9px 0 0;
-    color: var(--muted);
-    font-size: 14px;
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:18px;
 }
 
-.status-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin: 18px auto 0;
-    width: fit-content;
-    padding: 8px 14px;
-    border: 1px solid #302719;
-    border-radius: 999px;
-    background: rgba(255, 122, 0, 0.06);
-    color: #d8d8d8;
-    font-size: 12px;
+.stat{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:16px;
 }
 
-.status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--orange);
-    box-shadow: 0 0 10px rgba(255, 122, 0, 0.7);
+.stat-value{
+    font-size:25px;
+    font-weight:800;
+    color:var(--orange);
 }
 
-/* STATS */
+.stat-label{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:4px;
+}
+
+.categories{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding-bottom:5px;
+    margin-bottom:12px;
+}
 
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin: 22px 0;
+.category{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:#ddd;
+    padding:10px 14px;
+    border-radius:999px;
+    white-space:nowrap;
+    transition:.2s;
 }
 
-.stat {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(145deg, #181818, #111111);
-    border: 1px solid var(--border);
-    border-radius: 17px;
-    padding: 18px 10px;
-    text-align: center;
+.category:hover,
+.category.active{
+    background:var(--orange);
+    border-color:var(--orange);
+    color:white;
 }
 
-.stat::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 3px;
-    background: var(--orange);
+.toolbar{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:14px;
 }
 
-.stat strong {
-    display: block;
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--orange);
+.toolbar button{
+    background:var(--card);
+    color:white;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:11px 15px;
 }
 
-.stat span {
-    display: block;
-    margin-top: 5px;
-    color: var(--muted);
-    font-size: 12px;
-    text-transform: uppercase;
+.toolbar button.active,
+.toolbar button:hover{
+    background:var(--orange);
+    border-color:var(--orange);
 }
 
-/* TITRES */
+.search{
+    margin-bottom:18px;
+}
 
-.section-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 30px 0 14px;
+.search input{
+    width:100%;
+    background:var(--card);
+    border:1px solid var(--border);
+    color:white;
+    padding:14px 16px;
+    border-radius:13px;
+    outline:none;
 }
 
-.section-title h2 {
-    margin: 0;
-    font-size: 21px;
+.search input:focus{
+    border-color:var(--orange);
 }
 
-.section-title .line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, #3b260f, transparent);
+.message{
+    display:none;
+    background:#25170d;
+    border:1px solid #704000;
+    color:#ffd6ad;
+    padding:12px;
+    border-radius:12px;
+    margin-bottom:15px;
 }
 
-/* CATEGORIES */
+.section{
+    margin-top:22px;
+}
 
-.categories {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
 }
 
-.category {
-    position: relative;
-    overflow: hidden;
-    border: 1px solid #2c2c2c;
-    border-radius: 13px;
-    padding: 15px 10px;
-    background: linear-gradient(145deg, #1a1a1a, #111111);
-    color: #eeeeee;
-    font-size: 14px;
-    font-weight: 800;
-    cursor: pointer;
-    transition: 0.2s;
+.section-header h2{
+    font-size:19px;
 }
 
-.category:hover {
-    border-color: var(--orange);
-    transform: translateY(-2px);
+.section-header span{
+    color:var(--muted);
+    font-size:12px;
 }
 
-.category.active {
-    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-    border-color: var(--orange);
-    color: white;
-    box-shadow: 0 8px 20px rgba(255,122,0,0.18);
+.exercise-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
 }
 
-/* TOOLBAR */
+.exercise{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    overflow:hidden;
+}
 
-.toolbar {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+.exercise-image{
+    width:100%;
+    height:210px;
+    object-fit:cover;
+    background:#0d0d0d;
 }
 
-.toolbar button {
-    border: 1px solid #333;
-    padding: 13px 18px;
-    border-radius: 12px;
-    background: #181818;
-    color: white;
-    cursor: pointer;
-    font-weight: 800;
+.exercise-content{
+    padding:16px;
 }
 
-.toolbar button:hover,
-.toolbar button.active {
-    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-    border-color: var(--orange);
+.exercise-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
 }
 
-/* SEARCH */
+.exercise-name{
+    font-size:19px;
+    font-weight:800;
+}
 
-.search-wrapper {
-    position: relative;
-    margin: 17px 0;
+.badge{
+    background:#292929;
+    color:var(--orange-light);
+    border:1px solid #3a3a3a;
+    padding:5px 9px;
+    border-radius:999px;
+    font-size:11px;
 }
 
-.search-icon {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--orange);
-    font-size: 18px;
-    pointer-events: none;
+.description{
+    color:#c5c5c5;
+    font-size:13px;
+    line-height:1.5;
+    margin:12px 0;
+    white-space:pre-wrap;
 }
 
-.search {
-    width: 100%;
-    padding: 15px 15px 15px 45px;
-    border-radius: 13px;
-    border: 1px solid #303030;
-    outline: none;
-    background: #121212;
-    color: white;
-    font-size: 16px;
+.performance{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+    margin-top:12px;
 }
 
-.search:focus {
-    border-color: var(--orange);
-    box-shadow: 0 0 0 3px rgba(255,122,0,0.08);
+.performance-box{
+    background:#101010;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:12px;
 }
 
-/* MESSAGES */
+.performance-label{
+    color:#aaa;
+    font-size:12px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:6px;
+}
 
-.loading,
-.message,
-.error-box {
-    border-radius: 13px;
-    padding: 14px 16px;
-    margin: 15px 0;
-    word-break: break-word;
+.performance-icon{
+    width:27px;
+    height:27px;
+    border-radius:8px;
+    background:#2a180c;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:15px;
 }
 
-.loading {
-    background: #151515;
-    border: 1px solid #292929;
-    color: var(--orange-light);
-    text-align: center;
+.performance-value{
+    font-size:16px;
+    font-weight:800;
 }
 
-.message {
-    background: #171717;
-    border: 1px solid #333;
-    color: #ddd;
+.charge-light{
+    color:var(--yellow);
 }
 
-.error-box {
-    background: #351515;
-    border: 1px solid #8f2929;
-    color: #fecaca;
+.charge-correct{
+    color:var(--green);
 }
 
-/* CARD */
+.charge-heavy{
+    color:var(--red);
+}
 
-.card {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(145deg, #1a1a1a, #111111);
-    border: 1px solid #292929;
-    border-radius: 19px;
-    padding: 19px;
-    margin-bottom: 16px;
+.series-list{
+    margin-top:12px;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
 }
 
-.card::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: var(--orange);
+.series-row{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:7px;
+    background:#101010;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:9px;
+    font-size:12px;
 }
 
-.card h3 {
-    margin: 0 0 12px;
-    padding-left: 5px;
-    color: white;
-    font-size: 20px;
+.series-row strong{
+    color:var(--orange-light);
 }
 
-.info {
-    color: #c8c8c8;
-    line-height: 1.6;
+.exercise-actions{
+    display:flex;
+    gap:8px;
+    margin-top:14px;
 }
 
-.exercise-category {
-    display: inline-block;
-    margin-bottom: 8px;
-    padding: 5px 9px;
-    border-radius: 999px;
-    background: rgba(255,122,0,0.1);
-    color: var(--orange-light);
-    font-size: 12px;
-    font-weight: bold;
+.exercise-actions button{
+    flex:1;
+    border:0;
+    border-radius:10px;
+    padding:10px;
 }
 
-/* PERFORMANCE */
+.btn-edit{
+    background:#2a2a2a;
+    color:white;
+}
 
-.performance {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 16px;
+.btn-delete{
+    background:#351212;
+    color:#ffb0b0;
 }
 
-.performance-box {
-    background: #0d0d0d;
-    border: 1px solid #292929;
-    border-radius: 13px;
-    padding: 14px 10px;
-    text-align: center;
+.btn-edit:hover{
+    background:#3b3b3b;
 }
 
-.performance-label {
-    display: block;
-    color: #777;
-    font-size: 11px;
-    margin-bottom: 7px;
-    text-transform: uppercase;
-    font-weight: bold;
+.btn-delete:hover{
+    background:#551818;
 }
 
-.performance-value {
-    display: block;
-    font-size: 17px;
-    font-weight: 900;
+.empty{
+    background:var(--card);
+    border:1px dashed var(--border);
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+    color:var(--muted);
 }
 
-.weight-value {
-    color: var(--orange);
+.form-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:18px;
 }
 
-.charge-leger {
-    color: var(--yellow);
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
 }
 
-.charge-correct {
-    color: var(--green);
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
 }
 
-.charge-lourd {
-    color: var(--red);
+.field.full{
+    grid-column:1/-1;
 }
 
-/* MEDIA */
+.field label{
+    font-size:12px;
+    color:#aaa;
+}
 
-.video {
-    width: 100%;
-    max-height: 500px;
-    margin-top: 14px;
-    border-radius: 14px;
-    background: #000;
-    border: 1px solid #292929;
+.field input,
+.field select,
+.field textarea{
+    width:100%;
+    background:#0e0e0e;
+    border:1px solid var(--border);
+    color:white;
+    padding:12px;
+    border-radius:11px;
+    outline:none;
 }
 
-.photo {
-    width: 100%;
-    max-height: 500px;
-    object-fit: contain;
-    margin-top: 14px;
-    border-radius: 14px;
-    background: #000;
-    border: 1px solid #292929;
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+    border-color:var(--orange);
 }
 
-/* ACTIONS */
+.field textarea{
+    min-height:100px;
+    resize:vertical;
+}
 
-.actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 9px;
-    margin-top: 16px;
+.series-editor{
+    grid-column:1/-1;
+    background:#101010;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:14px;
 }
 
-.actions button {
-    border: 0;
-    padding: 12px 10px;
-    border-radius: 11px;
-    color: white;
-    cursor: pointer;
-    font-weight: 800;
+.series-editor-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
 }
 
-.edit {
-    background: linear-gradient(135deg, #ff8a00, #db5d00);
+.series-editor-header strong{
+    font-size:15px;
 }
 
-.delete {
-    background: #252525;
-    border: 1px solid #3a3a3a !important;
+.series-editor-header span{
+    color:var(--muted);
+    font-size:12px;
 }
 
-.delete:hover {
-    background: #b91c1c;
+.series-input{
+    display:grid;
+    grid-template-columns:55px 1fr 1fr 42px;
+    gap:8px;
+    align-items:end;
+    margin-bottom:8px;
 }
 
-/* FORMULAIRE */
+.series-number{
+    color:var(--orange);
+    font-weight:800;
+    padding:12px 5px;
+}
 
-.form-box {
-    background: linear-gradient(145deg, #191919, #111111);
-    border: 1px solid #2c2c2c;
-    border-radius: 19px;
-    padding: 20px;
-    margin-top: 28px;
+.series-input input{
+    width:100%;
+    background:#181818;
+    border:1px solid var(--border);
+    color:white;
+    padding:11px;
+    border-radius:9px;
+    outline:none;
 }
 
-.form-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+.series-remove{
+    border:1px solid #512020;
+    background:#281111;
+    color:#ff9d9d;
+    border-radius:9px;
+    height:42px;
 }
 
-.form-icon {
-    width: 45px;
-    height: 45px;
-    border-radius: 13px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-    font-size: 22px;
+.add-series{
+    width:100%;
+    border:1px dashed var(--orange);
+    background:#1b120b;
+    color:var(--orange-light);
+    padding:11px;
+    border-radius:10px;
+    margin-top:5px;
 }
 
-.form-header h2 {
-    margin: 0;
-    font-size: 20px;
+.form-actions{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
 }
 
-label {
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 7px;
-    color: #d2d2d2;
-    font-size: 13px;
-    font-weight: bold;
+.btn-save{
+    flex:1;
+    border:0;
+    background:linear-gradient(135deg,var(--orange),var(--orange-dark));
+    color:white;
+    padding:13px;
+    border-radius:11px;
+    font-weight:800;
 }
 
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 14px;
-    border-radius: 11px;
-    border: 1px solid #333;
-    outline: none;
-    background: #0d0d0d;
-    color: white;
-    font-size: 16px;
+.btn-cancel{
+    border:1px solid var(--border);
+    background:#242424;
+    color:white;
+    padding:13px 20px;
+    border-radius:11px;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: var(--orange);
-    box-shadow: 0 0 0 3px rgba(255,122,0,0.08);
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
 }
 
-textarea {
-    min-height: 110px;
-    resize: vertical;
+.gallery-item{
+    position:relative;
+    border-radius:13px;
+    overflow:hidden;
+    border:1px solid var(--border);
+    background:#101010;
 }
 
-input[type="file"] {
-    padding: 10px;
-    font-size: 14px;
+.gallery-item img{
+    width:100%;
+    height:170px;
+    object-fit:cover;
+    display:block;
 }
 
-input[type="file"]::file-selector-button {
-    border: 0;
-    padding: 9px 12px;
-    border-radius: 8px;
-    background: #272727;
-    color: white;
-    cursor: pointer;
-    margin-right: 8px;
+.gallery-caption{
+    padding:9px;
+    font-size:12px;
 }
 
-.save {
-    width: 100%;
-    margin-top: 22px;
-    padding: 16px;
-    border: 0;
-    border-radius: 13px;
-    background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-    color: white;
-    font-size: 17px;
-    font-weight: 900;
-    cursor: pointer;
+.notes{
+    display:grid;
+    gap:9px;
 }
 
-.cancel {
-    width: 100%;
-    margin-top: 10px;
-    padding: 13px;
-    border: 1px solid #3a3a3a;
-    border-radius: 11px;
-    background: #222;
-    color: white;
-    cursor: pointer;
-    display: none;
+.note{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-left:3px solid var(--orange);
+    padding:13px;
+    border-radius:10px;
 }
 
-/* GALERIE */
+.note-title{
+    font-weight:800;
+    margin-bottom:5px;
+}
 
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+.note-text{
+    color:#bbb;
+    white-space:pre-wrap;
+    font-size:13px;
 }
 
-.gallery img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 13px;
-    cursor: pointer;
-    border: 1px solid #292929;
+.chart-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:18px;
 }
 
-.gallery img:hover {
-    transform: scale(1.02);
-    border-color: var(--orange);
+.chart-info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-bottom:15px;
 }
 
-/* EMPTY */
+.chart-stat{
+    background:#101010;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:12px;
+}
 
-.empty {
-    background: #141414;
-    border: 1px dashed #353535;
-    border-radius: 14px;
-    padding: 24px 15px;
-    color: #777;
-    text-align: center;
+.chart-stat strong{
+    display:block;
+    color:var(--orange);
+    font-size:19px;
+    margin-top:4px;
 }
 
-/* FOOTER */
+.chart-stat span{
+    color:var(--muted);
+    font-size:11px;
+}
 
-footer {
-    text-align: center;
-    padding: 35px 15px;
-    color: #666;
-    font-size: 12px;
+.chart-wrap{
+    width:100%;
+    overflow-x:auto;
 }
 
-.footer-orange {
-    color: var(--orange);
+canvas{
+    display:block;
+    width:100%;
+    min-width:600px;
+    height:300px;
+    background:#0d0d0d;
+    border-radius:12px;
 }
 
-/* DESKTOP */
+.video-link{
+    display:inline-block;
+    margin-top:10px;
+    color:var(--orange-light);
+    text-decoration:none;
+    font-size:13px;
+}
 
-@media (min-width: 700px) {
+footer{
+    text-align:center;
+    color:#666;
+    font-size:11px;
+    padding:25px 10px;
+}
 
-    .container {
-        width: 92%;
+@media(max-width:800px){
+    .stats{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .categories {
-        grid-template-columns: repeat(4, 1fr);
+    .exercise-grid{
+        grid-template-columns:1fr;
     }
 
-    .gallery {
-        grid-template-columns: repeat(4, 1fr);
+    .gallery{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .gallery img {
-        height: 210px;
+    .form-grid{
+        grid-template-columns:1fr;
     }
 
-    .form-box {
-        padding: 28px;
-    }
-}
-
-@media (max-width: 480px) {
-
-    header h1 {
-        font-size: 24px;
-    }
-
-    .stats {
-        gap: 7px;
-    }
-
-    .stat {
-        padding: 14px 5px;
-    }
-
-    .stat strong {
-        font-size: 23px;
-    }
-
-    .stat span {
-        font-size: 10px;
+    .field.full,
+    .series-editor{
+        grid-column:auto;
     }
 }
-</style></head><body><header><div class="logo">💪</div>
 
-<h1>
-    Mon Carnet <span>Musculation</span>
-</h1>
+@media(max-width:500px){
+    main{
+        padding:15px 10px 40px;
+    }
 
-<p>
-    Mes exercices • mes performances • mes progrès
-</p>
+    .header-title h1{
+        font-size:19px;
+    }
 
-<div class="status-bar">
-    <span class="status-dot"></span>
-    <span>Mon carnet personnel</span>
+    .logo{
+        width:46px;
+        height:46px;
+    }
+
+    .performance{
+        grid-template-columns:1fr;
+    }
+
+    .series-input{
+        grid-template-columns:42px 1fr 1fr 38px;
+    }
+
+    .gallery img{
+        height:135px;
+    }
+
+    .chart-info{
+        grid-template-columns:1fr;
+    }
+}
+</style></head><body><header>
+    <div class="header-inner">
+        <div class="logo">💪</div>
+        <div class="header-title">
+            <h1>Mon Carnet Musculation</h1>
+            <p>Suivi de tes entraînements et de ta progression</p>
+        </div>
+    </div>
+</header><main><div class="stats">
+    <div class="stat">
+        <div class="stat-value" id="statExercices">0</div>
+        <div class="stat-label">Exercices</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-value" id="statPhotos">0</div>
+        <div class="stat-label">Photos</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-value" id="statVideos">0</div>
+        <div class="stat-label">Vidéos</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-value" id="statSeances">0</div>
+        <div class="stat-label">Séances enregistrées</div>
+    </div>
 </div>
 
-</header><div class="container"><div class="stats"><div class="stat">
-    <strong id="statExercices">0</strong>
-    <span>Exercices</span>
+<div class="categories">
+    <button class="category active" onclick="filtrerCategorie('Pectoraux',this)">Pectoraux</button>
+    <button class="category" onclick="filtrerCategorie('Dos',this)">Dos</button>
+    <button class="category" onclick="filtrerCategorie('Épaules',this)">Épaules</button>
+    <button class="category" onclick="filtrerCategorie('Biceps',this)">Biceps</button>
+    <button class="category" onclick="filtrerCategorie('Triceps',this)">Triceps</button>
+    <button class="category" onclick="filtrerCategorie('Jambes',this)">Jambes</button>
+    <button class="category" onclick="filtrerCategorie('Abdos',this)">Abdos</button>
+    <button class="category" onclick="filtrerPhotos(this)">📸 Photos</button>
 </div>
 
-<div class="stat">
-    <strong id="statPhotos">0</strong>
-    <span>Photos</span>
+<div class="toolbar">
+    <button class="active" onclick="afficherTous(this)">Tous les exercices</button>
+    <button onclick="ouvrirFormulaire()">＋ Ajouter un exercice</button>
 </div>
 
-<div class="stat">
-    <strong id="statVideos">0</strong>
-    <span>Vidéos</span>
+<div class="search">
+    <input
+        id="recherche"
+        type="search"
+        placeholder="🔎 Rechercher un exercice..."
+        oninput="afficherExercices()"
+    >
 </div>
-
-</div><div class="section-title">
-    <h2>🏋️ Mes catégories</h2>
-    <div class="line"></div>
-</div><div class="categories"><button class="category"
-    onclick="filtrerCategorie('Pectoraux', this)">
-    🏋️ Pectoraux
-</button>
-
-<button class="category"
-    onclick="filtrerCategorie('Dos', this)">
-    🔥 Dos
-</button>
-
-<button class="category"
-    onclick="filtrerCategorie('Épaules', this)">
-    💪 Épaules
-</button>
-
-<button class="category"
-    onclick="filtrerCategorie('Biceps', this)">
-    💪 Biceps
-</button>
-
-<button class="category"
-    onclick="filtrerCategorie('Triceps', this)">
-    💪 Triceps
-</button>
-
-<button class="category"
-    onclick="filtrerCategorie('Jambes', this)">
-    🦵 Jambes
-</button>
-
-<button class="category"
-    onclick="filtrerCategorie('Abdos', this)">
-    🔥 Abdos
-</button>
-
-<button class="category"
-    onclick="filtrerPhotos(this)">
-    📷 Photos
-</button>
-
-</div><div class="toolbar"><button
-    id="btnTous"
-    class="active"
-    onclick="afficherTous(this)">
-    📋 TOUS LES EXERCICES
-</button>
-
-</div><div class="search-wrapper"><span class="search-icon">🔎</span>
-
-<input
-    id="recherche"
-    class="search"
-    type="text"
-    placeholder="Rechercher un exercice..."
-    oninput="afficherExercices()"
->
-
-</div><div id="connexion" class="loading">
-    🔄 Connexion à Supabase...
-</div><div id="listeExercices"></div><div class="form-box" id="sectionFormulaire"><div class="form-header">
-
-    <div class="form-icon">➕</div>
-
-    <h2 id="titreFormulaire">
-        Ajouter un exercice
-    </h2>
-
-</div>
-
-
-<input
-    type="hidden"
-    id="exerciceId"
->
-
-
-<label>🏋️ Nom de l'exercice</label>
-
-<input
-    id="nom"
-    type="text"
-    placeholder="Exemple : Développé couché"
->
-
-
-<label>📂 Catégorie</label>
-
-<select id="categorie">
-
-    <option value="Pectoraux">Pectoraux</option>
-    <option value="Dos">Dos</option>
-    <option value="Épaules">Épaules</option>
-    <option value="Biceps">Biceps</option>
-    <option value="Triceps">Triceps</option>
-    <option value="Jambes">Jambes</option>
-    <option value="Abdos">Abdos</option>
-
-</select>
-
-
-<label>🔢 Nombre de séries</label>
-
-<input
-    id="series"
-    type="number"
-    value="4"
-    min="1"
->
-
-
-<label>🔁 Nombre de répétitions</label>
-
-<input
-    id="repetitions"
-    type="number"
-    value="10"
-    min="1"
->
-
-
-<label>⚖️ Poids utilisé (kg)</label>
-
-<input
-    id="poids"
-    type="number"
-    value=""
-    min="0"
-    step="0.5"
-    placeholder="Exemple : 60"
->
-
-
-<label>🎯 Charge</label>
-
-<select id="charge">
-
-    <option value="">-- Choisir --</option>
-    <option value="Trop léger">🟡 Trop léger</option>
-    <option value="Correct">🟢 Correct</option>
-    <option value="Trop lourd">🔴 Trop lourd</option>
-
-</select>
-
-
-<label>📝 Description / notes</label>
-
-<textarea
-    id="description"
-    placeholder="Technique, conseils, sensations..."
-></textarea>
-
-
-<label>🎥 Vidéo de démonstration</label>
-
-<input
-    id="video"
-    type="file"
-    accept="video/*"
->
-
-
-<label>📷 Photo</label>
-
-<input
-    id="photo"
-    type="file"
-    accept="image/*"
->
-
-
-<button
-    class="save"
-    onclick="sauvegarderExercice()">
-    💾 ENREGISTRER L'EXERCICE
-</button>
-
-
-<button
-    id="btnAnnuler"
-    class="cancel"
-    onclick="annulerModification()">
-    ❌ ANNULER LA MODIFICATION
-</button>
-
 
 <div id="message" class="message"></div>
 
-</div><div class="section-title">
-    <h2>🖼️ Galerie photos</h2>
-    <div class="line"></div>
-</div><div id="galerie" class="gallery"></div><div class="section-title">
-    <h2>📝 Notes</h2>
-    <div class="line"></div>
-</div><div id="notes"></div></div><footer>
-    <span class="footer-orange">●</span>
-    Mon Carnet Musculation
-    <span class="footer-orange">●</span>
+<section class="section">
+    <div class="section-header">
+        <h2 id="titreExercices">💪 Exercices</h2>
+        <span id="compteurExercices">0 résultat</span>
+    </div>
+
+    <div id="listeExercices" class="exercise-grid"></div>
+</section>
+
+<section class="section" id="sectionEvolution">
+    <div class="section-header">
+        <h2>📈 Évolution séance après séance</h2>
+        <span>Volume total d'entraînement</span>
+    </div>
+
+    <div class="chart-card">
+        <div class="chart-info">
+            <div class="chart-stat">
+                <span>Dernière séance</span>
+                <strong id="evolutionDerniere">0 kg</strong>
+            </div>
+
+            <div class="chart-stat">
+                <span>Meilleure séance</span>
+                <strong id="evolutionMeilleure">0 kg</strong>
+            </div>
+
+            <div class="chart-stat">
+                <span>Progression</span>
+                <strong id="evolutionProgression">0 %</strong>
+            </div>
+        </div>
+
+        <div class="chart-wrap">
+            <canvas id="graphiqueEvolution" width="900" height="300"></canvas>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="sectionFormulaire">
+    <div class="section-header">
+        <h2>➕ Ajouter / modifier un exercice</h2>
+    </div>
+
+    <div class="form-card">
+        <input type="hidden" id="exerciceId">
+
+        <div class="form-grid">
+
+            <div class="field">
+                <label>Nom de l'exercice</label>
+                <input id="nom" type="text" placeholder="Ex : Développé couché">
+            </div>
+
+            <div class="field">
+                <label>Catégorie</label>
+                <select id="categorie">
+                    <option value="Pectoraux">Pectoraux</option>
+                    <option value="Dos">Dos</option>
+                    <option value="Épaules">Épaules</option>
+                    <option value="Biceps">Biceps</option>
+                    <option value="Triceps">Triceps</option>
+                    <option value="Jambes">Jambes</option>
+                    <option value="Abdos">Abdos</option>
+                </select>
+            </div>
+
+            <div class="series-editor">
+                <div class="series-editor-header">
+                    <strong>🏋️ Séries de la séance</strong>
+                    <span>Poids et répétitions par série</span>
+                </div>
+
+                <div id="seriesContainer"></div>
+
+                <button type="button" class="add-series" onclick="ajouterSerie()">
+                    ＋ Ajouter une série
+                </button>
+            </div>
+
+            <div class="field">
+                <label>Charge générale</label>
+                <select id="charge">
+                    <option value="">Non renseignée</option>
+                    <option value="Trop léger">Trop léger</option>
+                    <option value="Correct">Correct</option>
+                    <option value="Trop lourd">Trop lourd</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Vidéo</label>
+                <input id="video" type="url" placeholder="https://...">
+            </div>
+
+            <div class="field">
+                <label>Photo</label>
+                <input id="photo" type="file" accept="image/*">
+            </div>
+
+            <div class="field full">
+                <label>Notes</label>
+                <textarea id="description" placeholder="Ex : bonne sensation, augmenter légèrement la charge la prochaine fois..."></textarea>
+            </div>
+
+        </div>
+
+        <div class="form-actions">
+            <button class="btn-save" onclick="sauvegarderExercice()">
+                💾 Enregistrer
+            </button>
+
+            <button class="btn-cancel" onclick="annulerEdition()">
+                Annuler
+            </button>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-header">
+        <h2 id="titreGalerie">🖼️ Galerie photos</h2>
+    </div>
+
+    <div id="galerie" class="gallery"></div>
+</section>
+
+<section class="section">
+    <div class="section-header">
+        <h2 id="titreNotes">📝 Notes</h2>
+    </div>
+
+    <div id="notes" class="notes"></div>
+</section>
+
+</main><footer>
+    Mon Carnet Musculation · Données personnelles synchronisées avec Supabase
 </footer><script>
-
-/* ============================================================
-   CONFIGURATION SUPABASE
-   ============================================================ */
-
-const SUPABASE_URL =
-    "https://cjtgjwepiotuhtfqwanw.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_DXMY1V9ir7R_vwuFysSWwA_Pe-r5NNP";
-
-const TABLE_URL =
-    SUPABASE_URL + "/rest/v1/exercices";
-
-const STORAGE_URL =
-    SUPABASE_URL + "/storage/v1/object/medias";
-
-
-/* ============================================================
-   VARIABLES
-   ============================================================ */
+const SUPABASE_URL = "https://cjtgjwepiotuhtfqwanw.supabase.co";
+const SUPABASE_KEY = "sb_publishable_DXMY1V9ir7R_vwuFysSWwA_Pe-r5NNP";
+const TABLE_URL = SUPABASE_URL + "/rest/v1/exercices";
+const STORAGE_URL = SUPABASE_URL + "/storage/v1/object/medias";
 
 let exercices = [];
-
 let filtreActuel = "TOUS";
-
 let modePhotos = false;
+let seriesTemp = [];
 
-
-/* ============================================================
-   HEADERS SUPABASE
-   ============================================================ */
-
-function headersSupabase() {
-
+function headersSupabase(){
     return {
         "apikey": SUPABASE_KEY,
-        "Content-Type": "application/json"
+        "Content-Type":"application/json"
     };
-
 }
 
-
-/* ============================================================
-   FETCH AVEC TIMEOUT
-   ============================================================ */
-
-async function fetchAvecTimeout(
-    url,
-    options = {},
-    timeout = 15000
-) {
-
-    const controller =
-        new AbortController();
-
-    const timer =
-        setTimeout(
-            function() {
-                controller.abort();
-            },
-            timeout
-        );
-
-    try {
-
-        return await fetch(
-            url,
-            {
-                ...options,
-                signal:
-                    controller.signal
-            }
-        );
-
-    } finally {
-
-        clearTimeout(timer);
-
-    }
-
+function afficherMessage(message){
+    const zone = document.getElementById("message");
+    zone.textContent = message;
+    zone.style.display = message ? "block" : "none";
 }
 
-
-/* ============================================================
-   MESSAGE
-   ============================================================ */
-
-function message(texte) {
-
-    const zone =
-        document.getElementById("message");
-
-    if (zone) {
-        zone.innerHTML = texte;
-    }
-
+function escapeHTML(value){
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 }
 
+function valeurNombre(value){
+    if(value === null || value === undefined || value === "") return 0;
 
-/* ============================================================
-   ECHAPPER HTML
-   ============================================================ */
-
-function echapperHTML(texte) {
-
-    if (
-        texte === null ||
-        texte === undefined
-    ) {
-        return "";
-    }
-
-    return String(texte)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
+    const n = parseFloat(String(value).replace(",","."));
+    return Number.isFinite(n) ? n : 0;
 }
 
+/*
+    Ancien format conservé pour tes exercices existants.
+    Les anciennes données [[POIDS:12]] et [[CHARGE:Correct]]
+    sont lues mais ne sont jamais affichées.
+*/
+function extraireAnciennesDonnees(description){
+    const texte = String(description || "");
 
-/* ============================================================
-   EXTRAIRE POIDS / CHARGE
-   ============================================================ */
+    const poidsMatch = texte.match(
+        /\[POIDS:([0-9]+(?:[.,][0-9]+)?)\]/i
+    );
 
-function extraireDonneesMusculation(
-    description
-) {
+    const chargeMatch = texte.match(
+        /\[CHARGE:(Trop léger|Correct|Trop lourd)\]/i
+    );
 
-    const texte =
-        String(description || "");
+    let poids = poidsMatch ? valeurNombre(poidsMatch[1]) : 0;
+    let charge = chargeMatch ? chargeMatch[1] : "";
 
-    const poidsMatch =
-        texte.match(
-            /\[POIDS:([0-9]+(?:[.,][0-9]+)?)\]/i
-        );
-
-    const chargeMatch =
-        texte.match(
-            /\[CHARGE:(Trop léger|Correct|Trop lourd)\]/i
-        );
-
-    let poids = "";
-
-    if (poidsMatch) {
-
-        poids =
-            poidsMatch[1]
-                .replace(",", ".");
-
-    }
-
-    const charge =
-        chargeMatch
-            ? chargeMatch[1]
-            : "";
-
-    let notePropre =
-        texte
-            .replace(
-                /\[POIDS:[0-9]+(?:[.,][0-9]+)?\]\s*/gi,
-                ""
-            )
-            .replace(
-                /\[CHARGE:(?:Trop léger|Correct|Trop lourd)\]\s*/gi,
-                ""
-            )
-            .trim();
+    const descriptionNettoyee = texte
+        .replace(/\[POIDS:[0-9]+(?:[.,][0-9]+)?\]\s*/gi,"")
+        .replace(/\[CHARGE:(?:Trop léger|Correct|Trop lourd)\]\s*/gi,"")
+        .trim();
 
     return {
-        poids: poids,
-        charge: charge,
-        description: notePropre
+        poids,
+        charge,
+        description:descriptionNettoyee
     };
-
 }
 
+function extraireSeries(exercice){
+    /*
+        Les nouvelles séries sont enregistrées dans description
+        sous forme technique :
 
-/* ============================================================
-   CONSTRUIRE DESCRIPTION
-   ============================================================ */
+        [[SERIES:1|10|10;2|10|10;3|8|12]]
 
-function construireDescription(
-    description,
-    poids,
-    charge
-) {
+        Cela permet de ne pas modifier la structure Supabase.
+    */
 
-    let texte =
-        String(description || "")
-            .trim();
+    const description = String(exercice.description || "");
 
-    texte =
-        texte
-            .replace(
-                /\[POIDS:[0-9]+(?:[.,][0-9]+)?\]\s*/gi,
-                ""
-            )
-            .replace(
-                /\[CHARGE:(?:Trop léger|Correct|Trop lourd)\]\s*/gi,
-                ""
-            )
-            .trim();
+    const match = description.match(
+        /\[SERIES:([^]+)\]\]/i
+    );
 
-    const informations = [];
+    if(match){
+        const resultat = [];
 
-    if (
-        poids !== null &&
-        poids !== undefined &&
-        String(poids).trim() !== ""
-    ) {
+        match[1].split(";").forEach(element => {
+            const morceaux = element.split("|");
 
-        informations.push(
-            "[[POIDS:" +
-            String(poids).replace(",", ".") +
-            "]]"
-        );
+            if(morceaux.length >= 3){
+                resultat.push({
+                    numero:parseInt(morceaux[0]) || resultat.length + 1,
+                    repetitions:valeurNombre(morceaux[1]),
+                    poids:valeurNombre(morceaux[2])
+                });
+            }
+        });
 
+        if(resultat.length){
+            return resultat;
+        }
     }
 
-    if (
-        charge === "Trop léger" ||
-        charge === "Correct" ||
-        charge === "Trop lourd"
-    ) {
+    const ancien = extraireAnciennesDonnees(description);
 
-        informations.push(
-            "[[CHARGE:" +
-            charge +
-            "]]"
-        );
-
+    if(ancien.poids > 0){
+        return [{
+            numero:1,
+            repetitions:valeurNombre(exercice.repetitions),
+            poids:ancien.poids
+        }];
     }
 
-    if (informations.length > 0) {
+    return [];
+}
 
-        return (
-            informations.join(" ") +
-            (
-                texte
-                    ? "\n" + texte
-                    : ""
-            )
-        );
+function nettoyerDescription(description){
+    return String(description || "")
+        .replace(/\[SERIES:[^]+\]\]\s*/gi,"")
+        .replace(/\[POIDS:[0-9]+(?:[.,][0-9]+)?\]\s*/gi,"")
+        .replace(/\[CHARGE:(?:Trop léger|Correct|Trop lourd)\]\s*/gi,"")
+        .trim();
+}
 
+function construireDescription(description,series,charge){
+    let texte = nettoyerDescription(description);
+
+    if(series.length){
+        const serialisees = series.map((s,index) => {
+            return [
+                index + 1,
+                valeurNombre(s.repetitions),
+                valeurNombre(s.poids)
+            ].join("|");
+        }).join(";");
+
+        texte += (texte ? "\n\n" : "") + "[[SERIES:" + serialisees + "]]";
+    }
+
+    if(charge){
+        texte += (texte ? "\n" : "") + "[[CHARGE:" + charge + "]]";
     }
 
     return texte;
-
 }
 
+function calculerVolume(exercice){
+    const series = extraireSeries(exercice);
 
-/* ============================================================
-   CLASSE CHARGE
-   ============================================================ */
+    return series.reduce((total,s) => {
+        return total +
+            valeurNombre(s.repetitions) *
+            valeurNombre(s.poids);
+    },0);
+}
 
-function classeCharge(charge) {
+function obtenirCharge(exercice){
+    const ancienne = extraireAnciennesDonnees(exercice.description);
 
-    if (charge === "Trop léger") {
-        return "charge-leger";
-    }
-
-    if (charge === "Correct") {
-        return "charge-correct";
-    }
-
-    if (charge === "Trop lourd") {
-        return "charge-lourd";
+    if(ancienne.charge){
+        return ancienne.charge;
     }
 
     return "";
-
 }
 
+function obtenirPoidsPrincipal(exercice){
+    const series = extraireSeries(exercice);
 
-/* ============================================================
-   CHARGER EXERCICES
-   ============================================================ */
+    if(!series.length){
+        const ancien = extraireAnciennesDonnees(exercice.description);
+        return ancien.poids;
+    }
 
-async function chargerExercices() {
+    return series[series.length - 1].poids;
+}
 
-    const connexion =
-        document.getElementById("connexion");
+function classeCharge(charge){
+    if(charge === "Correct") return "charge-correct";
+    if(charge === "Trop léger") return "charge-light";
+    if(charge === "Trop lourd") return "charge-heavy";
+    return "";
+}
 
-    const zone =
-        document.getElementById("listeExercices");
+async function chargerExercices(){
+    afficherMessage("Connexion à Supabase...");
 
-    connexion.style.display = "block";
+    try{
+        const response = await fetch(
+            TABLE_URL + "?select=*&order=id.desc",
+            {
+                headers:headersSupabase()
+            }
+        );
 
-    connexion.className = "loading";
-
-    connexion.innerHTML =
-        "🔄 Connexion à Supabase...";
-
-    try {
-
-        const response =
-            await fetchAvecTimeout(
-                TABLE_URL +
-                "?select=*&order=id.desc",
-                {
-                    method: "GET",
-                    headers: headersSupabase(),
-                    cache: "no-store"
-                },
-                15000
-            );
-
-        const texte =
-            await response.text();
-
-        if (!response.ok) {
-
-            connexion.className =
-                "error-box";
-
-            connexion.innerHTML =
-                "<strong>❌ ERREUR SUPABASE</strong><br><br>" +
-                "Code HTTP : <strong>" +
-                response.status +
-                "</strong><br><br>" +
-                "<strong>Réponse :</strong><br>" +
-                echapperHTML(texte) +
-                "<br><br>" +
-                "Tes exercices ne sont PAS supprimés.";
-
-            zone.innerHTML = "";
-
-            return;
-
+        if(!response.ok){
+            throw new Error("Erreur Supabase : " + response.status);
         }
 
-        const donnees =
-            JSON.parse(texte);
+        exercices = await response.json();
 
-        if (!Array.isArray(donnees)) {
-
-            throw new Error(
-                "Supabase n'a pas renvoyé une liste d'exercices."
-            );
-
-        }
-
-        exercices =
-            donnees;
-
-        connexion.className =
-            "message";
-
-        connexion.innerHTML =
-            "🟢 Connexion réussie — " +
-            exercices.length +
-            " exercice(s)";
-
+        afficherMessage("");
         mettreAJourStats();
-
         afficherExercices();
-
         afficherGalerie();
-
         afficherNotes();
+        afficherEvolution();
 
-    } catch (erreur) {
-
-        console.error(
-            "ERREUR SUPABASE :",
-            erreur
-        );
-
-        connexion.className =
-            "error-box";
-
-        connexion.innerHTML =
-            "<strong>❌ Impossible de contacter Supabase.</strong><br><br>" +
-            echapperHTML(erreur.message) +
-            "<br><br>" +
-            "Tes données ne sont PAS supprimées.";
-
-        zone.innerHTML = "";
-
+    }catch(error){
+        console.error(error);
+        afficherMessage("Impossible de charger les exercices : " + error.message);
     }
-
 }
 
+function mettreAJourStats(){
+    document.getElementById("statExercices").textContent = exercices.length;
 
-/* ============================================================
-   STATISTIQUES
-   ============================================================ */
+    document.getElementById("statPhotos").textContent =
+        exercices.filter(e => e.photo_url).length;
 
-function mettreAJourStats() {
+    document.getElementById("statVideos").textContent =
+        exercices.filter(e => e.video_url).length;
 
-    document.getElementById(
-        "statExercices"
-    ).textContent =
-        exercices.length;
-
-    document.getElementById(
-        "statPhotos"
-    ).textContent =
-        exercices.filter(
-            e => e.photo_url
-        ).length;
-
-    document.getElementById(
-        "statVideos"
-    ).textContent =
-        exercices.filter(
-            e => e.video_url
-        ).length;
-
+    const seances = calculerSeances();
+    document.getElementById("statSeances").textContent = seances.length;
 }
 
+function categorieCorrespond(exercice){
+    if(filtreActuel === "TOUS") return true;
 
-/* ============================================================
-   OBTENIR LA LISTE SELON LE FILTRE
-   ============================================================ */
-
-function obtenirListeFiltree() {
-
-    let liste =
-        [...exercices];
-
-
-    if (modePhotos) {
-
-        liste =
-            liste.filter(
-                e => e.photo_url
-            );
-
-        return liste;
-
-    }
-
-
-    if (
-        filtreActuel !== "TOUS"
-    ) {
-
-        liste =
-            liste.filter(
-                function(e) {
-
-                    return String(
-                        e.categorie || ""
-                    )
-                    .trim()
-                    .toLowerCase() ===
-                    String(
-                        filtreActuel
-                    )
-                    .trim()
-                    .toLowerCase();
-
-                }
-            );
-
-    }
-
-
-    return liste;
-
+    return String(exercice.categorie || "").toLowerCase()
+        === String(filtreActuel || "").toLowerCase();
 }
 
+function afficherExercices(){
+    const zone = document.getElementById("listeExercices");
+    const recherche = String(
+        document.getElementById("recherche").value || ""
+    ).toLowerCase().trim();
 
-/* ============================================================
-   AFFICHER EXERCICES
-   ============================================================ */
-
-function afficherExercices() {
-
-    const zone =
-        document.getElementById(
-            "listeExercices"
-        );
-
-    const recherche =
-        document.getElementById(
-            "recherche"
-        )
-        .value
-        .toLowerCase()
-        .trim();
-
-
-    let liste =
-        obtenirListeFiltree();
-
-
-    if (recherche) {
-
-        liste =
-            liste.filter(
-                function(e) {
-
-                    const nom =
-                        String(
-                            e.nom || ""
-                        ).toLowerCase();
-
-                    const description =
-                        String(
-                            e.description || ""
-                        ).toLowerCase();
-
-                    const categorie =
-                        String(
-                            e.categorie || ""
-                        ).toLowerCase();
-
-                    return (
-                        nom.includes(recherche) ||
-                        description.includes(recherche) ||
-                        categorie.includes(recherche)
-                    );
-
-                }
-            );
-
-    }
-
-
-    if (liste.length === 0) {
-
+    if(modePhotos){
         zone.innerHTML =
-            '<div class="empty">Aucun exercice dans cette sélection.</div>';
-
+            '<div class="empty">📸 Mode photos activé.</div>';
+        document.getElementById("compteurExercices").textContent =
+            "Photos";
         return;
-
     }
 
+    let source = exercices.filter(categorieCorrespond);
 
-    zone.innerHTML =
-        liste.map(
-            function(e) {
+    if(recherche){
+        source = source.filter(e => {
+            return String(e.nom || "").toLowerCase().includes(recherche)
+                || String(e.categorie || "").toLowerCase().includes(recherche)
+                || nettoyerDescription(e.description).toLowerCase().includes(recherche);
+        });
+    }
 
-                const nom =
-                    echapperHTML(e.nom);
+    document.getElementById("compteurExercices").textContent =
+        source.length + (source.length > 1 ? " résultats" : " résultat");
 
-                const categorie =
-                    echapperHTML(e.categorie);
+    if(!source.length){
+        zone.innerHTML =
+            '<div class="empty">Aucun exercice dans cette catégorie.</div>';
+        return;
+    }
 
-                const donnees =
-                    extraireDonneesMusculation(
-                        e.description
-                    );
+    zone.innerHTML = source.map(e => {
+        const series = extraireSeries(e);
+        const charge = obtenirCharge(e);
+        const poids = obtenirPoidsPrincipal(e);
+        const description = nettoyerDescription(e.description);
+        const volume = calculerVolume(e);
 
-                const description =
-                    echapperHTML(
-                        donnees.description
-                    );
+        const seriesHTML = series.length
+            ? `
+                <div class="series-list">
+                    ${series.map((s,index) => `
+                        <div class="series-row">
+                            <div><strong>Série ${index + 1}</strong></div>
+                            <div>🔁 ${escapeHTML(s.repetitions)} reps</div>
+                            <div>🏋️ ${escapeHTML(s.poids)} kg</div>
+                        </div>
+                    `).join("")}
+                </div>
+            `
+            : "";
 
+        const imageHTML = e.photo_url
+            ? `<img class="exercise-image" src="${escapeHTML(e.photo_url)}" alt="${escapeHTML(e.nom)}">`
+            : "";
 
-                let chargeAffichage =
-                    "Non renseignée";
+        const videoHTML = e.video_url
+            ? `<a class="video-link" href="${escapeHTML(e.video_url)}" target="_blank">▶️ Voir la vidéo</a>`
+            : "";
 
+        return `
+            <article class="exercise">
 
-                if (
-                    donnees.charge ===
-                    "Trop léger"
-                ) {
+                ${imageHTML}
 
-                    chargeAffichage =
-                        "🟡 Trop léger";
+                <div class="exercise-content">
 
-                }
-
-
-                if (
-                    donnees.charge ===
-                    "Correct"
-                ) {
-
-                    chargeAffichage =
-                        "🟢 Correct";
-
-                }
-
-
-                if (
-                    donnees.charge ===
-                    "Trop lourd"
-                ) {
-
-                    chargeAffichage =
-                        "🔴 Trop lourd";
-
-                }
-
-
-                const classe =
-                    classeCharge(
-                        donnees.charge
-                    );
-
-
-                let html = `
-
-                    <div class="card">
-
-                        <h3>
-                            ${nom}
-                        </h3>
-
-                        <div class="exercise-category">
-                            🏷️ ${categorie}
+                    <div class="exercise-top">
+                        <div class="exercise-name">
+                            ${escapeHTML(e.nom)}
                         </div>
 
-                        <div class="info">
-                            💪 ${e.series || 0}
-                            séries ×
-                            ${e.repetitions || 0}
-                            répétitions
+                        <div class="badge">
+                            ${escapeHTML(e.categorie)}
                         </div>
+                    </div>
 
-                `;
+                    ${description
+                        ? `<div class="description">${escapeHTML(description)}</div>`
+                        : ""
+                    }
 
+                    <div class="performance">
 
-                if (
-                    donnees.poids ||
-                    donnees.charge
-                ) {
-
-                    html += `
-
-                        <div class="performance">
-
-                            <div class="performance-box">
-
-                                <span class="performance-label">
-                                    ⚖️ Poids utilisé
-                                </span>
-
-                                <span class="performance-value weight-value">
-                                    ${
-                                        donnees.poids
-                                            ? echapperHTML(
-                                                donnees.poids
-                                            ) + " kg"
-                                            : "Non renseigné"
-                                    }
-                                </span>
-
+                        <div class="performance-box">
+                            <div class="performance-label">
+                                <span class="performance-icon">🏋️</span>
+                                Poids
                             </div>
 
-
-                            <div class="performance-box">
-
-                                <span class="performance-label">
-                                    🎯 Charge
-                                </span>
-
-                                <span class="performance-value ${classe}">
-                                    ${chargeAffichage}
-                                </span>
-
+                            <div class="performance-value">
+                                ${poids ? escapeHTML(poids) + " kg" : "—"}
                             </div>
-
                         </div>
 
-                    `;
+                        <div class="performance-box">
+                            <div class="performance-label">
+                                <span class="performance-icon">⚡</span>
+                                Charge
+                            </div>
 
-                }
-
-
-                if (description) {
-
-                    html += `
-
-                        <p class="info">
-                            📝 ${description}
-                        </p>
-
-                    `;
-
-                }
-
-
-                if (e.video_url) {
-
-                    html += `
-
-                        <video
-                            class="video"
-                            controls
-                            preload="metadata"
-                            src="${echapperHTML(
-                                e.video_url
-                            )}">
-                        </video>
-
-                    `;
-
-                }
-
-
-                if (e.photo_url) {
-
-                    html += `
-
-                        <img
-                            class="photo"
-                            src="${echapperHTML(
-                                e.photo_url
-                            )}"
-                            alt="${nom}"
-                            loading="lazy">
-
-                    `;
-
-                }
-
-
-                html += `
-
-                        <div class="actions">
-
-                            <button
-                                class="edit"
-                                onclick="modifierExercice(${Number(e.id)})">
-                                ✏️ Modifier
-                            </button>
-
-                            <button
-                                class="delete"
-                                onclick="supprimerExercice(${Number(e.id)})">
-                                🗑️ Supprimer
-                            </button>
-
+                            <div class="performance-value ${classeCharge(charge)}">
+                                ${charge ? escapeHTML(charge) : "—"}
+                            </div>
                         </div>
 
                     </div>
 
-                `;
+                    ${seriesHTML}
 
+                    ${volume
+                        ? `<div style="margin-top:10px;color:#aaa;font-size:12px;">
+                            📊 Volume de la séance :
+                            <strong style="color:#ff9d3d">${volume.toFixed(1)} kg</strong>
+                           </div>`
+                        : ""
+                    }
 
-                return html;
+                    ${videoHTML}
 
-            }
-        ).join("");
+                    <div class="exercise-actions">
+                        <button class="btn-edit" onclick="modifierExercice(${e.id})">
+                            ✏️ Modifier
+                        </button>
 
+                        <button class="btn-delete" onclick="supprimerExercice(${e.id})">
+                            🗑️ Supprimer
+                        </button>
+                    </div>
+
+                </div>
+            </article>
+        `;
+    }).join("");
 }
 
+function ajouterSerie(repetitions="",poids=""){
+    seriesTemp.push({
+        repetitions:repetitions,
+        poids:poids
+    });
 
-/* ============================================================
-   FILTRER UNE CATÉGORIE
-   ============================================================ */
-
-function filtrerCategorie(
-    categorie,
-    bouton
-) {
-
-    modePhotos = false;
-
-    filtreActuel =
-        categorie;
-
-
-    /*
-       Active le bouton choisi
-    */
-
-    document.querySelectorAll(
-        ".category"
-    )
-    .forEach(
-        function(b) {
-            b.classList.remove("active");
-        }
-    );
-
-
-    document.querySelectorAll(
-        ".toolbar button"
-    )
-    .forEach(
-        function(b) {
-            b.classList.remove("active");
-        }
-    );
-
-
-    bouton.classList.add("active");
-
-
-    /*
-       PRÉREMPLIT LE FORMULAIRE
-       POUR TOUTES LES CATÉGORIES
-    */
-
-    const categorieFormulaire =
-        document.getElementById(
-            "categorie"
-        );
-
-
-    if (categorieFormulaire) {
-
-        categorieFormulaire.value =
-            categorie;
-
-    }
-
-
-    /*
-       Affiche uniquement cette catégorie
-       partout dans le site
-    */
-
-    afficherExercices();
-
-    afficherGalerie();
-
-    afficherNotes();
-
+    afficherEditeurSeries();
 }
 
-
-/* ============================================================
-   FILTRE PHOTOS
-   ============================================================ */
-
-function filtrerPhotos(
-    bouton
-) {
-
-    modePhotos = true;
-
-    filtreActuel =
-        "PHOTOS";
-
-
-    document.querySelectorAll(
-        ".category"
-    )
-    .forEach(
-        function(b) {
-            b.classList.remove("active");
-        }
-    );
-
-
-    document.querySelectorAll(
-        ".toolbar button"
-    )
-    .forEach(
-        function(b) {
-            b.classList.remove("active");
-        }
-    );
-
-
-    bouton.classList.add("active");
-
-
-    afficherExercices();
-
-    afficherGalerie();
-
-    afficherNotes();
-
+function supprimerSerie(index){
+    seriesTemp.splice(index,1);
+    afficherEditeurSeries();
 }
 
-
-/* ============================================================
-   TOUS
-   ============================================================ */
-
-function afficherTous(
-    bouton
-) {
-
-    modePhotos = false;
-
-    filtreActuel =
-        "TOUS";
-
-
-    document.querySelectorAll(
-        ".category"
-    )
-    .forEach(
-        function(b) {
-            b.classList.remove("active");
-        }
-    );
-
-
-    document.querySelectorAll(
-        ".toolbar button"
-    )
-    .forEach(
-        function(b) {
-            b.classList.remove("active");
-        }
-    );
-
-
-    bouton.classList.add("active");
-
-
-    afficherExercices();
-
-    afficherGalerie();
-
-    afficherNotes();
-
-}
-
-
-/* ============================================================
-   UPLOAD
-   ============================================================ */
-
-async function envoyerFichier(
-    fichier,
-    prefixe
-) {
-
-    if (!fichier) {
-        return null;
-    }
-
-
-    const extension =
-        fichier.name.includes(".")
-            ? fichier.name.substring(
-                fichier.name.lastIndexOf(".")
-            )
-            : "";
-
-
-    const nomFichier =
-        prefixe +
-        "_" +
-        Date.now() +
-        "_" +
-        Math.random()
-            .toString(36)
-            .substring(2, 9) +
-        extension;
-
-
-    const url =
-        STORAGE_URL +
-        "/" +
-        encodeURIComponent(
-            nomFichier
-        );
-
-
-    const response =
-        await fetchAvecTimeout(
-            url,
-            {
-                method: "POST",
-
-                headers: {
-                    "apikey":
-                        SUPABASE_KEY,
-
-                    "x-upsert":
-                        "false",
-
-                    "Content-Type":
-                        fichier.type ||
-                        "application/octet-stream"
-                },
-
-                body: fichier
-
-            },
-            60000
-        );
-
-
-    const texte =
-        await response.text();
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            "Erreur upload : " +
-            texte
-        );
-
-    }
-
-
-    return (
-        SUPABASE_URL +
-        "/storage/v1/object/public/medias/" +
-        nomFichier
-    );
-
-}
-
-
-/* ============================================================
-   SAUVEGARDER
-   ============================================================ */
-
-async function sauvegarderExercice() {
-
-    const id =
-        document.getElementById(
-            "exerciceId"
-        ).value;
-
-
-    const nom =
-        document.getElementById(
-            "nom"
-        ).value.trim();
-
-
-    const categorie =
-        document.getElementById(
-            "categorie"
-        ).value;
-
-
-    const series =
-        parseInt(
-            document.getElementById(
-                "series"
-            ).value
-        ) || 0;
-
-
-    const repetitions =
-        parseInt(
-            document.getElementById(
-                "repetitions"
-            ).value
-        ) || 0;
-
-
-    const poids =
-        document.getElementById(
-            "poids"
-        ).value.trim();
-
-
-    const charge =
-        document.getElementById(
-            "charge"
-        ).value;
-
-
-    const descriptionTexte =
-        document.getElementById(
-            "description"
-        ).value.trim();
-
-
-    const description =
-        construireDescription(
-            descriptionTexte,
-            poids,
-            charge
-        );
-
-
-    const videoFile =
-        document.getElementById(
-            "video"
-        ).files[0];
-
-
-    const photoFile =
-        document.getElementById(
-            "photo"
-        ).files[0];
-
-
-    if (!nom) {
-
-        alert(
-            "Entre le nom de l'exercice."
-        );
-
+function afficherEditeurSeries(){
+    const zone = document.getElementById("seriesContainer");
+
+    if(!seriesTemp.length){
+        zone.innerHTML =
+            '<div style="color:#777;font-size:12px;margin-bottom:8px;">Aucune série. Ajoute ta première série.</div>';
         return;
-
     }
 
+    zone.innerHTML = seriesTemp.map((serie,index) => `
+        <div class="series-input">
 
-    try {
+            <div class="series-number">
+                S${index + 1}
+            </div>
 
-        message(
-            "⏳ Enregistrement en cours..."
-        );
+            <div>
+                <input
+                    type="number"
+                    min="0"
+                    step="1"
+                    placeholder="Répétitions"
+                    value="${escapeHTML(serie.repetitions)}"
+                    onchange="modifierSerie(${index},'repetitions',this.value)"
+                >
+            </div>
 
+            <div>
+                <input
+                    type="number"
+                    min="0"
+                    step="0.5"
+                    placeholder="Poids kg"
+                    value="${escapeHTML(serie.poids)}"
+                    onchange="modifierSerie(${index},'poids',this.value)"
+                >
+            </div>
 
-        let videoUrl = null;
+            <button
+                type="button"
+                class="series-remove"
+                onclick="supprimerSerie(${index})"
+            >
+                ×
+            </button>
 
-        let photoUrl = null;
+        </div>
+    `).join("");
+}
 
+function modifierSerie(index,champ,valeur){
+    if(seriesTemp[index]){
+        seriesTemp[index][champ] = valeur;
+    }
+}
 
-        if (videoFile) {
+function ouvrirFormulaire(){
+    document.getElementById("sectionFormulaire")
+        .scrollIntoView({behavior:"smooth"});
 
-            message(
-                "⏳ Envoi de la vidéo..."
-            );
-
-            videoUrl =
-                await envoyerFichier(
-                    videoFile,
-                    "video"
-                );
-
+    if(!document.getElementById("exerciceId").value){
+        if(!seriesTemp.length){
+            ajouterSerie();
         }
+    }
+}
 
+async function sauvegarderExercice(){
 
-        if (photoFile) {
+    const id = document.getElementById("exerciceId").value;
+    const nom = document.getElementById("nom").value.trim();
+    const categorie = document.getElementById("categorie").value;
+    const charge = document.getElementById("charge").value;
+    const description = document.getElementById("description").value.trim();
+    const video = document.getElementById("video").value.trim();
+    const photoInput = document.getElementById("photo");
 
-            message(
-                "⏳ Envoi de la photo..."
+    if(!nom){
+        alert("Indique le nom de l'exercice.");
+        return;
+    }
+
+    const series = seriesTemp
+        .map(s => ({
+            repetitions:valeurNombre(s.repetitions),
+            poids:valeurNombre(s.poids)
+        }))
+        .filter(s => s.repetitions > 0 || s.poids > 0);
+
+    const descriptionFinale =
+        construireDescription(description,series,charge);
+
+    const ancien = id
+        ? exercices.find(e => String(e.id) === String(id))
+        : null;
+
+    let photoUrl = ancien ? ancien.photo_url : null;
+
+    try{
+
+        if(photoInput.files.length){
+            afficherMessage("Envoi de la photo...");
+
+            const fichier = photoInput.files[0];
+
+            const extension =
+                fichier.name.split(".").pop().toLowerCase();
+
+            const nomFichier =
+                "exercice_" +
+                Date.now() +
+                "_" +
+                Math.random().toString(36).substring(2,8) +
+                "." +
+                extension;
+
+            const uploadResponse = await fetch(
+                STORAGE_URL + "/" + nomFichier,
+                {
+                    method:"POST",
+                    headers:{
+                        "apikey":SUPABASE_KEY,
+                        "Content-Type":fichier.type || "application/octet-stream"
+                    },
+                    body:fichier
+                }
             );
+
+            if(!uploadResponse.ok){
+                throw new Error(
+                    "Erreur upload photo : " +
+                    uploadResponse.status
+                );
+            }
 
             photoUrl =
-                await envoyerFichier(
-                    photoFile,
-                    "photo"
-                );
-
+                STORAGE_URL.replace(
+                    "/storage/v1/object/medias",
+                    "/storage/v1/object/public/medias"
+                ) +
+                "/" +
+                nomFichier;
         }
 
+        const donnees = {
+            nom:nom,
+            categorie:categorie,
+            repetitions:series.length
+                ? String(series[0].repetitions)
+                : null,
+            description:descriptionFinale,
+            video_url:video || null,
+            photo_url:photoUrl
+        };
 
-        if (id) {
+        afficherMessage(
+            id ? "Modification en cours..." : "Enregistrement..."
+        );
 
-            const ancien =
-                exercices.find(
-                    e =>
-                        String(e.id) ===
-                        String(id)
-                );
+        let response;
 
-
-            const donnees = {
-
-                nom: nom,
-
-                categorie: categorie,
-
-                series: series,
-
-                repetitions: repetitions,
-
-                description: description
-
-            };
-
-
-            if (videoUrl) {
-
-                donnees.video_url =
-                    videoUrl;
-
-            } else if (ancien) {
-
-                donnees.video_url =
-                    ancien.video_url ||
-                    null;
-
-            }
-
-
-            if (photoUrl) {
-
-                donnees.photo_url =
-                    photoUrl;
-
-            } else if (ancien) {
-
-                donnees.photo_url =
-                    ancien.photo_url ||
-                    null;
-
-            }
-
-
-            const response =
-                await fetchAvecTimeout(
-                    TABLE_URL +
-                    "?id=eq." +
-                    encodeURIComponent(id),
-                    {
-                        method: "PATCH",
-
-                        headers: {
-                            ...headersSupabase(),
-
-                            "Prefer":
-                                "return=representation"
-                        },
-
-                        body:
-                            JSON.stringify(
-                                donnees
-                            )
+        if(id){
+            response = await fetch(
+                TABLE_URL + "?id=eq." + encodeURIComponent(id),
+                {
+                    method:"PATCH",
+                    headers:{
+                        ...headersSupabase(),
+                        "Prefer":"return=minimal"
                     },
-                    15000
-                );
-
-
-            const texte =
-                await response.text();
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    texte
-                );
-
-            }
-
-
-            message(
-                "✅ Exercice modifié avec succès."
+                    body:JSON.stringify(donnees)
+                }
             );
-
-
-        } else {
-
-            const donnees = {
-
-                nom: nom,
-
-                categorie: categorie,
-
-                series: series,
-
-                repetitions: repetitions,
-
-                description: description,
-
-                video_url: videoUrl,
-
-                photo_url: photoUrl
-
-            };
-
-
-            const response =
-                await fetchAvecTimeout(
-                    TABLE_URL,
-                    {
-                        method: "POST",
-
-                        headers: {
-                            ...headersSupabase(),
-
-                            "Prefer":
-                                "return=representation"
-                        },
-
-                        body:
-                            JSON.stringify(
-                                donnees
-                            )
+        }else{
+            response = await fetch(
+                TABLE_URL,
+                {
+                    method:"POST",
+                    headers:{
+                        ...headersSupabase(),
+                        "Prefer":"return=representation"
                     },
-                    15000
-                );
-
-
-            const texte =
-                await response.text();
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    texte
-                );
-
-            }
-
-
-            message(
-                "✅ Exercice enregistré avec succès."
+                    body:JSON.stringify(donnees)
+                }
             );
-
         }
 
+        if(!response.ok){
+            const texte = await response.text();
+            throw new Error(
+                "Erreur sauvegarde : " +
+                response.status +
+                " " +
+                texte
+            );
+        }
+
+        afficherMessage("");
 
         viderFormulaire();
 
         await chargerExercices();
 
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-
-    } catch (erreur) {
-
-        console.error(
-            "Erreur sauvegarde :",
-            erreur
-        );
-
-
-        message(
-            "❌ Erreur : " +
-            echapperHTML(
-                erreur.message
-            )
-        );
-
+    }catch(error){
+        console.error(error);
+        afficherMessage(error.message);
     }
-
 }
 
+function modifierExercice(id){
 
-/* ============================================================
-   MODIFIER
-   ============================================================ */
+    const e = exercices.find(x => String(x.id) === String(id));
 
-function modifierExercice(id) {
+    if(!e) return;
 
-    const exercice =
-        exercices.find(
-            e =>
-                Number(e.id) ===
-                Number(id)
-        );
+    document.getElementById("exerciceId").value = e.id;
+    document.getElementById("nom").value = e.nom || "";
+    document.getElementById("categorie").value = e.categorie || "Pectoraux";
 
+    const ancienne = extraireAnciennesDonnees(e.description);
 
-    if (!exercice) {
+    document.getElementById("charge").value =
+        ancienne.charge || "";
 
-        alert(
-            "Exercice introuvable."
-        );
+    document.getElementById("description").value =
+        ancienne.description || "";
 
-        return;
+    document.getElementById("video").value =
+        e.video_url || "";
 
+    seriesTemp = extraireSeries(e).map(s => ({
+        repetitions:s.repetitions,
+        poids:s.poids
+    }));
+
+    afficherEditeurSeries();
+
+    if(!seriesTemp.length){
+        ajouterSerie();
     }
 
-
-    const donnees =
-        extraireDonneesMusculation(
-            exercice.description
-        );
-
-
-    document.getElementById(
-        "exerciceId"
-    ).value =
-        exercice.id;
-
-
-    document.getElementById(
-        "nom"
-    ).value =
-        exercice.nom || "";
-
-
-    document.getElementById(
-        "categorie"
-    ).value =
-        exercice.categorie ||
-        "Pectoraux";
-
-
-    document.getElementById(
-        "series"
-    ).value =
-        exercice.series || 4;
-
-
-    document.getElementById(
-        "repetitions"
-    ).value =
-        exercice.repetitions || 10;
-
-
-    document.getElementById(
-        "poids"
-    ).value =
-        donnees.poids || "";
-
-
-    document.getElementById(
-        "charge"
-    ).value =
-        donnees.charge || "";
-
-
-    document.getElementById(
-        "description"
-    ).value =
-        donnees.description || "";
-
-
-    document.getElementById(
-        "titreFormulaire"
-    ).textContent =
-        "✏️ Modifier l'exercice";
-
-
-    document.querySelector(
-        ".form-icon"
-    ).textContent =
-        "✏️";
-
-
-    document.getElementById(
-        "btnAnnuler"
-    ).style.display =
-        "block";
-
-
-    document.getElementById(
-        "sectionFormulaire"
-    ).scrollIntoView({
-        behavior: "smooth"
-    });
-
+    document.getElementById("sectionFormulaire")
+        .scrollIntoView({behavior:"smooth"});
 }
 
+function viderFormulaire(){
 
-/* ============================================================
-   ANNULER
-   ============================================================ */
+    document.getElementById("exerciceId").value = "";
+    document.getElementById("nom").value = "";
+    document.getElementById("charge").value = "";
+    document.getElementById("description").value = "";
+    document.getElementById("video").value = "";
+    document.getElementById("photo").value = "";
 
-function annulerModification() {
+    seriesTemp = [];
+    ajouterSerie();
+}
 
+function annulerEdition(){
     viderFormulaire();
-
-
-    document.getElementById(
-        "titreFormulaire"
-    ).textContent =
-        "Ajouter un exercice";
-
-
-    document.querySelector(
-        ".form-icon"
-    ).textContent =
-        "➕";
-
-
-    document.getElementById(
-        "btnAnnuler"
-    ).style.display =
-        "none";
-
-
-    /*
-       On conserve la catégorie actuellement sélectionnée.
-       Donc si tu es dans DOS, le formulaire reste sur DOS.
-    */
-
-    if (
-        filtreActuel !== "TOUS" &&
-        !modePhotos
-    ) {
-
-        document.getElementById(
-            "categorie"
-        ).value =
-            filtreActuel;
-
-    }
-
 }
 
+async function supprimerExercice(id){
 
-/* ============================================================
-   VIDER FORMULAIRE
-   ============================================================ */
+    const e = exercices.find(x => String(x.id) === String(id));
 
-function viderFormulaire() {
+    if(!e) return;
 
-    document.getElementById(
-        "exerciceId"
-    ).value = "";
-
-
-    document.getElementById(
-        "nom"
-    ).value = "";
-
-
-    document.getElementById(
-        "description"
-    ).value = "";
-
-
-    document.getElementById(
-        "poids"
-    ).value = "";
-
-
-    document.getElementById(
-        "charge"
-    ).value = "";
-
-
-    document.getElementById(
-        "video"
-    ).value = "";
-
-
-    document.getElementById(
-        "photo"
-    ).value = "";
-
-
-    document.getElementById(
-        "series"
-    ).value = 4;
-
-
-    document.getElementById(
-        "repetitions"
-    ).value = 10;
-
-
-    /*
-       Si une catégorie est sélectionnée,
-       on la conserve dans le formulaire.
-    */
-
-    if (
-        filtreActuel !== "TOUS" &&
-        !modePhotos
-    ) {
-
-        document.getElementById(
-            "categorie"
-        ).value =
-            filtreActuel;
-
-    }
-
-}
-
-
-/* ============================================================
-   SUPPRIMER
-   ============================================================ */
-
-async function supprimerExercice(id) {
-
-    const exercice =
-        exercices.find(
-            e =>
-                Number(e.id) ===
-                Number(id)
-        );
-
-
-    if (!exercice) {
+    if(!confirm(
+        "Supprimer l'exercice « " +
+        e.nom +
+        " » ?"
+    )){
         return;
     }
 
+    try{
 
-    const confirmation =
-        confirm(
-            "Supprimer « " +
-            exercice.nom +
-            " » ?"
+        const response = await fetch(
+            TABLE_URL + "?id=eq." + encodeURIComponent(id),
+            {
+                method:"DELETE",
+                headers:headersSupabase()
+            }
         );
 
-
-    if (!confirmation) {
-        return;
-    }
-
-
-    try {
-
-        message(
-            "⏳ Suppression..."
-        );
-
-
-        const response =
-            await fetchAvecTimeout(
-                TABLE_URL +
-                "?id=eq." +
-                encodeURIComponent(id),
-                {
-                    method: "DELETE",
-                    headers:
-                        headersSupabase()
-                },
-                15000
-            );
-
-
-        const texte =
-            await response.text();
-
-
-        if (!response.ok) {
-
+        if(!response.ok){
             throw new Error(
-                texte
+                "Erreur suppression : " + response.status
             );
-
         }
-
-
-        message(
-            "✅ Exercice supprimé."
-        );
-
 
         await chargerExercices();
 
-
-    } catch (erreur) {
-
-        console.error(
-            erreur
-        );
-
-
-        message(
-            "❌ Erreur de suppression : " +
-            echapperHTML(
-                erreur.message
-            )
-        );
-
+    }catch(error){
+        console.error(error);
+        afficherMessage(error.message);
     }
-
 }
 
+function filtrerCategorie(categorie,bouton){
 
-/* ============================================================
-   GALERIE — FILTRÉE PAR CATÉGORIE
-   ============================================================ */
+    modePhotos = false;
+    filtreActuel = categorie;
 
-function afficherGalerie() {
+    document.querySelectorAll(".category")
+        .forEach(b => b.classList.remove("active"));
 
-    const galerie =
-        document.getElementById(
-            "galerie"
-        );
+    document.querySelectorAll(".toolbar button")
+        .forEach(b => b.classList.remove("active"));
 
+    bouton.classList.add("active");
 
-    let liste =
-        obtenirListeFiltree();
+    /*
+        Le choix de la catégorie est automatiquement
+        prérempli dans le formulaire.
+    */
+    document.getElementById("categorie").value = categorie;
 
+    mettreAJourTitresSections();
+    afficherExercices();
+    afficherGalerie();
+    afficherNotes();
+}
 
-    const photos =
-        liste.filter(
-            e => e.photo_url
-        );
+function filtrerPhotos(bouton){
 
+    modePhotos = true;
+    filtreActuel = "PHOTOS";
 
-    if (photos.length === 0) {
+    document.querySelectorAll(".category")
+        .forEach(b => b.classList.remove("active"));
 
-        if (
-            filtreActuel !== "TOUS" &&
-            !modePhotos
-        ) {
+    document.querySelectorAll(".toolbar button")
+        .forEach(b => b.classList.remove("active"));
 
-            galerie.innerHTML =
-                '<div class="empty">📷 Aucune photo pour ' +
-                echapperHTML(filtreActuel) +
-                '.</div>';
+    bouton.classList.add("active");
 
-        } else {
+    mettreAJourTitresSections();
+    afficherExercices();
+    afficherGalerie();
+    afficherNotes();
+}
 
-            galerie.innerHTML =
-                '<div class="empty">📷 Aucune photo pour le moment</div>';
+function afficherTous(bouton){
 
-        }
+    modePhotos = false;
+    filtreActuel = "TOUS";
 
+    document.querySelectorAll(".category")
+        .forEach(b => b.classList.remove("active"));
+
+    document.querySelectorAll(".toolbar button")
+        .forEach(b => b.classList.remove("active"));
+
+    bouton.classList.add("active");
+
+    mettreAJourTitresSections();
+    afficherExercices();
+    afficherGalerie();
+    afficherNotes();
+}
+
+function mettreAJourTitresSections(){
+
+    const titreGalerie =
+        document.getElementById("titreGalerie");
+
+    const titreNotes =
+        document.getElementById("titreNotes");
+
+    if(modePhotos){
+        titreGalerie.textContent = "🖼️ Galerie photos";
+        titreNotes.textContent = "📝 Notes";
         return;
-
     }
 
+    if(filtreActuel !== "TOUS"){
+        titreGalerie.textContent =
+            "🖼️ Photos — " + filtreActuel;
 
-    galerie.innerHTML =
-        photos.map(
-            function(e) {
-
-                const url =
-                    echapperHTML(
-                        e.photo_url
-                    );
-
-
-                return `
-
-                    <img
-                        src="${url}"
-                        alt="${echapperHTML(e.nom)}"
-                        title="${echapperHTML(e.nom)}"
-                        loading="lazy"
-                        onclick="window.open('${url}', '_blank')">
-
-                `;
-
-            }
-        ).join("");
-
+        titreNotes.textContent =
+            "📝 Notes — " + filtreActuel;
+    }else{
+        titreGalerie.textContent = "🖼️ Galerie photos";
+        titreNotes.textContent = "📝 Notes";
+    }
 }
 
+function afficherGalerie(){
 
-/* ============================================================
-   NOTES — FILTRÉES PAR CATÉGORIE
-   ============================================================ */
+    const zone = document.getElementById("galerie");
 
-function afficherNotes() {
+    let source = [...exercices];
 
-    const zone =
-        document.getElementById(
-            "notes"
-        );
+    if(!modePhotos && filtreActuel !== "TOUS"){
+        source = source.filter(categorieCorrespond);
+    }
 
+    const photos = source.filter(e => e.photo_url);
 
-    let liste =
-        obtenirListeFiltree();
-
-
-    const notes =
-        liste
-            .map(
-                function(e) {
-
-                    const donnees =
-                        extraireDonneesMusculation(
-                            e.description
-                        );
-
-
-                    return {
-                        exercice: e,
-                        note: donnees.description
-                    };
-
-                }
-            )
-            .filter(
-                function(x) {
-
-                    return (
-                        x.note &&
-                        x.note.trim() !== ""
-                    );
-
-                }
-            );
-
-
-    if (notes.length === 0) {
-
-        if (
-            filtreActuel !== "TOUS" &&
-            !modePhotos
-        ) {
-
-            zone.innerHTML =
-                '<div class="empty">📝 Aucune note pour ' +
-                echapperHTML(filtreActuel) +
-                '.</div>';
-
-        } else {
-
-            zone.innerHTML =
-                '<div class="empty">📝 Aucune note pour le moment</div>';
-
-        }
-
+    if(!photos.length){
+        zone.innerHTML =
+            '<div class="empty">📷 Aucune photo dans cette sélection.</div>';
         return;
-
     }
 
-
-    zone.innerHTML =
-        notes.map(
-            function(x) {
-
-                return `
-
-                    <div class="card">
-
-                        <h3>
-                            ${echapperHTML(
-                                x.exercice.nom
-                            )}
-                        </h3>
-
-                        <div class="exercise-category">
-                            🏷️ ${echapperHTML(
-                                x.exercice.categorie
-                            )}
-                        </div>
-
-                        <div class="info">
-                            📝 ${echapperHTML(
-                                x.note
-                            )}
-                        </div>
-
-                    </div>
-
-                `;
-
-            }
-        ).join("");
-
+    zone.innerHTML = photos.map(e => `
+        <div class="gallery-item">
+            <img
+                src="${escapeHTML(e.photo_url)}"
+                alt="${escapeHTML(e.nom)}"
+            >
+            <div class="gallery-caption">
+                <strong>${escapeHTML(e.nom)}</strong><br>
+                <span style="color:#888">${escapeHTML(e.categorie)}</span>
+            </div>
+        </div>
+    `).join("");
 }
 
+function afficherNotes(){
 
-/* ============================================================
-   DEMARRAGE
-   ============================================================ */
+    const zone = document.getElementById("notes");
 
-function demarrerApplication() {
+    if(modePhotos){
+        zone.innerHTML =
+            '<div class="empty">📝 Les notes sont masquées en mode Photos.</div>';
+        return;
+    }
 
-    console.log(
-        "Mon Carnet Musculation : démarrage"
+    let source = [...exercices];
+
+    if(filtreActuel !== "TOUS"){
+        source = source.filter(categorieCorrespond);
+    }
+
+    const notes = source.map(e => ({
+        nom:e.nom,
+        categorie:e.categorie,
+        note:nettoyerDescription(e.description)
+    })).filter(e => e.note);
+
+    if(!notes.length){
+        zone.innerHTML =
+            '<div class="empty">📝 Aucune note pour cette sélection.</div>';
+        return;
+    }
+
+    zone.innerHTML = notes.map(e => `
+        <div class="note">
+            <div class="note-title">
+                ${escapeHTML(e.nom)}
+                <span style="color:#777;font-size:11px;">
+                    · ${escapeHTML(e.categorie)}
+                </span>
+            </div>
+
+            <div class="note-text">
+                ${escapeHTML(e.note)}
+            </div>
+        </div>
+    `).join("");
+}
+
+/*
+    ---------------------------------------------------------
+    ÉVOLUTION DES SÉANCES
+    ---------------------------------------------------------
+
+    Chaque exercice possède maintenant des séries.
+    Le volume = répétitions × poids.
+
+    Pour permettre une évolution séance après séance
+    sans modifier Supabase, on utilise le stockage local
+    du navigateur pour mémoriser les snapshots.
+
+    Les exercices existants restent dans Supabase.
+*/
+
+function obtenirHistoriqueLocal(){
+
+    try{
+        return JSON.parse(
+            localStorage.getItem("carnet_musculation_historique") || "[]"
+        );
+    }catch{
+        return [];
+    }
+}
+
+function sauvegarderHistoriqueLocal(historique){
+
+    localStorage.setItem(
+        "carnet_musculation_historique",
+        JSON.stringify(historique)
+    );
+}
+
+function calculerSeances(){
+
+    const historique = obtenirHistoriqueLocal();
+
+    if(historique.length){
+        return historique;
+    }
+
+    /*
+        Si aucun historique n'existe encore,
+        on crée une première représentation à partir
+        des exercices actuels.
+    */
+
+    const volume = exercices.reduce(
+        (total,e) => total + calculerVolume(e),
+        0
     );
 
+    if(volume <= 0){
+        return [];
+    }
 
-    afficherTous(
-        document.getElementById(
-            "btnTous"
-        )
+    return [{
+        date:new Date().toISOString(),
+        volume:volume
+    }];
+}
+
+function enregistrerSeance(){
+
+    const volume = exercices.reduce(
+        (total,e) => total + calculerVolume(e),
+        0
     );
 
+    if(volume <= 0){
+        alert(
+            "Ajoute au moins une série avec un poids et des répétitions."
+        );
+        return;
+    }
+
+    const historique = obtenirHistoriqueLocal();
+
+    historique.push({
+        date:new Date().toISOString(),
+        volume:volume
+    });
+
+    sauvegarderHistoriqueLocal(historique);
+
+    afficherEvolution();
+    mettreAJourStats();
+}
+
+function afficherEvolution(){
+
+    const historique = calculerSeances();
+
+    const canvas =
+        document.getElementById("graphiqueEvolution");
+
+    const ctx = canvas.getContext("2d");
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    if(!historique.length){
+
+        document.getElementById("evolutionDerniere").textContent =
+            "0 kg";
+
+        document.getElementById("evolutionMeilleure").textContent =
+            "0 kg";
+
+        document.getElementById("evolutionProgression").textContent =
+            "0 %";
+
+        ctx.fillStyle = "#777";
+        ctx.font = "16px Arial";
+        ctx.textAlign = "center";
+
+        ctx.fillText(
+            "Enregistre une séance pour commencer ton évolution",
+            canvas.width / 2,
+            canvas.height / 2
+        );
+
+        return;
+    }
+
+    const valeurs = historique.map(s =>
+        valeurNombre(s.volume)
+    );
+
+    const derniere = valeurs[valeurs.length - 1];
+    const meilleure = Math.max(...valeurs);
+    const premiere = valeurs[0];
+
+    let progression = 0;
+
+    if(premiere > 0){
+        progression =
+            ((derniere - premiere) / premiere) * 100;
+    }
+
+    document.getElementById("evolutionDerniere").textContent =
+        derniere.toFixed(0) + " kg";
+
+    document.getElementById("evolutionMeilleure").textContent =
+        meilleure.toFixed(0) + " kg";
+
+    document.getElementById("evolutionProgression").textContent =
+        (progression >= 0 ? "+" : "") +
+        progression.toFixed(0) +
+        " %";
+
+    const paddingLeft = 55;
+    const paddingRight = 25;
+    const paddingTop = 25;
+    const paddingBottom = 45;
+
+    const largeur =
+        canvas.width -
+        paddingLeft -
+        paddingRight;
+
+    const hauteur =
+        canvas.height -
+        paddingTop -
+        paddingBottom;
+
+    const max =
+        Math.max(...valeurs,1);
+
+    /*
+        Grille horizontale
+    */
+
+    ctx.strokeStyle = "#292929";
+    ctx.lineWidth = 1;
+
+    for(let i=0;i<=4;i++){
+
+        const y =
+            paddingTop +
+            hauteur -
+            (hauteur * i / 4);
+
+        ctx.beginPath();
+        ctx.moveTo(paddingLeft,y);
+        ctx.lineTo(canvas.width-paddingRight,y);
+        ctx.stroke();
+
+        ctx.fillStyle = "#777";
+        ctx.font = "11px Arial";
+        ctx.textAlign = "right";
+
+        ctx.fillText(
+            Math.round(max * i / 4) + " kg",
+            paddingLeft - 8,
+            y + 4
+        );
+    }
+
+    /*
+        Ligne de progression
+    */
+
+    ctx.strokeStyle = "#ff7a00";
+    ctx.lineWidth = 4;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+
+    ctx.beginPath();
+
+    valeurs.forEach((valeur,index) => {
+
+        const x =
+            valeurs.length === 1
+                ? paddingLeft + largeur / 2
+                : paddingLeft +
+                  largeur *
+                  index /
+                  (valeurs.length - 1);
+
+        const y =
+            paddingTop +
+            hauteur -
+            (valeur / max) * hauteur;
+
+        if(index === 0){
+            ctx.moveTo(x,y);
+        }else{
+            ctx.lineTo(x,y);
+        }
+    });
+
+    ctx.stroke();
+
+    /*
+        Points
+    */
+
+    valeurs.forEach((valeur,index) => {
+
+        const x =
+            valeurs.length === 1
+                ? paddingLeft + largeur / 2
+                : paddingLeft +
+                  largeur *
+                  index /
+                  (valeurs.length - 1);
+
+        const y =
+            paddingTop +
+            hauteur -
+            (valeur / max) * hauteur;
+
+        ctx.beginPath();
+        ctx.arc(x,y,6,0,Math.PI*2);
+        ctx.fillStyle = "#ff7a00";
+        ctx.fill();
+
+        ctx.fillStyle = "#fff";
+        ctx.font = "11px Arial";
+        ctx.textAlign = "center";
+
+        ctx.fillText(
+            Math.round(valeur) + " kg",
+            x,
+            y - 11
+        );
+
+        ctx.fillStyle = "#777";
+
+        ctx.fillText(
+            "S" + (index + 1),
+            x,
+            canvas.height - 20
+        );
+    });
+}
+
+/*
+    Bouton automatique ajouté sous le graphique.
+*/
+
+function ajouterBoutonSeance(){
+
+    const chartCard =
+        document.querySelector(".chart-card");
+
+    if(!chartCard || document.getElementById("btnSeance")){
+        return;
+    }
+
+    const bouton = document.createElement("button");
+
+    bouton.id = "btnSeance";
+    bouton.className = "add-series";
+    bouton.style.marginTop = "14px";
+
+    bouton.textContent =
+        "📈 Enregistrer cette séance";
+
+    bouton.onclick = enregistrerSeance;
+
+    chartCard.appendChild(bouton);
+}
+
+window.addEventListener("load",() => {
+
+    /*
+        On commence avec une série prête à remplir.
+    */
+
+    seriesTemp = [];
+
+    ajouterSerie();
+
+    ajouterBoutonSeance();
+
+    /*
+        La catégorie par défaut correspond à la première
+        catégorie disponible.
+    */
+
+    document.getElementById("categorie").value =
+        "Pectoraux";
 
     chargerExercices();
-
-}
-
-
-if (
-    document.readyState === "loading"
-) {
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        demarrerApplication
-    );
-
-} else {
-
-    demarrerApplication();
-
-}
-
+});
 </script></body>
-    </html>
+                </html>
