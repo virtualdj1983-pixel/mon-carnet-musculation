@@ -140,6 +140,46 @@ h2 {
     line-height: 1.5;
 }
 
+.performance {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.performance-box {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 13px;
+    text-align: center;
+}
+
+.performance-label {
+    display: block;
+    color: #94a3b8;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.performance-value {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.charge-leger {
+    color: #facc15;
+}
+
+.charge-correct {
+    color: #22c55e;
+}
+
+.charge-lourd {
+    color: #ef4444;
+}
+
 .video {
     width: 100%;
     max-height: 500px;
@@ -301,179 +341,176 @@ footer {
     .gallery {
         grid-template-columns: repeat(4, 1fr);
     }
+
+    .performance {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 </style></head><body><header>
     <h1>💪 Mon Carnet Musculation</h1>
     <p>Mes exercices, mes vidéos, mes photos et mes notes</p>
-</header><div class="container"><div class="stats">
-    <div class="stat">
-        <strong id="statExercices">0</strong>
-        <span>Exercices</span>
-    </div>
-
-    <div class="stat">
-        <strong id="statPhotos">0</strong>
-        <span>Photos</span>
-    </div>
-
-    <div class="stat">
-        <strong id="statVideos">0</strong>
-        <span>Vidéos</span>
-    </div>
+</header><div class="container"><div class="stats"><div class="stat">
+    <strong id="statExercices">0</strong>
+    <span>Exercices</span>
 </div>
 
-<h2>🏋️ Mes catégories</h2>
-
-<div class="categories">
-
-    <button class="category" onclick="filtrerCategorie('Pectoraux', this)">
-        🏋️ Pectoraux
-    </button>
-
-    <button class="category" onclick="filtrerCategorie('Dos', this)">
-        🔥 Dos
-    </button>
-
-    <button class="category" onclick="filtrerCategorie('Épaules', this)">
-        💪 Épaules
-    </button>
-
-    <button class="category" onclick="filtrerCategorie('Biceps', this)">
-        💪 Biceps
-    </button>
-
-    <button class="category" onclick="filtrerCategorie('Triceps', this)">
-        💪 Triceps
-    </button>
-
-    <button class="category" onclick="filtrerCategorie('Jambes', this)">
-        🦵 Jambes
-    </button>
-
-    <button class="category" onclick="filtrerCategorie('Abdos', this)">
-        🔥 Abdos
-    </button>
-
-    <button class="category" onclick="filtrerPhotos(this)">
-        📷 Photos
-    </button>
-
+<div class="stat">
+    <strong id="statPhotos">0</strong>
+    <span>Photos</span>
 </div>
 
-<div class="toolbar">
-
-    <button id="btnTous" class="active" onclick="afficherTous(this)">
-        📋 TOUS LES EXERCICES
-    </button>
-
+<div class="stat">
+    <strong id="statVideos">0</strong>
+    <span>Vidéos</span>
 </div>
 
-<input
-    id="recherche"
-    class="search"
-    type="text"
-    placeholder="🔎 Rechercher un exercice..."
-    oninput="afficherExercices()"
->
+</div><h2>🏋️ Mes catégories</h2><div class="categories"><button class="category" onclick="filtrerCategorie('Pectoraux', this)">
+    🏋️ Pectoraux
+</button>
+
+<button class="category" onclick="filtrerCategorie('Dos', this)">
+    🔥 Dos
+</button>
+
+<button class="category" onclick="filtrerCategorie('Épaules', this)">
+    💪 Épaules
+</button>
+
+<button class="category" onclick="filtrerCategorie('Biceps', this)">
+    💪 Biceps
+</button>
+
+<button class="category" onclick="filtrerCategorie('Triceps', this)">
+    💪 Triceps
+</button>
+
+<button class="category" onclick="filtrerCategorie('Jambes', this)">
+    🦵 Jambes
+</button>
+
+<button class="category" onclick="filtrerCategorie('Abdos', this)">
+    🔥 Abdos
+</button>
+
+<button class="category" onclick="filtrerPhotos(this)">
+    📷 Photos
+</button>
+
+</div><div class="toolbar"><button id="btnTous" class="active" onclick="afficherTous(this)">
+    📋 TOUS LES EXERCICES
+</button>
+
+</div><input
+id="recherche"
+class="search"
+type="text"
+placeholder="🔎 Rechercher un exercice..."
+oninput="afficherExercices()"
+
+«»
 
 <div id="connexion" class="loading">
     🔄 Connexion à la base de données...
-</div>
+</div><div id="listeExercices"></div><div class="form-box" id="sectionFormulaire"><h2 id="titreFormulaire">➕ Ajouter un exercice</h2>
 
-<div id="listeExercices"></div>
+<input type="hidden" id="exerciceId">
 
-<div class="form-box" id="sectionFormulaire">
+<label>Nom de l'exercice</label>
 
-    <h2 id="titreFormulaire">➕ Ajouter un exercice</h2>
+<input
+    id="nom"
+    type="text"
+    placeholder="Exemple : Développé couché"
+>
 
-    <input type="hidden" id="exerciceId">
+<label>Catégorie</label>
 
-    <label>Nom de l'exercice</label>
+<select id="categorie">
+    <option value="Pectoraux">Pectoraux</option>
+    <option value="Dos">Dos</option>
+    <option value="Épaules">Épaules</option>
+    <option value="Biceps">Biceps</option>
+    <option value="Triceps">Triceps</option>
+    <option value="Jambes">Jambes</option>
+    <option value="Abdos">Abdos</option>
+</select>
 
-    <input
-        id="nom"
-        type="text"
-        placeholder="Exemple : Développé couché"
-    >
+<label>Nombre de séries</label>
 
-    <label>Catégorie</label>
+<input
+    id="series"
+    type="number"
+    value="4"
+    min="1"
+>
 
-    <select id="categorie">
-        <option value="Pectoraux">Pectoraux</option>
-        <option value="Dos">Dos</option>
-        <option value="Épaules">Épaules</option>
-        <option value="Biceps">Biceps</option>
-        <option value="Triceps">Triceps</option>
-        <option value="Jambes">Jambes</option>
-        <option value="Abdos">Abdos</option>
-    </select>
+<label>Nombre de répétitions</label>
 
-    <label>Nombre de séries</label>
+<input
+    id="repetitions"
+    type="number"
+    value="10"
+    min="1"
+>
 
-    <input
-        id="series"
-        type="number"
-        value="4"
-        min="1"
-    >
+<label>⚖️ Poids utilisé (kg)</label>
 
-    <label>Nombre de répétitions</label>
+<input
+    id="poids"
+    type="number"
+    value=""
+    min="0"
+    step="0.5"
+    placeholder="Exemple : 60"
+>
 
-    <input
-        id="repetitions"
-        type="number"
-        value="10"
-        min="1"
-    >
+<label>🎯 Charge</label>
 
-    <label>Description / notes</label>
+<select id="charge">
+    <option value="">-- Choisir --</option>
+    <option value="Trop léger">🟡 Trop léger</option>
+    <option value="Correct">🟢 Correct</option>
+    <option value="Trop lourd">🔴 Trop lourd</option>
+</select>
 
-    <textarea
-        id="description"
-        placeholder="Technique, poids, conseils, sensations..."
-    ></textarea>
+<label>📝 Description / notes</label>
 
-    <label>🎥 Vidéo de démonstration</label>
+<textarea
+    id="description"
+    placeholder="Technique, conseils, sensations..."
+></textarea>
 
-    <input
-        id="video"
-        type="file"
-        accept="video/*"
-    >
+<label>🎥 Vidéo de démonstration</label>
 
-    <label>📷 Photo</label>
+<input
+    id="video"
+    type="file"
+    accept="video/*"
+>
 
-    <input
-        id="photo"
-        type="file"
-        accept="image/*"
-    >
+<label>📷 Photo</label>
 
-    <button class="save" onclick="sauvegarderExercice()">
-        💾 ENREGISTRER
-    </button>
+<input
+    id="photo"
+    type="file"
+    accept="image/*"
+>
 
-    <button
-        id="btnAnnuler"
-        class="cancel"
-        onclick="annulerModification()"
-    >
-        ❌ ANNULER LA MODIFICATION
-    </button>
+<button class="save" onclick="sauvegarderExercice()">
+    💾 ENREGISTRER
+</button>
 
-    <div id="message" class="message"></div>
+<button
+    id="btnAnnuler"
+    class="cancel"
+    onclick="annulerModification()"
+>
+    ❌ ANNULER LA MODIFICATION
+</button>
 
-</div>
+<div id="message" class="message"></div>
 
-<h2>🖼️ Galerie photos</h2>
-
-<div id="galerie" class="gallery"></div>
-
-<h2>📝 Notes</h2>
-
-<div id="notes"></div>
-
-</div><footer>
+</div><h2>🖼️ Galerie photos</h2><div id="galerie" class="gallery"></div><h2>📝 Notes</h2><div id="notes"></div></div><footer>
     Mon Carnet Musculation
 </footer><script>
 
@@ -511,15 +548,6 @@ let modePhotos = false;
 
 function headersSupabase() {
 
-    /*
-     * IMPORTANT :
-     * La nouvelle clé sb_publishable_... n'est pas
-     * une ancienne clé JWT anon.
-     *
-     * Elle doit être envoyée avec "apikey".
-     * On ne la met donc PAS dans Authorization: Bearer.
-     */
-
     return {
         "apikey": SUPABASE_KEY,
         "Content-Type": "application/json"
@@ -532,7 +560,11 @@ function headersSupabase() {
    REQUETE AVEC TIMEOUT
    ============================================================ */
 
-async function fetchAvecTimeout(url, options = {}, timeout = 15000) {
+async function fetchAvecTimeout(
+    url,
+    options = {},
+    timeout = 15000
+) {
 
     const controller =
         new AbortController();
@@ -580,7 +612,10 @@ function message(texte) {
 
 function echapperHTML(texte) {
 
-    if (texte === null || texte === undefined) {
+    if (
+        texte === null ||
+        texte === undefined
+    ) {
         return "";
     }
 
@@ -590,6 +625,172 @@ function echapperHTML(texte) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+
+}
+
+
+/* ============================================================
+   GESTION POIDS / CHARGE
+
+   Les colonnes Supabase existantes ne sont pas modifiées.
+
+   Les nouvelles informations sont enregistrées dans le champ
+   description sous forme de lignes techniques protégées.
+
+   Exemple :
+   [[POIDS:60]]
+   [[CHARGE:Correct]]
+
+   Ainsi, les anciens exercices restent compatibles.
+   ============================================================ */
+
+function extraireDonneesMusculation(description) {
+
+    const texte =
+        String(description || "");
+
+    const poidsMatch =
+        texte.match(/\[POIDS:([0-9]+(?:[.,][0-9]+)?)\]/i);
+
+    const chargeMatch =
+        texte.match(/\[CHARGE:(Trop léger|Correct|Trop lourd)\]/i);
+
+    let poids = "";
+
+    if (poidsMatch) {
+
+        poids =
+            poidsMatch[1]
+                .replace(",", ".");
+
+    }
+
+    const charge =
+        chargeMatch
+            ? chargeMatch[1]
+            : "";
+
+    let notePropre =
+        texte
+            .replace(
+                /\[POIDS:[0-9]+(?:[.,][0-9]+)?\]\s*/gi,
+                ""
+            )
+            .replace(
+                /\[CHARGE:(?:Trop léger|Correct|Trop lourd)\]\s*/gi,
+                ""
+            )
+            .trim();
+
+    return {
+        poids,
+        charge,
+        description: notePropre
+    };
+
+}
+
+
+/* ============================================================
+   CONSTRUIRE LA DESCRIPTION SUPABASE
+   ============================================================ */
+
+function construireDescription(
+    description,
+    poids,
+    charge
+) {
+
+    let texte =
+        String(description || "").trim();
+
+    /*
+     * Supprime d'abord d'éventuelles anciennes données
+     * techniques afin d'éviter les doublons.
+     */
+
+    texte =
+        texte
+            .replace(
+                /\[POIDS:[0-9]+(?:[.,][0-9]+)?\]\s*/gi,
+                ""
+            )
+            .replace(
+                /\[CHARGE:(?:Trop léger|Correct|Trop lourd)\]\s*/gi,
+                ""
+            )
+            .trim();
+
+    const informations = [];
+
+    if (
+        poids !== null &&
+        poids !== undefined &&
+        String(poids).trim() !== ""
+    ) {
+
+        informations.push(
+            "[[POIDS:" +
+            String(poids).replace(",", ".") +
+            "]]"
+        );
+
+    }
+
+    if (
+        charge &&
+        (
+            charge === "Trop léger" ||
+            charge === "Correct" ||
+            charge === "Trop lourd"
+        )
+    ) {
+
+        informations.push(
+            "[[CHARGE:" +
+            charge +
+            "]]"
+        );
+
+    }
+
+    if (informations.length > 0) {
+
+        return (
+            informations.join(" ") +
+            (
+                texte
+                    ? "\n" + texte
+                    : ""
+            )
+        );
+
+    }
+
+    return texte;
+
+}
+
+
+/* ============================================================
+   CLASSE CSS DE LA CHARGE
+   ============================================================ */
+
+function classeCharge(charge) {
+
+    if (charge === "Trop léger") {
+        return "charge-leger";
+    }
+
+    if (charge === "Correct") {
+        return "charge-correct";
+    }
+
+    if (charge === "Trop lourd") {
+        return "charge-lourd";
+    }
+
+    return "";
 
 }
 
@@ -750,15 +951,21 @@ async function chargerExercices() {
 
 function mettreAJourStats() {
 
-    document.getElementById("statExercices").textContent =
+    document.getElementById(
+        "statExercices"
+    ).textContent =
         exercices.length;
 
-    document.getElementById("statPhotos").textContent =
+    document.getElementById(
+        "statPhotos"
+    ).textContent =
         exercices.filter(
             e => e.photo_url
         ).length;
 
-    document.getElementById("statVideos").textContent =
+    document.getElementById(
+        "statVideos"
+    ).textContent =
         exercices.filter(
             e => e.video_url
         ).length;
@@ -773,10 +980,14 @@ function mettreAJourStats() {
 function afficherExercices() {
 
     const zone =
-        document.getElementById("listeExercices");
+        document.getElementById(
+            "listeExercices"
+        );
 
     const recherche =
-        document.getElementById("recherche")
+        document.getElementById(
+            "recherche"
+        )
         .value
         .toLowerCase()
         .trim();
@@ -791,7 +1002,9 @@ function afficherExercices() {
                 e => e.photo_url
             );
 
-    } else if (filtreActuel !== "TOUS") {
+    } else if (
+        filtreActuel !== "TOUS"
+    ) {
 
         liste =
             liste.filter(
@@ -853,8 +1066,15 @@ function afficherExercices() {
             const categorie =
                 echapperHTML(e.categorie);
 
+            const donnees =
+                extraireDonneesMusculation(
+                    e.description
+                );
+
             const description =
-                echapperHTML(e.description);
+                echapperHTML(
+                    donnees.description
+                );
 
             let html = `
                 <div class="card">
@@ -867,6 +1087,62 @@ function afficherExercices() {
                         ${e.repetitions || 0} répétitions
                     </div>
             `;
+
+            if (
+                donnees.poids ||
+                donnees.charge
+            ) {
+
+                const classe =
+                    classeCharge(
+                        donnees.charge
+                    );
+
+                html += `
+                    <div class="performance">
+
+                        <div class="performance-box">
+
+                            <span class="performance-label">
+                                ⚖️ POIDS
+                            </span>
+
+                            <span class="performance-value">
+                                ${
+                                    donnees.poids
+                                    ? echapperHTML(donnees.poids) + " kg"
+                                    : "Non renseigné"
+                                }
+                            </span>
+
+                        </div>
+
+                        <div class="performance-box">
+
+                            <span class="performance-label">
+                                🎯 CHARGE
+                            </span>
+
+                            <span class="performance-value ${classe}">
+                                ${
+                                    donnees.charge
+                                    ? (
+                                        donnees.charge === "Trop léger"
+                                            ? "🟡 Trop léger"
+                                            : donnees.charge === "Correct"
+                                                ? "🟢 Correct"
+                                                : "🔴 Trop lourd"
+                                    )
+                                    : "Non renseignée"
+                                }
+                            </span>
+
+                        </div>
+
+                    </div>
+                `;
+
+            }
 
             if (description) {
 
@@ -1152,10 +1428,32 @@ async function sauvegarderExercice() {
             ).value
         ) || 0;
 
-    const description =
+    const poids =
+        document.getElementById(
+            "poids"
+        ).value.trim();
+
+    const charge =
+        document.getElementById(
+            "charge"
+        ).value;
+
+    const descriptionTexte =
         document.getElementById(
             "description"
         ).value.trim();
+
+    /*
+     * Les nouvelles informations sont ajoutées
+     * à la description existante.
+     */
+
+    const description =
+        construireDescription(
+            descriptionTexte,
+            poids,
+            charge
+        );
 
     const videoFile =
         document.getElementById(
@@ -1398,6 +1696,11 @@ function modifierExercice(id) {
 
     }
 
+    const donnees =
+        extraireDonneesMusculation(
+            exercice.description
+        );
+
     document.getElementById(
         "exerciceId"
     ).value =
@@ -1425,9 +1728,19 @@ function modifierExercice(id) {
         exercice.repetitions || 10;
 
     document.getElementById(
+        "poids"
+    ).value =
+        donnees.poids || "";
+
+    document.getElementById(
+        "charge"
+    ).value =
+        donnees.charge || "";
+
+    document.getElementById(
         "description"
     ).value =
-        exercice.description || "";
+        donnees.description || "";
 
     document.getElementById(
         "titreFormulaire"
@@ -1485,6 +1798,14 @@ function viderFormulaire() {
 
     document.getElementById(
         "description"
+    ).value = "";
+
+    document.getElementById(
+        "poids"
+    ).value = "";
+
+    document.getElementById(
+        "charge"
     ).value = "";
 
     document.getElementById(
@@ -1636,6 +1957,9 @@ function afficherGalerie() {
 
 /* ============================================================
    NOTES
+
+   On retire les informations techniques poids/charge
+   avant d'afficher les notes.
    ============================================================ */
 
 function afficherNotes() {
@@ -1646,13 +1970,25 @@ function afficherNotes() {
         );
 
     const notes =
-        exercices.filter(
-            e =>
-                e.description &&
-                String(
-                    e.description
-                ).trim() !== ""
-        );
+        exercices
+            .map(e => {
+
+                const donnees =
+                    extraireDonneesMusculation(
+                        e.description
+                    );
+
+                return {
+                    exercice: e,
+                    note: donnees.description
+                };
+
+            })
+            .filter(
+                x =>
+                    x.note &&
+                    x.note.trim() !== ""
+            );
 
     if (notes.length === 0) {
 
@@ -1664,17 +2000,17 @@ function afficherNotes() {
     }
 
     zone.innerHTML =
-        notes.map(e => {
+        notes.map(x => {
 
             return `
                 <div class="card">
 
                     <h3>
-                        ${echapperHTML(e.nom)}
+                        ${echapperHTML(x.exercice.nom)}
                     </h3>
 
                     <div class="info">
-                        ${echapperHTML(e.description)}
+                        ${echapperHTML(x.note)}
                     </div>
 
                 </div>
@@ -1705,4 +2041,4 @@ document.addEventListener(
 );
 
 </script></body>
-            </html>
+    </html>
