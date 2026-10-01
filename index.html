@@ -101,6 +101,23 @@ details summary{cursor:pointer;color:var(--o2);font-weight:bold;font-size:13px;p
 .row-btns .ok{background:linear-gradient(135deg,var(--o),var(--o3));border:0}
 .stat-box{background:#141414;border:1px solid #292929;border-radius:14px;padding:14px;margin-bottom:12px}
 .stat-box h3{margin:0 0 8px;font-size:16px}
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer;-webkit-user-select:none;user-select:none}
+.card-head h3{margin:0 0 6px;font-size:19px}
+.card-head .exercise-category{margin-bottom:6px}
+.resume{display:block;color:#aaa;font-size:13px}
+.chevron{flex:none;font-size:24px;color:var(--o);transition:transform .2s}
+.card.open .chevron{transform:rotate(180deg)}
+.card-body{display:none;margin-top:12px;padding-top:4px;border-top:1px solid #262626}
+.card.open .card-body{display:block}
+.card{padding:16px 18px}
+.thumb{width:58px;height:58px;object-fit:cover;border-radius:11px;border:1px solid #3a3a3a;flex:none}
+.card-head .txt{flex:1;min-width:0}
+.card-body .photo{margin:0 0 12px;max-height:420px}
+.card-body .video{margin:0 0 12px}
+details.sem-details{margin-top:14px;background:#0d0d0d;border:1px solid #292929;border-radius:13px;padding:0 12px}
+.sem-details>summary{padding:13px 0;font-size:14px}
+.sem-details .prog{margin-top:0;border:0;background:none;padding:0 0 12px}
+.card>.photo{display:block;margin:12px 0 0;max-height:480px;cursor:zoom-in}
 @media(min-width:700px){.categories{grid-template-columns:repeat(4,1fr)}.gallery{grid-template-columns:repeat(4,1fr)}.gallery img{height:210px}}
 </style>
 </head>
@@ -134,6 +151,7 @@ details summary{cursor:pointer;color:var(--o2);font-weight:bold;font-size:13px;p
 
 <div class="toolbar">
 <button class="active" onclick="afficherTous(this)">📋 TOUS LES EXERCICES</button>
+<button onclick="toutBasculer()">↕️ DÉPLIER / REPLIER TOUT</button>
 </div>
 
 <div class="search-wrapper">
@@ -424,11 +442,26 @@ function afficherExercices() {
     if (d.charge === "Correct") chargeAffichage = "🟢 Correct";
     if (d.charge === "Trop lourd") chargeAffichage = "🔴 Trop lourd";
 
+    const idNum = Number(e.id);
+    const photoBig = e.photo_url ? `<img class="photo" src="${echapperHTML(urlMedia(e.photo_url))}" alt="${nom}" loading="lazy" onclick="window.open(this.src,'_blank')">` : "";
+    const media = e.video_url ? `<video class="video" controls preload="metadata" src="${echapperHTML(urlMedia(e.video_url))}"></video>` : "";
+    const ouvert = ouverts.has(idNum);
+    const resume = (e.series || 0) + " séries × " + (e.repetitions || 0) + " rép" + (d.poids ? " • " + echapperHTML(d.poids) + " kg" : "");
     let html = `
-      <div class="card">
-        <h3>${nom}</h3>
-        <div class="exercise-category">🏷️ ${categorie}</div>
-        <div class="info">💪 ${e.series || 0} séries × ${e.repetitions || 0} répétitions</div>` + blocProgression(e.id, d.histo);
+      <div class="card${ouvert ? " open" : ""}" id="card_${idNum}">
+        <div class="card-head" onclick="basculerCarte(${idNum})">
+          <div class="txt">
+            <h3>${nom}</h3>
+            <div class="exercise-category">🏷️ ${categorie}</div>
+            <span class="resume">💪 ${resume}</span>
+          </div>
+          <span class="chevron">▾</span>
+        </div>
+        ${photoBig}
+        ${blocProgression(e.id, d.histo)}
+        <div class="card-body">
+        ${media}
+        <div class="info">💪 ${e.series || 0} séries × ${e.repetitions || 0} répétitions</div>`;
 
     if (d.poids || d.charge) {
       html += `
@@ -446,17 +479,12 @@ function afficherExercices() {
 
     if (description) html += `<p class="info">📝 ${description}</p>`;
 
-    if (e.video_url) {
-      html += `<video class="video" controls preload="metadata" src="${echapperHTML(urlMedia(e.video_url))}"></video>`;
-    }
-    if (e.photo_url) {
-      html += `<img class="photo" src="${echapperHTML(urlMedia(e.photo_url))}" alt="${nom}" loading="lazy">`;
-    }
 
     html += `
         <div class="actions">
           <button class="edit" onclick="modifierExercice(${Number(e.id)})">✏️ Modifier</button>
           <button class="delete" onclick="supprimerExercice(${Number(e.id)})">🗑️ Supprimer</button>
+        </div>
         </div>
       </div>`;
     return html;
@@ -775,7 +803,8 @@ function camembert(items, taille) {
 
 function blocProgression(id, histo) {
   id = Number(id);
-  let html = '<div class="prog">';
+  const ouvertSem = histo.length === 0 || semOuv.has(id);
+  let html = `<details class="prog-details sem-details"${ouvertSem ? " open" : ""} ontoggle="majSem(${id},this.open)"><summary>📅 Semaines (${histo.length})${histo.length ? " — dernière : " + dateLongue(histo[histo.length - 1].date) : ""}</summary><div class="prog">`;
   if (histo.length === 0) {
     html += '<div class="prog-title">📅 Suivi par semaine</div><div class="info" style="font-size:13px">Aucune semaine enregistrée. Ajoute ta première séance pour suivre tes progrès.</div>';
   } else {
@@ -787,11 +816,11 @@ function blocProgression(id, histo) {
       `<div class="sem-item"><div><b>${dateLongue(h.date)}</b><br>${h.series.map((s, j) => "S" + (j + 1) + " " + s.rep + "×" + arrondi(s.kg) + " kg").join(" · ")}</div>` +
       `<button onclick="supprimerSemaine(${id},${i})">🗑️</button></div>`
     ).reverse().join("");
-    html += `<details class="prog-details"><summary>📈 Évolution et semaines (${histo.length})</summary>` +
+    html += `<div>` +
       graphiqueEvolution(histo) +
       '<div class="prog-title" style="margin-top:12px">🥧 Part du volume par semaine</div>' +
       camembert(histo.map((h, i) => ({ label: dateCourte(h.date), value: volumeSeance(h) || repsSeance(h), color: PALETTE[i % PALETTE.length] })), 120) +
-      '<div class="prog-title" style="margin-top:12px">🗓️ Toutes les semaines</div>' + liste + "</details>";
+      '<div class="prog-title" style="margin-top:12px">🗓️ Toutes les semaines</div>' + liste + "</div>";
   }
   html += `<button class="btn-sem" onclick="ouvrirSemaine(${id})">➕ Ajouter une semaine</button>
     <div class="form-sem" id="formSem_${id}">
@@ -803,7 +832,7 @@ function blocProgression(id, histo) {
         <button onclick="retirerLigneSerie(${id})">➖ Série</button>
       </div>
       <div class="row-btns"><button class="ok" onclick="enregistrerSemaine(${id})">💾 Enregistrer la semaine</button></div>
-    </div></div>`;
+    </div></div></details>`;
   return html;
 }
 
@@ -905,6 +934,30 @@ function afficherStatsGlobales() {
     `<div class="stat-box"><h3>🏋️ Exercices par muscle</h3>${p1 || '<div class="empty">Pas encore d\'exercice.</div>'}</div>` +
     `<div class="stat-box"><h3>📈 Volume soulevé par muscle (kg × répétitions)</h3>${p2 || '<div class="empty">Ajoute des semaines avec des kilos pour voir ce graphique.</div>'}</div>`;
 }
+
+/* ---------- CARTES REPLIABLES ---------- */
+
+const ouverts = new Set();
+
+function basculerCarte(id) {
+  id = Number(id);
+  const c = $("card_" + id);
+  if (!c) return;
+  if (c.classList.toggle("open")) ouverts.add(id); else ouverts.delete(id);
+}
+
+function toutBasculer() {
+  const cartes = [...document.querySelectorAll(".card[id^='card_']")];
+  const toutesOuvertes = cartes.length > 0 && cartes.every(c => c.classList.contains("open"));
+  cartes.forEach(c => {
+    const id = Number(c.id.replace("card_", ""));
+    c.classList.toggle("open", !toutesOuvertes);
+    if (toutesOuvertes) ouverts.delete(id); else ouverts.add(id);
+  });
+}
+
+const semOuv = new Set();
+function majSem(id, ouvert) { id = Number(id); if (ouvert) semOuv.add(id); else semOuv.delete(id); }
 
 /* ---------- DÉMARRAGE ---------- */
 
